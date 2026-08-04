@@ -117,6 +117,15 @@ No registry token belongs in this repository. Licensed users can replace the two
 trial aliases in `package.json` with the matching full Pro/Enterprise packages;
 source imports remain unchanged.
 
+## Workflow screenshots
+
+| Overview | Primary workflow |
+| --- | --- |
+| ![Gantt overview](./assets/screenshots/overview.webp) | ![Gantt workflow](./assets/screenshots/workflow.webp) |
+| ![Gantt details](./assets/screenshots/details.webp) | ![Gantt result](./assets/screenshots/result.webp) |
+
+[Download the walkthrough poster](./assets/gantt-walkthrough-poster.webp).
+
 ## License
 
 The examples, recipes, tests, documentation, and media tooling are MIT licensed.
