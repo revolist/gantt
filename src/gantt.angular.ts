@@ -22,7 +22,7 @@ import {
   renderShowcaseTaskBarColor,
   renderShowcaseTaskBarContent,
 } from './shared/gantt-project-data';
-import { currentTheme, observeCurrentTheme } from '../../composables/useRandomData';
+import { currentTheme, observeCurrentTheme } from './shared/theme';
 
 function createGanttConfig(showCriticalPath: boolean, showBaseline: boolean): GanttPluginConfig {
   return {

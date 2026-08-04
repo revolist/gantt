@@ -18,7 +18,7 @@ import {
   renderShowcaseTaskBarContent,
 } from './shared/gantt-project-data';
 import type { GanttPluginConfig } from '@revolist/revogrid-enterprise';
-import { currentTheme, observeCurrentTheme } from '../../composables/useRandomData';
+import { currentTheme, observeCurrentTheme } from './shared/theme';
 
 const plugins = [GanttPlugin, ExportExcelPlugin, RowStatusPlugin];
 const source      = [...SHOWCASE_TASKS];

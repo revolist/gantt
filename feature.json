@@ -1,0 +1,26 @@
+{
+  "$schema": "./feature.schema.json",
+  "slug": "gantt",
+  "title": "RevoGrid Gantt",
+  "summary": "Editable project timelines with dependencies, working calendars, resources, baselines, task editing, and critical-path analysis.",
+  "edition": "Pro Advanced",
+  "repositoryUrl": "https://github.com/revolist/gantt",
+  "productUrl": "https://rv-grid.com/gantt/",
+  "trialUrl": "https://pro.rv-grid.com/guides/installation-npm-trial/",
+  "pricingUrl": "https://rv-grid.com/pricing/",
+  "liveDemoUrl": "https://example.rv-grid.com/gantt/demo/",
+  "frameworks": ["ts", "react", "vue", "angular"],
+  "recipes": [
+    { "id": "dependencies-calendars", "title": "Dependencies and calendars", "summary": "Model linked tasks against explicit working calendars and holidays.", "path": "recipes/dependencies-calendars.ts" },
+    { "id": "resources-baselines", "title": "Resources and baselines", "summary": "Add assignments, capacity, costs, and an approved comparison snapshot.", "path": "recipes/resources-baselines.ts" },
+    { "id": "critical-path-editing", "title": "Critical path and task editing", "summary": "Enable schedule-risk visuals and the production task editing workflow.", "path": "recipes/critical-path-editing.ts" }
+  ],
+  "media": {
+    "poster": "assets/gantt-walkthrough-poster.webp",
+    "walkthroughGif": "assets/gantt-walkthrough.gif",
+    "walkthroughMp4": "assets/gantt-walkthrough.mp4",
+    "screenshots": ["assets/screenshots/overview.webp", "assets/screenshots/workflow.webp", "assets/screenshots/details.webp", "assets/screenshots/result.webp"]
+  },
+  "demoOutput": "dist"
+}
+

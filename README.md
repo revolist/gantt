@@ -1,12 +1,23 @@
-# Advanced Gantt
+<div align="center">
 
-An Enterprise project-planning demo implemented in Vanilla TypeScript, React, Vue, and Angular.
+# RevoGrid Gantt
 
-## Demo preview
+**Editable project timelines, dependencies, resources, and schedule intelligence.**
 
-[![Advanced Gantt walkthrough](./assets/pro-advanced-gantt-walkthrough.gif)](./assets/pro-advanced-gantt-walkthrough.mp4)
+[![CI](https://github.com/revolist/gantt/actions/workflows/ci.yml/badge.svg)](https://github.com/revolist/gantt/actions/workflows/ci.yml)
+[![Frameworks](https://img.shields.io/badge/TypeScript%20%7C%20React%20%7C%20Vue%20%7C%20Angular-4f46e5)](#framework-examples)
+[![License: MIT](https://img.shields.io/badge/Example%20license-MIT-16a34a.svg)](./LICENSE)
 
-_Click the animated preview to open the full-quality MP4._
+[View live demo](https://example.rv-grid.com/gantt/demo/) · [Request trial](https://pro.rv-grid.com/guides/installation-npm-trial/) · [Get Pro Advanced](https://rv-grid.com/pricing/)
+
+[![RevoGrid Gantt walkthrough](./assets/gantt-walkthrough.gif)](./assets/gantt-walkthrough.mp4)
+
+_Open the animation for the full-quality MP4 walkthrough._
+
+</div>
+
+This production-style project-planning workspace is implemented in Vanilla
+TypeScript, React, Vue, and Angular.
 
 ## What it features
 
@@ -71,9 +82,27 @@ The demo adds two more plugins from `@revolist/revogrid-pro` alongside `GanttPlu
 
 Gantt requires an Enterprise entitlement, while Excel export, row status, and the shared Pro dependency stack require Pro functionality. Range selection and column resizing shown by the demo are base-grid capabilities rather than additional Pro plugins.
 
+## Recipes
+
+| Recipe | What it demonstrates |
+| --- | --- |
+| [`dependencies-calendars.ts`](./recipes/dependencies-calendars.ts) | Linked task scheduling against working calendars. |
+| [`resources-baselines.ts`](./recipes/resources-baselines.ts) | Assignments, costs, capacity, and baseline comparison. |
+| [`critical-path-editing.ts`](./recipes/critical-path-editing.ts) | Task creation/editing and critical-path visibility. |
+
+## Framework examples
+
+| Framework | Entry point | Command |
+| --- | --- | --- |
+| Vanilla TypeScript | [`src/gantt.ts`](./src/gantt.ts) | `pnpm dev` |
+| React | [`src/gantt.react.tsx`](./src/gantt.react.tsx) | `pnpm dev:react` |
+| Vue 3 | [`src/gantt.vue`](./src/gantt.vue) | `pnpm dev:vue` |
+| Angular | [`src/gantt.angular.ts`](./src/gantt.angular.ts) | `pnpm dev:angular` |
+
 ## Run it
 
 ```bash
+pnpm install
 pnpm dev          # Vanilla TypeScript
 pnpm dev:react
 pnpm dev:vue
@@ -81,6 +110,17 @@ pnpm dev:angular
 ```
 
 Build variants use the matching `build:ts`, `build:react`, `build:vue`, and `build:angular` scripts. Run `pnpm test` for the Gantt data/configuration tests.
+
+Trial users must authenticate with the registry described in the [official
+trial installation guide](https://pro.rv-grid.com/guides/installation-npm-trial/).
+No registry token belongs in this repository. Licensed users can replace the two
+trial aliases in `package.json` with the matching full Pro/Enterprise packages;
+source imports remain unchanged.
+
+## License
+
+The examples, recipes, tests, documentation, and media tooling are MIT licensed.
+RevoGrid Pro and Enterprise packages remain separate commercial dependencies.
 
 ## Main files
 
