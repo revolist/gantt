@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "RevoGrid feature showcase metadata",
   "type": "object",
-  "required": ["slug", "title", "summary", "edition", "repositoryUrl", "productUrl", "trialUrl", "liveDemoUrl", "frameworks", "recipes", "media", "demoOutput"],
+  "required": ["slug", "title", "summary", "edition", "repositoryUrl", "productUrl", "trialUrl", "liveDemoUrl", "frameworks", "examples", "recipes", "media", "demoOutput"],
   "properties": {
     "slug": { "type": "string", "pattern": "^[a-z][a-z0-9-]*$" },
     "title": { "type": "string", "minLength": 1 },
@@ -20,6 +20,21 @@
       ],
       "minItems": 4,
       "maxItems": 4
+    },
+    "examples": {
+      "type": "array",
+      "minItems": 2,
+      "items": {
+        "type": "object",
+        "required": ["id", "title", "summary", "query"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^[a-z][a-z0-9-]*$" },
+          "title": { "type": "string", "minLength": 1 },
+          "summary": { "type": "string", "minLength": 20 },
+          "query": { "type": "string", "pattern": "^example=[a-z][a-z0-9-]*$" },
+          "default": { "type": "boolean" }
+        }
+      }
     },
     "recipes": {
       "type": "array",
@@ -48,4 +63,3 @@
     "demoOutput": { "const": "dist" }
   }
 }
-

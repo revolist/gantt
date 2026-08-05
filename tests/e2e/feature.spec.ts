@@ -18,3 +18,24 @@ test(`${feature.title} mounts without browser errors`, async ({ page }) => {
   expect(screenshot.byteLength).toBeGreaterThan(10_000);
   expect(errors).toEqual([]);
 });
+
+test('mounts the 10,000-task example from the multi-example host', async ({ page }) => {
+  const errors: string[] = [];
+  page.on('console', (message) => {
+    if (message.type() === 'error') errors.push(message.text());
+  });
+  page.on('pageerror', (error) => errors.push(error.message));
+
+  await page.goto('/?example=big-data');
+  const grid = page.locator('revo-grid');
+  await expect(grid).toBeVisible({ timeout: 20_000 });
+  await expect.poll(async () => grid.evaluate((element) => {
+    const ganttGrid = element as HTMLRevoGridElement;
+    return {
+      tasks: ganttGrid.source?.length ?? 0,
+      dependencies: ganttGrid.ganttDependencies?.length ?? 0,
+    };
+  }), { timeout: 20_000 }).toEqual({ tasks: 10_000, dependencies: 19_796 });
+  await expect(grid.locator('.gantt-bar').first()).toBeVisible();
+  expect(errors).toEqual([]);
+});

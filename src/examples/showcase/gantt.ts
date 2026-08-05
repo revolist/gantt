@@ -1,4 +1,4 @@
-// src/gantt.ts
+// src/examples/showcase/gantt.ts
 import './gantt.scss';
 import { defineCustomElements } from '@revolist/revogrid/loader';
 defineCustomElements();
@@ -17,8 +17,8 @@ import {
   SHOWCASE_TASKS,
   renderShowcaseTaskBarColor,
   renderShowcaseTaskBarContent,
-} from './shared/gantt-project-data';
-import { currentTheme, observeCurrentTheme } from './shared/theme';
+} from './data/gantt-project-data';
+import { currentTheme, observeCurrentTheme } from '../../theme';
 
 // ─── Entry point ──────────────────────────────────────────────────────────────
 

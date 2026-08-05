@@ -51,8 +51,8 @@ import {
   SHOWCASE_TASKS,
   renderShowcaseTaskBarColor,
   renderShowcaseTaskBarContent,
-} from './shared/gantt-project-data';
-import { currentTheme, observeCurrentTheme } from './shared/theme';
+} from './data/gantt-project-data';
+import { currentTheme, observeCurrentTheme } from '../../theme';
 
 // ── Static grid data ──────────────────────────────────────────────────────────
 const plugins = ref<unknown[]>([]);

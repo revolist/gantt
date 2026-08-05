@@ -1,4 +1,4 @@
-/** Shared task icons used by the reusable showcase column presets. */
+/** Task icons owned by the showcase column presets. */
 import bugIcon from '@fortawesome/fontawesome-free/svgs/solid/bug.svg?raw';
 import chartLineIcon from '@fortawesome/fontawesome-free/svgs/solid/chart-line.svg?raw';
 import clipboardListIcon from '@fortawesome/fontawesome-free/svgs/solid/clipboard-list.svg?raw';

@@ -6,6 +6,7 @@ import { promisify } from 'node:util';
 const execFileAsync = promisify(execFile);
 const root = resolve(import.meta.dirname, '..');
 const feature = JSON.parse(await readFile(join(root, 'feature.json'), 'utf8'));
+const packageManifest = JSON.parse(await readFile(join(root, 'package.json'), 'utf8'));
 const requiredStrings = ['slug', 'title', 'summary', 'edition', 'repositoryUrl', 'productUrl', 'trialUrl', 'demoOutput'];
 const failures = [];
 
@@ -17,6 +18,7 @@ for (const requiredFile of ['package.json', 'pnpm-lock.yaml', 'pnpm-workspace.ya
   }
 }
 const workspace = await readFile(join(root, 'pnpm-workspace.yaml'), 'utf8');
+const lockfile = await readFile(join(root, 'pnpm-lock.yaml'), 'utf8');
 if (!/^packages:\s*\n\s*- ["']?\.["']?\s*$/m.test(workspace)) {
   failures.push('pnpm-workspace.yaml: repository root must be its own workspace');
 }
@@ -31,13 +33,29 @@ for (const requiredRegistryLine of [
   }
 }
 
-const lockfile = await readFile(join(root, 'pnpm-lock.yaml'), 'utf8');
-const revolistResolutions = [...lockfile.matchAll(/^  '(@revolist\/[^']+)':\n    resolution: \{([^}]*)\}/gm)];
-if (!revolistResolutions.length) failures.push('pnpm-lock.yaml: no @revolist package resolutions found');
-for (const [, packageName, resolution] of revolistResolutions) {
-  if (!resolution.includes('tarball: https://npm.pkg.github.com/download/')) {
-    failures.push(`pnpm-lock.yaml: ${packageName} is missing its GitHub download URL`);
+const exactVersionPattern = /^\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?(?:\+[0-9A-Za-z.-]+)?$/;
+const commercialDependencies = [
+  ['@revolist/revogrid-pro', '@revolist/rv-pro-trial'],
+  ['@revolist/revogrid-enterprise', '@revolist/rv-enterprise-trial'],
+];
+const commercialVersions = new Map();
+for (const [packageName, trialPackageName] of commercialDependencies) {
+  const specifier = packageManifest.dependencies?.[packageName];
+  const trialAliasPrefix = `npm:${trialPackageName}@`;
+  const version = typeof specifier === 'string' && specifier.startsWith(trialAliasPrefix)
+    ? specifier.slice(trialAliasPrefix.length)
+    : specifier;
+  if (typeof version !== 'string' || !exactVersionPattern.test(version)) {
+    failures.push(`package.json: ${packageName} must use an exact version or exact ${trialPackageName} alias`);
+    continue;
   }
+  commercialVersions.set(packageName, version);
+  if (!lockfile.includes(`specifier: ${specifier}`)) {
+    failures.push(`pnpm-lock.yaml: importer specifier for ${packageName} must match package.json`);
+  }
+}
+if (new Set(commercialVersions.values()).size > 1) {
+  failures.push('package.json: RevoGrid Pro and Enterprise versions must match');
 }
 
 for (const key of requiredStrings) {
@@ -45,6 +63,22 @@ for (const key of requiredStrings) {
 }
 if (!Array.isArray(feature.frameworks) || feature.frameworks.join(',') !== 'ts,react,vue,angular') {
   failures.push('feature.json: frameworks must be ts, react, vue, angular');
+}
+if (!Array.isArray(feature.examples) || feature.examples.length < 2) {
+  failures.push('feature.json: at least two examples are required');
+} else {
+  const exampleIds = new Set(feature.examples.map((example) => example.id));
+  if (exampleIds.size !== feature.examples.length) {
+    failures.push('feature.json: example ids must be unique');
+  }
+  if (feature.examples.filter((example) => example.default).length !== 1) {
+    failures.push('feature.json: exactly one example must be marked as default');
+  }
+  for (const example of feature.examples) {
+    if (example.query !== `example=${example.id}`) {
+      failures.push(`feature.json: ${example.id} query must be example=${example.id}`);
+    }
+  }
 }
 if (!Array.isArray(feature.recipes) || feature.recipes.length < 2) failures.push('feature.json: at least two recipes are required');
 
@@ -112,8 +146,15 @@ async function walk(directory) {
     const path = join(directory, entry.name);
     if (entry.isDirectory()) await walk(path);
     else if (['.ts', '.tsx', '.vue', '.json', '.md', '.yml', '.yaml'].includes(extname(entry.name)) || entry.name === 'package.json') {
+      const relativePath = path.slice(root.length + 1);
+      if (relativePath.startsWith('src/shared/')) {
+        failures.push(`${relativePath}: example-owned code must live with its example; cross-example helpers belong directly in src`);
+      }
+      if (/^src\/examples\/[^/]+$/.test(relativePath)) {
+        failures.push(`${relativePath}: runtime infrastructure belongs directly in src; each example must use its own subdirectory`);
+      }
       const source = await readFile(path, 'utf8');
-      for (const value of forbidden) if (source.includes(value)) failures.push(`${path.slice(root.length + 1)}: contains forbidden coupling ${value}`);
+      for (const value of forbidden) if (source.includes(value)) failures.push(`${relativePath}: contains forbidden coupling ${value}`);
     }
   }
 }

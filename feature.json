@@ -10,6 +10,21 @@
   "pricingUrl": "https://rv-grid.com/pricing/",
   "liveDemoUrl": "https://gantt.rv-grid.com/demo/",
   "frameworks": ["ts", "react", "vue", "angular"],
+  "examples": [
+    {
+      "id": "showcase",
+      "title": "Project planning showcase",
+      "summary": "Editable project planning with resources, baselines, and critical-path controls.",
+      "query": "example=showcase",
+      "default": true
+    },
+    {
+      "id": "big-data",
+      "title": "10,000-task performance",
+      "summary": "Virtualized editing and 19,796 dependencies across a three-month project.",
+      "query": "example=big-data"
+    }
+  ],
   "recipes": [
     { "id": "dependencies-calendars", "title": "Dependencies and calendars", "summary": "Model linked tasks against explicit working calendars and holidays.", "path": "recipes/dependencies-calendars.ts" },
     { "id": "resources-baselines", "title": "Resources and baselines", "summary": "Add assignments, capacity, costs, and an approved comparison snapshot.", "path": "recipes/resources-baselines.ts" },

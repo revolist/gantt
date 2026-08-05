@@ -1,4 +1,4 @@
-// src/gantt.react.tsx
+// src/examples/showcase/gantt.react.tsx
 import './gantt.scss';
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { RevoGrid } from '@revolist/react-datagrid';
@@ -16,9 +16,9 @@ import {
   SHOWCASE_TASKS,
   renderShowcaseTaskBarColor,
   renderShowcaseTaskBarContent,
-} from './shared/gantt-project-data';
+} from './data/gantt-project-data';
 import type { GanttPluginConfig } from '@revolist/revogrid-enterprise';
-import { currentTheme, observeCurrentTheme } from './shared/theme';
+import { currentTheme, observeCurrentTheme } from '../../theme';
 
 const plugins = [GanttPlugin, ExportExcelPlugin, RowStatusPlugin];
 const source      = [...SHOWCASE_TASKS];

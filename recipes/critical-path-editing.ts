@@ -1,7 +1,7 @@
 import {
   SHOWCASE_GANTT_CONFIG,
   SHOWCASE_TASKS,
-} from '../src/shared/gantt-project-data';
+} from '../src/examples/showcase/data/gantt-project-data';
 
 export const criticalPathAndEditingRecipe = {
   config: {
@@ -15,4 +15,3 @@ export const criticalPathAndEditingRecipe = {
   },
   tasks: SHOWCASE_TASKS,
 };
-

@@ -1,4 +1,4 @@
-/** Shared project column presets used by multiple Gantt examples. */
+/** Project column presets owned by the showcase example. */
 import type { ColumnRegular } from '@revolist/revogrid';
 import { createDefaultTaskTableColumn, isGanttAddTaskRow } from '@revolist/revogrid-enterprise';
 import { getShowcaseTaskIcon } from './gantt-showcase-icons';

@@ -49,7 +49,7 @@ export function currentTheme() {
 export function currentThemeVue() {
   return {
     // Vue templates and scripts can consume this ref-shaped value without making
-    // the shared helper depend on a package-local Vue installation.
+    // the framework-neutral helper depend on a package-local Vue installation.
     isDark: { value: isDarkTheme() },
   };
 }

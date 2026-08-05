@@ -4,7 +4,7 @@ import {
   TASKS,
   US_CALENDAR,
   makeGanttConfig,
-} from '../src/shared/gantt-project-data';
+} from '../src/examples/showcase/data/gantt-project-data';
 
 export const dependenciesAndCalendarsRecipe = {
   config: makeGanttConfig(),
@@ -12,4 +12,3 @@ export const dependenciesAndCalendarsRecipe = {
   dependencies: DEPENDENCIES,
   calendars: [STANDARD_CALENDAR, US_CALENDAR],
 };
-

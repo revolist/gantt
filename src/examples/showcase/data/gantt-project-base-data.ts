@@ -1,4 +1,4 @@
-/** Shared project fixtures used by multiple Gantt examples. */
+/** Project fixtures used by the showcase and its companion recipes. */
 import type {
   AssignmentEntity,
   BaselineSnapshot,

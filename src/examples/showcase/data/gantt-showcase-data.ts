@@ -1,4 +1,4 @@
-/** Shared showcase-sized task data used by multiple Gantt examples. */
+/** Task data owned by the project-planning showcase. */
 import type {
   AssignmentEntity,
   BaselineSnapshot,

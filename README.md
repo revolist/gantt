@@ -13,8 +13,18 @@
 
 </div>
 
-This production-style project-planning workspace is implemented in Vanilla
-TypeScript, React, Vue, and Angular.
+This repository hosts multiple Gantt examples implemented in Vanilla TypeScript,
+React, Vue, and Angular. The example is selected with the `example` URL query;
+the framework is selected by the existing Vite mode.
+
+## Examples
+
+| Example | URL | Purpose |
+| --- | --- | --- |
+| Project planning showcase | `/?example=showcase` | Resources, assignments, baselines, critical path, rich task bars, and editing controls. |
+| 10,000-task performance | `/?example=big-data` | 10,000 editable tasks and 19,796 dependencies over three months with bounded virtual rendering. |
+
+Missing or unknown example ids fall back to the project planning showcase.
 
 ## What it features
 
@@ -89,10 +99,16 @@ Range selection and column resizing shown by the demo are base-grid capabilities
 
 | Framework | Entry point | Command |
 | --- | --- | --- |
-| Vanilla TypeScript | [`src/gantt.ts`](./src/gantt.ts) | `pnpm dev` |
-| React | [`src/gantt.react.tsx`](./src/gantt.react.tsx) | `pnpm dev:react` |
-| Vue 3 | [`src/gantt.vue`](./src/gantt.vue) | `pnpm dev:vue` |
-| Angular | [`src/gantt.angular.ts`](./src/gantt.angular.ts) | `pnpm dev:angular` |
+| Vanilla TypeScript | [`src/examples/showcase/gantt.ts`](./src/examples/showcase/gantt.ts) | `pnpm dev` |
+| React | [`src/examples/showcase/gantt.react.tsx`](./src/examples/showcase/gantt.react.tsx) | `pnpm dev:react` |
+| Vue 3 | [`src/examples/showcase/gantt.vue`](./src/examples/showcase/gantt.vue) | `pnpm dev:vue` |
+| Angular | [`src/examples/showcase/gantt.angular.ts`](./src/examples/showcase/gantt.angular.ts) | `pnpm dev:angular` |
+
+Each command can open either registered example. For example,
+`http://localhost:5173/?example=big-data` runs the performance example in the
+selected framework mode. New examples live in an isolated
+`src/examples/<example-id>/` directory and are registered in
+[`src/examples.ts`](./src/examples.ts).
 
 ## Run it
 
@@ -110,7 +126,8 @@ Trial users must authenticate with the registry described in the [official
 trial installation guide](https://pro.rv-grid.com/guides/installation-npm-trial/).
 No registry token belongs in this repository. Licensed users can replace the two
 trial aliases in `package.json` with the matching licensed RevoGrid packages;
-source imports remain unchanged.
+source imports remain unchanged. `package.json` is authoritative for these
+direct versions, while `pnpm-lock.yaml` preserves the resolved install graph.
 
 ## License
 
@@ -119,10 +136,10 @@ Commercial RevoGrid packages are not covered by this repository's MIT license.
 
 ## Main files
 
-- `src/gantt.ts` — Vanilla TypeScript
-- `src/gantt.react.tsx` — React
-- `src/gantt.vue` — Vue
-- `src/gantt.angular.ts` — Angular
-- `src/shared/gantt-project-data.ts` — public fixture/configuration barrel
-- `src/shared/gantt-showcase-data.ts` — tasks, dependencies, resources, assignments, and baselines
-- `src/shared/gantt-showcase-columns.ts` — task-table columns and task-bar renderers
+- `src/examples/showcase/` — the four framework variants for the full project-planning showcase
+- `src/examples/big-data/` — the four framework variants and dataset for the 10,000-task performance example
+- `src/examples.ts` — typed example selection and lazy framework loaders
+- `src/examples/showcase/data/gantt-project-data.ts` — showcase fixture/configuration barrel used by the companion recipes
+- `src/examples/showcase/data/gantt-showcase-data.ts` — showcase tasks, dependencies, resources, assignments, and baselines
+- `src/examples/showcase/data/gantt-showcase-columns.ts` — showcase task-table columns and task-bar renderers
+- `src/theme.ts` — the framework-neutral theme observer shared by both examples

@@ -4,7 +4,7 @@ import {
   RESOURCES,
   TASKS_SLIPPED,
   makeGanttConfig,
-} from '../src/shared/gantt-project-data';
+} from '../src/examples/showcase/data/gantt-project-data';
 
 export const resourcesAndBaselinesRecipe = {
   config: makeGanttConfig({ visuals: { showBaseline: true } }),
@@ -13,4 +13,3 @@ export const resourcesAndBaselinesRecipe = {
   assignments: ASSIGNMENTS,
   baselines: BASELINES,
 };
-

@@ -14,7 +14,7 @@ function getParentTaskIds(tasks: readonly { parentId?: string | null }[]) {
     .filter((parentId): parentId is string => typeof parentId === 'string' && parentId.length > 0));
 }
 
-describe('shared Gantt showcase data', () => {
+describe('Gantt showcase data', () => {
   it('omits authored task types from parent rows so Gantt can infer default summaries', async () => {
     const { SHOWCASE_TASKS } = await loadShowcaseData();
     const parentTaskIds = getParentTaskIds(SHOWCASE_TASKS);
