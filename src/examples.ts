@@ -1,4 +1,4 @@
-export const GANTT_EXAMPLE_IDS = ['showcase', 'big-data'] as const;
+export const GANTT_EXAMPLE_IDS = ['showcase', 'big-data', 'horizontal-big-data'] as const;
 
 export type GanttExampleId = typeof GANTT_EXAMPLE_IDS[number];
 export type GanttExampleFramework = 'ts' | 'react' | 'vue' | 'angular';
@@ -30,6 +30,14 @@ export const GANTT_EXAMPLES: Readonly<Record<GanttExampleId, GanttExampleDefinit
     loadReact: async () => (await import('./examples/big-data/gantt-big-data.react')).default,
     loadVue: async () => (await import('./examples/big-data/gantt-big-data.vue')).default,
     loadAngular: async () => (await import('./examples/big-data/gantt-big-data.angular')).GanttBigDataGridComponent,
+  },
+  'horizontal-big-data': {
+    id: 'horizontal-big-data',
+    angularSelector: 'gantt-horizontal-big-data-grid',
+    loadTs: async () => (await import('./examples/horizontal-big-data/gantt-horizontal-big-data')).load,
+    loadReact: async () => (await import('./examples/horizontal-big-data/gantt-horizontal-big-data.react')).default,
+    loadVue: async () => (await import('./examples/horizontal-big-data/gantt-horizontal-big-data.vue')).default,
+    loadAngular: async () => (await import('./examples/horizontal-big-data/gantt-horizontal-big-data.angular')).GanttHorizontalBigDataGridComponent,
   },
 };
 

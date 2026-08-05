@@ -23,6 +23,12 @@
       "title": "10,000-task performance",
       "summary": "Virtualized editing and 19,796 dependencies across a three-month project.",
       "query": "example=big-data"
+    },
+    {
+      "id": "horizontal-big-data",
+      "title": "Twenty-year timeline performance",
+      "summary": "Responsive horizontal navigation, zooming, editing, and 194 dependencies across twenty years.",
+      "query": "example=horizontal-big-data"
     }
   ],
   "recipes": [

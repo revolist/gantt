@@ -23,6 +23,7 @@ the framework is selected by the existing Vite mode.
 | --- | --- | --- |
 | Project planning showcase | `/?example=showcase` | Resources, assignments, baselines, critical path, rich task bars, and editing controls. |
 | 10,000-task performance | `/?example=big-data` | 10,000 editable tasks and 19,796 dependencies over three months with bounded virtual rendering. |
+| Twenty-year timeline performance | `/?example=horizontal-big-data` | 100 editable tasks and 194 dependencies across twenty years with responsive horizontal navigation and zooming. |
 
 Missing or unknown example ids fall back to the project planning showcase.
 
@@ -104,9 +105,10 @@ Range selection and column resizing shown by the demo are base-grid capabilities
 | Vue 3 | [`src/examples/showcase/gantt.vue`](./src/examples/showcase/gantt.vue) | `pnpm dev:vue` |
 | Angular | [`src/examples/showcase/gantt.angular.ts`](./src/examples/showcase/gantt.angular.ts) | `pnpm dev:angular` |
 
-Each command can open either registered example. For example,
+Each command can open any registered example. For example,
 `http://localhost:5173/?example=big-data` runs the performance example in the
-selected framework mode. New examples live in an isolated
+selected framework mode, while `?example=horizontal-big-data` runs the twenty-year
+timeline example. New examples live in an isolated
 `src/examples/<example-id>/` directory and are registered in
 [`src/examples.ts`](./src/examples.ts).
 
@@ -138,8 +140,9 @@ Commercial RevoGrid packages are not covered by this repository's MIT license.
 
 - `src/examples/showcase/` — the four framework variants for the full project-planning showcase
 - `src/examples/big-data/` — the four framework variants and dataset for the 10,000-task performance example
+- `src/examples/horizontal-big-data/` — the four framework variants and dataset for the twenty-year horizontal performance example
 - `src/examples.ts` — typed example selection and lazy framework loaders
 - `src/examples/showcase/data/gantt-project-data.ts` — showcase fixture/configuration barrel used by the companion recipes
 - `src/examples/showcase/data/gantt-showcase-data.ts` — showcase tasks, dependencies, resources, assignments, and baselines
 - `src/examples/showcase/data/gantt-showcase-columns.ts` — showcase task-table columns and task-bar renderers
-- `src/theme.ts` — the framework-neutral theme observer shared by both examples
+- `src/theme.ts` — the framework-neutral theme observer shared by all examples

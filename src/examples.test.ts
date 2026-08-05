@@ -12,15 +12,20 @@ describe('Gantt example registry', () => {
     expect(resolveGanttExample('?example=unknown').id).toBe(DEFAULT_GANTT_EXAMPLE_ID);
   });
 
-  it('resolves the big-data example and keeps every framework loader registered', () => {
+  it('resolves both big-data examples and keeps every framework loader registered', () => {
     const example = resolveGanttExample('?example=big-data');
+    const horizontalExample = resolveGanttExample('?example=horizontal-big-data');
 
     expect(example).toBe(GANTT_EXAMPLES['big-data']);
     expect(example.angularSelector).toBe('gantt-big-data-grid');
-    expect(GANTT_EXAMPLE_IDS).toEqual(['showcase', 'big-data']);
-    expect(typeof example.loadTs).toBe('function');
-    expect(typeof example.loadReact).toBe('function');
-    expect(typeof example.loadVue).toBe('function');
-    expect(typeof example.loadAngular).toBe('function');
+    expect(horizontalExample).toBe(GANTT_EXAMPLES['horizontal-big-data']);
+    expect(horizontalExample.angularSelector).toBe('gantt-horizontal-big-data-grid');
+    expect(GANTT_EXAMPLE_IDS).toEqual(['showcase', 'big-data', 'horizontal-big-data']);
+    for (const registeredExample of [example, horizontalExample]) {
+      expect(typeof registeredExample.loadTs).toBe('function');
+      expect(typeof registeredExample.loadReact).toBe('function');
+      expect(typeof registeredExample.loadVue).toBe('function');
+      expect(typeof registeredExample.loadAngular).toBe('function');
+    }
   });
 });
