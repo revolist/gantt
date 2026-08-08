@@ -1,0 +1,311 @@
+.industry-gantt-shell--erp {
+  --ig-accent: #2e88a6;
+  --ig-accent-deep: #17283b;
+  --ig-border: #aeb8c3;
+  --ig-muted: #5c6876;
+  --ig-text: #162231;
+  border-color: #9eabb8;
+  border-radius: 3px;
+  background: #f4f6f8;
+  box-shadow: 0 10px 28px rgba(20, 33, 49, .14);
+}
+
+.industry-gantt-shell--erp .industry-gantt-header {
+  grid-template-columns: minmax(420px, 1fr) minmax(470px, .9fr);
+  gap: 18px;
+  min-height: 99px;
+  padding: 11px 14px 22px;
+  border-bottom-color: #425267;
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, .025) 1px, transparent 1px) 0 0 / 28px 28px,
+    linear-gradient(115deg, #101b29, #17283b 64%, #1e3347);
+}
+
+.industry-gantt-shell--erp .industry-gantt-identity {
+  gap: 10px;
+}
+
+.industry-gantt-shell--erp .industry-gantt-mark {
+  flex-basis: 31px;
+  width: 31px;
+  height: 31px;
+  border: 1px solid #60758a;
+  border-radius: 2px;
+  color: #bfe9f2;
+  background: rgba(9, 19, 29, .34);
+  box-shadow: none;
+  font-size: 9px;
+  letter-spacing: .08em;
+}
+
+.industry-gantt-shell--erp .industry-gantt-product {
+  margin-bottom: 3px;
+  color: #77c5d7;
+  font-size: 9px;
+  letter-spacing: .13em;
+}
+
+.industry-gantt-shell--erp .industry-gantt-title {
+  color: #f4f7fa;
+  font-size: 19px;
+  font-weight: 680;
+  letter-spacing: -.012em;
+}
+
+.industry-gantt-shell--erp .industry-gantt-subtitle {
+  margin-top: 4px;
+  color: #aebac8;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 9px;
+  letter-spacing: .015em;
+}
+
+.industry-gantt-shell--erp .industry-gantt-metrics {
+  display:grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0;
+  overflow: hidden;
+  border: 1px solid #45586d;
+  border-radius: 2px;
+  background: rgba(8, 18, 28, .26);
+}
+
+.industry-gantt-shell--erp .industry-gantt-metric {
+  padding: 8px 10px 7px;
+  border: 0;
+  border-left: 1px solid #45586d;
+  border-radius: 0;
+  background: transparent;
+}
+
+.industry-gantt-shell--erp .industry-gantt-metric:first-child {
+  border-left: 0;
+}
+
+.industry-gantt-shell--erp .industry-gantt-metric__value {
+  color: #f1f5f8;
+  font-size: 15px;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+
+.industry-gantt-shell--erp .industry-gantt-metric__label {
+  margin-top: 5px;
+  color: #8fa0b2;
+  font-size: 8px;
+  letter-spacing: .08em;
+}
+
+.industry-gantt-shell--erp .industry-gantt-metric--positive .industry-gantt-metric__value {
+  color: #77d4bf;
+}
+
+.industry-gantt-shell--erp .industry-gantt-metric--warning .industry-gantt-metric__value {
+  color: #efbd73;
+}
+
+.industry-gantt-shell--erp .industry-gantt-metric--danger .industry-gantt-metric__value {
+  color: #ff8b80;
+}
+
+.industry-gantt-shell--erp .industry-gantt-sync {
+  right: 14px;
+  bottom: 6px;
+  color: #91a1b3;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 8px;
+  letter-spacing: .025em;
+}
+
+.industry-gantt-shell--erp .industry-gantt-sync__dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 1px;
+  background: #67c6a8;
+  box-shadow: none;
+}
+
+.industry-gantt-shell--erp .industry-gantt-toolbar {
+  flex-basis: 39px;
+  gap: 6px;
+  padding: 5px 9px;
+  border-bottom-color: #b6c0ca;
+  background: #e7ebef;
+  box-shadow: inset 0 1px #fff;
+}
+
+.industry-gantt-shell--erp .industry-gantt-toolbar__label {
+  display: inline-flex;
+  max-width: 420px;
+  align-items: center;
+  margin-right: auto;
+  padding: 5px 9px;
+  border-left: 3px solid #2e88a6;
+  color: #344254;
+  background: #f6f8fa;
+  font-size: 9px;
+  font-weight: 760;
+  letter-spacing: .055em;
+  text-transform: uppercase;
+}
+
+.industry-gantt-shell--erp .industry-gantt-toolbar__label::before {
+  margin-right: 8px;
+  color: #778493;
+  content: 'VIEW  03 /';
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 8px;
+  font-weight: 650;
+}
+
+.industry-gantt-shell--erp .industry-gantt-toolbar__legend {
+  margin-right: 2px;
+  padding: 4px 8px;
+  border: 1px solid #c7a39f;
+  color: #823b35;
+  background: #f8ecea;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .025em;
+}
+
+.industry-gantt-shell--erp .industry-gantt-toolbar__legend::before {
+  width: 6px;
+  height: 6px;
+  border-radius: 1px;
+  background: #c14f46;
+}
+
+.industry-gantt-shell--erp .industry-gantt-toggle {
+  min-height: 27px;
+  padding: 4px 10px;
+  border-color: #aab5c0;
+  border-radius: 2px;
+  color: #2a394a;
+  background: #f8fafb;
+  box-shadow: inset 0 1px #fff;
+  font-size: 9px;
+  letter-spacing: .03em;
+  text-transform: uppercase;
+}
+
+.industry-gantt-shell--erp .industry-gantt-toggle[aria-pressed='true'] {
+  border-color: #1d6f8b;
+  color: #fff;
+  background: #1f7896;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .12);
+}
+
+.industry-gantt-shell--erp .industry-gantt-grid revogr-data .rgCell.erp-grid-cell {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  box-sizing: border-box;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.industry-gantt-shell--erp .industry-gantt-grid {
+  --revo-grid-background: #fff;
+  --revo-grid-text: #162131;
+  --revo-grid-border: #d6dce1;
+  --revo-grid-header-bg: #fbfcfd;
+  --revo-grid-header-color: #172131;
+  --revo-grid-header-border: #d4dbe0;
+  --revo-grid-cell-border: #dce1e5;
+  --revo-grid-cell-vertical-border: #d7dde2;
+  --revo-grid-row-hover: #f4f7f9;
+  --revo-grid-row-headers-bg: #fbfcfd;
+  --revo-grid-row-headers-color: #182433;
+  --revo-grid-header-font-size: 14px;
+  --revo-grid-header-font-weight: 400;
+  --revo-grid-header-text-align: center;
+}
+
+.industry-gantt-shell--erp .industry-gantt-grid revogr-viewport-scroll.colPinEnd {
+  width: 64% !important;
+}
+
+.industry-gantt-shell--erp .erp-work-order {
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  color: #2b3b4c;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 10px;
+  font-weight: 750;
+  letter-spacing: .01em;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.industry-gantt-shell--erp .erp-state {
+  display: inline-flex;
+  max-width: calc(100% - 6px);
+  min-height: 20px;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  padding: 2px 8px;
+  border: 1px solid #c7d0d9;
+  border-radius: 999px;
+  color: #425166;
+  background: #f3f5f7;
+  font-size: 9px;
+  font-weight: 760;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.industry-gantt-shell--erp .erp-state--done {
+  border-color: #add6c9;
+  color: #236856;
+  background: #e8f5f0;
+}
+
+.industry-gantt-shell--erp .erp-state--in-progress {
+  border-color: #a9c9dc;
+  color: #1f607b;
+  background: #e9f3f8;
+}
+
+.industry-gantt-shell--erp .erp-state--blocked {
+  border-color: #e0b5b1;
+  color: #9b3f38;
+  background: #faecea;
+}
+
+.industry-gantt-shell--erp.industry-gantt-shell--dark {
+  border-color: #3f4d5c;
+  background: #141b23;
+}
+
+.industry-gantt-shell--erp.industry-gantt-shell--dark .industry-gantt-toolbar {
+  border-bottom-color: #3d4a58;
+  background: #222c37;
+  box-shadow: inset 0 1px rgba(255, 255, 255, .035);
+}
+
+.industry-gantt-shell--erp.industry-gantt-shell--dark .industry-gantt-toolbar__label {
+  color: #d4dbe3;
+  background: #19232d;
+}
+
+.industry-gantt-shell--erp.industry-gantt-shell--dark .industry-gantt-toolbar__legend {
+  border-color: #744b48;
+  color: #f2b0aa;
+  background: #392725;
+}
+
+.industry-gantt-shell--erp.industry-gantt-shell--dark .industry-gantt-toggle {
+  border-color: #526170;
+  color: #d9e0e7;
+  background: #1b2631;
+  box-shadow: none;
+}
+
+@media (max-width: 900px) {
+  .industry-gantt-shell--erp .industry-gantt-header {
+    grid-template-columns: 1fr;
+  }
+}

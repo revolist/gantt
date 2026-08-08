@@ -1,0 +1,464 @@
+.industry-gantt-shell--manufacturing {
+  --ig-accent: #38e8ff;
+  --ig-accent-deep: #087f9b;
+  --ig-border: #253945;
+  --ig-muted: #91a6b1;
+  --ig-surface: #0b1217;
+  --ig-text: #dcf9ff;
+  --ig-mono: 'SFMono-Regular', 'Cascadia Code', 'Roboto Mono', Consolas, monospace;
+
+  position: relative;
+  border: 1px solid #263d49;
+  border-radius: 4px;
+  background:
+    linear-gradient(90deg, rgba(56, 232, 255, 0.025) 1px, transparent 1px) 0 0 / 24px 24px,
+    #091116;
+  box-shadow:
+    0 18px 50px rgba(5, 13, 18, 0.3),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.025);
+
+  &::before {
+    position: absolute;
+    z-index: 4;
+    top: 0;
+    left: 0;
+    width: 3px;
+    height: 116px;
+    background: linear-gradient(#38e8ff, #0a7189 62%, transparent);
+    box-shadow: 0 0 14px rgba(56, 232, 255, 0.55);
+    content: '';
+    pointer-events: none;
+  }
+
+  .industry-gantt-header {
+    grid-template-columns: minmax(420px, 1.12fr) minmax(450px, 1fr);
+    gap: 28px;
+    min-height: 116px;
+    padding: 15px 20px 20px 22px;
+    overflow: hidden;
+    border-bottom-color: #29424e;
+    background:
+      linear-gradient(90deg, rgba(56, 232, 255, 0.035) 1px, transparent 1px) 0 0 / 23px 100%,
+      repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.018) 0, rgba(255, 255, 255, 0.018) 1px, transparent 1px, transparent 4px),
+      radial-gradient(circle at 78% -40%, rgba(29, 179, 207, 0.18), transparent 42%),
+      linear-gradient(112deg, #091116, #0d1a21 62%, #071015);
+  }
+
+  .industry-gantt-header::before {
+    position: absolute;
+    top: 0;
+    right: 20px;
+    left: 22px;
+    height: 2px;
+    background: linear-gradient(90deg, #38e8ff 0 16%, rgba(56, 232, 255, 0.08) 16% 100%);
+    content: '';
+  }
+
+  .industry-gantt-header::after {
+    position: absolute;
+    right: 21px;
+    bottom: 5px;
+    color: #53717e;
+    content: 'CELL NETWORK  /  CNC-07  /  QUALITY GATE  /  OUTBOUND';
+    font-family: var(--ig-mono);
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 0.09em;
+    pointer-events: none;
+  }
+
+  .industry-gantt-identity {
+    gap: 15px;
+    align-items: flex-start;
+  }
+
+  .industry-gantt-mark {
+    position: relative;
+    flex-basis: 52px;
+    width: 52px;
+    height: 52px;
+    border: 1px solid #38e8ff;
+    border-radius: 1px;
+    color: #b9f7ff;
+    background:
+      linear-gradient(135deg, rgba(56, 232, 255, 0.12), transparent 48%),
+      #0d2029;
+    box-shadow:
+      inset 0 0 0 4px #0a151b,
+      inset 0 0 0 5px rgba(56, 232, 255, 0.24),
+      0 0 20px rgba(56, 232, 255, 0.13);
+    font-family: var(--ig-mono);
+    font-size: 12px;
+    letter-spacing: 0.12em;
+  }
+
+  .industry-gantt-mark::after {
+    position: absolute;
+    right: 4px;
+    bottom: 4px;
+    width: 5px;
+    height: 5px;
+    background: #7dff9b;
+    box-shadow: 0 0 8px rgba(125, 255, 155, 0.8);
+    content: '';
+  }
+
+  .industry-gantt-product {
+    margin: 1px 0 5px;
+    color: #6ecfe0;
+    font-family: var(--ig-mono);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+  }
+
+  .industry-gantt-title {
+    color: #effdff;
+    font-size: 21px;
+    font-weight: 680;
+    line-height: 1.08;
+    letter-spacing: 0.025em;
+    text-transform: uppercase;
+  }
+
+  .industry-gantt-subtitle {
+    margin-top: 7px;
+    color: #8da4ae;
+    font-family: var(--ig-mono);
+    font-size: 10px;
+    letter-spacing: 0.012em;
+  }
+
+  .industry-gantt-metrics {
+    gap: 6px;
+  }
+
+  .industry-gantt-metric {
+    position: relative;
+    padding: 9px 9px 8px 11px;
+    border-color: #29434f;
+    border-radius: 1px;
+    background:
+      linear-gradient(135deg, rgba(56, 232, 255, 0.045), transparent 56%),
+      #0d1b22;
+    box-shadow: inset 2px 0 #315d6d;
+  }
+
+  .industry-gantt-metric::after {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    width: 3px;
+    height: 3px;
+    background: #38e8ff;
+    box-shadow: 0 0 6px rgba(56, 232, 255, 0.55);
+    content: '';
+  }
+
+  .industry-gantt-metric__value {
+    color: #d8fbff;
+    font-family: var(--ig-mono);
+    font-size: 17px;
+    font-variant-numeric: tabular-nums;
+    font-weight: 700;
+  }
+
+  .industry-gantt-metric__label {
+    margin-top: 6px;
+    color: #6f8b96;
+    font-family: var(--ig-mono);
+    font-size: 8px;
+    letter-spacing: 0.09em;
+  }
+
+  .industry-gantt-metric--positive {
+    box-shadow: inset 2px 0 #5ce78a;
+  }
+
+  .industry-gantt-metric--positive .industry-gantt-metric__value {
+    color: #7ff0a2;
+  }
+
+  .industry-gantt-metric--warning {
+    box-shadow: inset 2px 0 #f5bd50;
+  }
+
+  .industry-gantt-metric--warning::after {
+    background: #f5bd50;
+    box-shadow: 0 0 6px rgba(245, 189, 80, 0.48);
+  }
+
+  .industry-gantt-metric--warning .industry-gantt-metric__value {
+    color: #ffd47c;
+  }
+
+  .industry-gantt-metric--danger {
+    box-shadow: inset 2px 0 #ff6b67;
+  }
+
+  .industry-gantt-metric--danger::after {
+    background: #ff6b67;
+    box-shadow: 0 0 6px rgba(255, 107, 103, 0.5);
+  }
+
+  .industry-gantt-metric--danger .industry-gantt-metric__value {
+    color: #ff8580;
+  }
+
+  .industry-gantt-sync {
+    right: auto;
+    bottom: 5px;
+    left: 91px;
+    gap: 7px;
+    color: #5e7b87;
+    font-family: var(--ig-mono);
+    font-size: 8px;
+    letter-spacing: 0.055em;
+    text-transform: uppercase;
+  }
+
+  .industry-gantt-sync__dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 0;
+    background: #78f99c;
+    box-shadow:
+      0 0 0 2px rgba(120, 249, 156, 0.1),
+      0 0 7px rgba(120, 249, 156, 0.65);
+    animation: manufacturing-telemetry-pulse 1.8s steps(2, end) infinite;
+  }
+
+  .industry-gantt-toolbar {
+    flex-basis: 40px;
+    gap: 6px;
+    padding: 5px 11px 5px 14px;
+    border-bottom-color: #2b424d;
+    background:
+      linear-gradient(90deg, rgba(56, 232, 255, 0.045), transparent 30%),
+      #111d23;
+    box-shadow: inset 0 -1px rgba(0, 0, 0, 0.45);
+  }
+
+  .industry-gantt-toolbar__label {
+    position: relative;
+    color: #bfeaf0;
+    font-family: var(--ig-mono);
+    font-size: 9px;
+    letter-spacing: 0.095em;
+    text-transform: uppercase;
+  }
+
+  .industry-gantt-toolbar__label::before {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin-right: 8px;
+    border: 1px solid #38e8ff;
+    background: rgba(56, 232, 255, 0.18);
+    box-shadow: 0 0 7px rgba(56, 232, 255, 0.32);
+    content: '';
+  }
+
+  .industry-gantt-toolbar__legend {
+    gap: 7px;
+    margin-right: 10px;
+    color: #849ba5;
+    font-family: var(--ig-mono);
+    font-size: 8px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .industry-gantt-toolbar__legend::before {
+    width: 16px;
+    height: 5px;
+    border-radius: 0;
+    background: repeating-linear-gradient(135deg, #ff6661 0 3px, #922f34 3px 6px);
+  }
+
+  .industry-gantt-toggle {
+    min-height: 27px;
+    padding: 3px 10px;
+    border-color: #35505b;
+    border-radius: 1px;
+    color: #92acb6;
+    background: #0b151a;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.018);
+    font-family: var(--ig-mono);
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .industry-gantt-toggle::before {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin-right: 6px;
+    border: 1px solid #51717d;
+    background: transparent;
+    box-shadow: inset 0 0 0 1px #0b151a;
+    content: '';
+  }
+
+  .industry-gantt-toggle[aria-pressed='true'] {
+    border-color: #38e8ff;
+    color: #d9fbff;
+    background: #12313c;
+    box-shadow:
+      inset 2px 0 #38e8ff,
+      0 0 10px rgba(56, 232, 255, 0.12);
+  }
+
+  .industry-gantt-toggle[aria-pressed='true']::before {
+    border-color: #7ff4ff;
+    background: #38e8ff;
+    box-shadow:
+      inset 0 0 0 1px #12313c,
+      0 0 5px rgba(56, 232, 255, 0.48);
+  }
+
+  .industry-gantt-toggle:hover {
+    border-color: #5f7d87;
+    color: #d0f3f8;
+  }
+
+  .industry-gantt-toggle:focus-visible {
+    outline-color: #38e8ff;
+  }
+
+  .industry-gantt-grid,
+  revo-grid {
+    --revo-grid-primary: #16839d;
+    --revo-grid-primary-transparent: rgba(22, 131, 157, 0.12);
+    --revo-grid-background: #fff;
+    --revo-grid-foreground: #17263a;
+    --revo-grid-text: #223147;
+    --revo-grid-divider: #d2d9e0;
+    --revo-grid-border: #d6dde4;
+    --revo-grid-header-bg: #fff;
+    --revo-grid-header-color: #142238;
+    --revo-grid-header-border: #d6dde4;
+    --revo-grid-header-focused-bg: #edf7f9;
+    --revo-grid-header-hover-bg: #f5f8fa;
+    --revo-grid-cell-border: #e2e7ec;
+    --revo-grid-cell-vertical-border: #dce2e8;
+    --revo-grid-focused-bg: rgba(22, 131, 157, 0.07);
+    --revo-grid-row-hover: #f7fafb;
+    --revo-grid-row-headers-bg: #fff;
+    --revo-grid-row-headers-color: #27364a;
+    --revo-grid-selection-border: #f5a800;
+    --revo-grid-selection-bg: rgba(245, 168, 0, 0.035);
+    --revo-grid-font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --revo-grid-font-size: 11.5px;
+    --revo-grid-header-height: 32px;
+    --revo-grid-header-font-size: 11px;
+    --revo-grid-header-font-weight: 750;
+    --revo-grid-header-text-transform: uppercase;
+    --revo-grid-header-padding: 0 11px;
+    --revo-grid-cell-padding: 0 11px;
+    --gantt-cell-min-height: 30px;
+    --gantt-task-height: 22px;
+    --gantt-summary-height: 8px;
+    --gantt-bar-size: 18px;
+    --gantt-border-color-soft: #e2e7ec;
+    --gantt-border-color-strong: #d6dde4;
+    --gantt-header-bg: #fff;
+    --gantt-header-band-bg: #fafbfc;
+    --gantt-header-tick-bg: #fff;
+    --gantt-text-strong: #17263a;
+    --gantt-text-muted: #526175;
+    --gantt-task-bg: #39abc3;
+    --gantt-task-border: #167d96;
+    --gantt-task-progress-bg: #16839d;
+    --gantt-task-text: #fff;
+    --gantt-critical-bg: #df4a52;
+    --gantt-critical-border: #c83a42;
+    --gantt-critical-progress-bg: #c9323b;
+    --gantt-summary-bg: #0b4c75;
+    --gantt-summary-critical-bg: #df4a52;
+    --gantt-bar-mix-bg: #fff;
+    --gantt-bar-progress-mix: #fff;
+    --gantt-dependency-stroke: #747b84;
+    --gantt-dependency-stroke-hover: #16839d;
+    --gantt-dependency-stroke-selected: #f5a800;
+    --gantt-dependency-stroke-critical: #c9323b;
+    --gantt-baseline-bg: rgba(154, 164, 174, 0.48);
+    --gantt-non-working-bg: rgba(33, 49, 68, 0.025);
+    --gantt-project-line: #e256bc;
+    --gantt-selection-blue: #f5a800;
+
+    border-top: 1px solid #d6dde4;
+    background: #fff;
+    font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-variant-numeric: tabular-nums;
+  }
+
+  revo-grid revogr-header .rgHeaderCell {
+    letter-spacing: 0.015em;
+  }
+
+  revo-grid revogr-data .rgCell {
+    letter-spacing: -0.005em;
+  }
+
+  .industry-status {
+    padding: 3px 6px;
+    border: 1px solid #c7d0d4;
+    border-radius: 1px;
+    color: #4d6068;
+    background: #edf2f3;
+    font-family: var(--ig-mono);
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .industry-status--done {
+    border-color: #9cd1b2;
+    color: #1b6d45;
+    background: #e2f3e9;
+  }
+
+  .industry-status--in-progress {
+    border-color: #76ccda;
+    color: #086a7d;
+    background: #ddf4f7;
+  }
+
+  .industry-status--blocked {
+    border-color: #e3aaa7;
+    color: #a3312e;
+    background: #fbe9e7;
+  }
+
+  @media (max-width: 900px) {
+    .industry-gantt-header {
+      grid-template-columns: 1fr;
+    }
+
+    .industry-gantt-header::after {
+      content: 'CELL NETWORK / LIVE';
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .industry-gantt-sync__dot {
+      animation: none;
+    }
+  }
+}
+
+@keyframes manufacturing-telemetry-pulse {
+  0%,
+  82% {
+    opacity: 1;
+  }
+
+  83%,
+  100% {
+    opacity: 0.35;
+  }
+}

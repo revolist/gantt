@@ -1,16 +1,9 @@
+import type { GanttEntryDefinition } from './gantt-entry';
+
 export const GANTT_EXAMPLE_IDS = ['showcase', 'big-data', 'horizontal-big-data'] as const;
 
 export type GanttExampleId = typeof GANTT_EXAMPLE_IDS[number];
-export type GanttExampleFramework = 'ts' | 'react' | 'vue' | 'angular';
-
-interface GanttExampleDefinition {
-  readonly id: GanttExampleId;
-  readonly angularSelector: string;
-  readonly loadTs: () => Promise<(parentSelector: string) => (() => void) | undefined>;
-  readonly loadReact: () => Promise<unknown>;
-  readonly loadVue: () => Promise<unknown>;
-  readonly loadAngular: () => Promise<unknown>;
-}
+export type GanttExampleDefinition = GanttEntryDefinition<GanttExampleId>;
 
 export const DEFAULT_GANTT_EXAMPLE_ID: GanttExampleId = 'showcase';
 

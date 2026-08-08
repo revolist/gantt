@@ -1,12 +1,13 @@
 import '../demo-host.css';
 import '@revolist/revogrid-pro/dist/revogrid-pro.css';
 import '@revolist/revogrid-enterprise/dist/revogrid-enterprise.css';
-import { resolveGanttExample, type GanttExampleFramework } from './examples';
+import { resolveGanttEntry } from './entries';
+import type { GanttEntryFramework } from './gantt-entry';
 
-const framework: GanttExampleFramework = import.meta.env.MODE === 'development'
+const framework: GanttEntryFramework = import.meta.env.MODE === 'development'
   ? 'ts'
-  : import.meta.env.MODE as GanttExampleFramework;
-const example = resolveGanttExample(window.location.search);
+  : import.meta.env.MODE as GanttEntryFramework;
+const entry = resolveGanttEntry(window.location.search);
 
 async function bootstrap() {
   switch (framework) {
@@ -14,7 +15,7 @@ async function bootstrap() {
       const [{ createElement }, { createRoot }, Demo] = await Promise.all([
         import('react'),
         import('react-dom/client'),
-        example.loadReact(),
+        entry.loadReact(),
       ]);
       createRoot(document.querySelector('#app')!).render(
         createElement(Demo as Parameters<typeof createElement>[0]),
@@ -24,7 +25,7 @@ async function bootstrap() {
     case 'vue': {
       const [{ createApp }, Demo] = await Promise.all([
         import('vue'),
-        example.loadVue(),
+        entry.loadVue(),
       ]);
       createApp(Demo as Parameters<typeof createApp>[0]).mount('#app');
       break;
@@ -32,16 +33,16 @@ async function bootstrap() {
     case 'angular': {
       await import('zone.js');
       await import('@angular/compiler');
-      document.querySelector('#app')!.innerHTML = `<${example.angularSelector}></${example.angularSelector}>`;
+      document.querySelector('#app')!.innerHTML = `<${entry.angularSelector}></${entry.angularSelector}>`;
       const [{ bootstrapApplication }, Demo] = await Promise.all([
         import('@angular/platform-browser'),
-        example.loadAngular(),
+        entry.loadAngular(),
       ]);
       await bootstrapApplication(Demo as Parameters<typeof bootstrapApplication>[0]);
       break;
     }
     default: {
-      const load = await example.loadTs();
+      const load = await entry.loadTs();
       load('#app');
     }
   }

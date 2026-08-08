@@ -1,0 +1,549 @@
+.industry-gantt-shell--resource-planning.industry-gantt-shell {
+  --ig-accent: #3d7758;
+  --ig-accent-deep: #24543d;
+  --ig-border: #d8ded3;
+  --ig-muted: #68736a;
+  --ig-surface: #f5f4ed;
+  --ig-text: #21352a;
+  --capacity-paper: #f5f4ed;
+  --capacity-paper-light: #fbfaf5;
+  --capacity-rule: #d9dfd5;
+  --capacity-ink: #21352a;
+  --capacity-green: #3d7758;
+  --capacity-moss: #6b8b70;
+  --capacity-amber: #c0874e;
+
+  position: relative;
+  border-color: #d5dbd1;
+  border-radius: 18px;
+  background:
+    linear-gradient(90deg, rgba(74, 111, 84, .035) 1px, transparent 1px) 0 0 / 28px 100%,
+    var(--capacity-paper);
+  box-shadow: 0 18px 50px rgba(43, 58, 47, .11);
+
+  &::before {
+    position: absolute;
+    z-index: 4;
+    top: 15px;
+    bottom: 15px;
+    left: 8px;
+    width: 2px;
+    border-radius: 2px;
+    background: linear-gradient(#8aaa91, #d5b778 52%, #9bb2a1);
+    content: '';
+    pointer-events: none;
+  }
+
+  .industry-gantt-header {
+    grid-template-columns: minmax(420px, .96fr) minmax(460px, 1.04fr);
+    gap: 28px;
+    min-height: 132px;
+    padding: 18px 22px 24px 28px;
+    overflow: hidden;
+    border-bottom-color: #d6ddd3;
+    background:
+      radial-gradient(circle at 78% -20%, rgba(103, 143, 114, .13), transparent 43%),
+      repeating-linear-gradient(0deg, transparent 0 25px, rgba(68, 101, 77, .035) 25px 26px),
+      linear-gradient(110deg, #fbfaf5, #f1f2e9);
+  }
+
+  .industry-gantt-header::after {
+    position: absolute;
+    right: 22px;
+    bottom: 9px;
+    left: 28px;
+    height: 3px;
+    border-radius: 3px;
+    background:
+      linear-gradient(90deg,
+        #4f8665 0 31%,
+        #d3a05f 31% 42%,
+        #7ca084 42% 68%,
+        #d9bb7b 68% 76%,
+        #a5b7a7 76% 100%);
+    content: '';
+    opacity: .82;
+  }
+
+  .industry-gantt-identity {
+    gap: 16px;
+    align-items: flex-start;
+  }
+
+  .industry-gantt-mark {
+    position: relative;
+    flex-basis: 54px;
+    width: 54px;
+    height: 54px;
+    border: 7px solid #d9e3da;
+    border-top-color: #497f61;
+    border-right-color: #7ba087;
+    border-radius: 50%;
+    color: #315c45;
+    background: #fbfaf5;
+    box-shadow: 0 5px 16px rgba(52, 85, 64, .13);
+    font-size: 10px;
+    font-weight: 850;
+    letter-spacing: .06em;
+  }
+
+  .industry-gantt-mark::after {
+    position: absolute;
+    right: -8px;
+    bottom: -4px;
+    width: 13px;
+    height: 13px;
+    border: 3px solid #fbfaf5;
+    border-radius: 50%;
+    background: #d0a05f;
+    box-shadow: 0 2px 7px rgba(112, 79, 41, .2);
+    content: '';
+  }
+
+  .industry-gantt-product {
+    margin: 1px 0 5px;
+    color: #557061;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .12em;
+  }
+
+  .industry-gantt-title {
+    color: var(--capacity-ink);
+    font-size: 27px;
+    font-weight: 650;
+    letter-spacing: -.035em;
+  }
+
+  .industry-gantt-subtitle {
+    max-width: 530px;
+    margin-top: 7px;
+    color: #68736a;
+    font-size: 11px;
+    line-height: 1.45;
+    white-space: normal;
+  }
+
+  .industry-gantt-metrics {
+    position: relative;
+    grid-template-columns: 1.08fr .92fr .92fr 1fr;
+    gap: 0;
+    padding: 11px 3px 5px;
+    border: 1px solid rgba(88, 115, 93, .18);
+    border-radius: 12px;
+    background: rgba(255, 255, 251, .72);
+    box-shadow: 0 6px 20px rgba(51, 72, 57, .055);
+  }
+
+  .industry-gantt-metrics::before {
+    position: absolute;
+    top: -10px;
+    left: 14px;
+    padding: 2px 7px;
+    border-radius: 9px;
+    color: #6e7e72;
+    background: #f4f4ec;
+    content: 'CAPACITY BAND';
+    font-size: 7px;
+    font-weight: 800;
+    letter-spacing: .13em;
+  }
+
+  .industry-gantt-metric {
+    position: relative;
+    min-height: 50px;
+    padding: 8px 12px 7px;
+    border: 0;
+    border-left: 1px solid rgba(83, 111, 89, .16);
+    border-radius: 0;
+    background: transparent;
+  }
+
+  .industry-gantt-metric:first-child { border-left: 0; }
+
+  .industry-gantt-metric::after {
+    position: absolute;
+    right: 11px;
+    bottom: 4px;
+    left: 11px;
+    height: 2px;
+    border-radius: 2px;
+    background: #a9bcad;
+    content: '';
+  }
+
+  .industry-gantt-metric__value {
+    color: #2f5d44;
+    font-size: 19px;
+    font-variant-numeric: tabular-nums;
+    font-weight: 700;
+    letter-spacing: -.025em;
+  }
+
+  .industry-gantt-metric__label {
+    margin-top: 5px;
+    color: #778278;
+    font-size: 7px;
+    letter-spacing: .07em;
+  }
+
+  .industry-gantt-metric--warning::after { background: #d0a05f; }
+  .industry-gantt-metric--warning .industry-gantt-metric__value { color: #9a6835; }
+  .industry-gantt-metric--positive::after { background: #4e9069; }
+  .industry-gantt-metric--positive .industry-gantt-metric__value { color: #347652; }
+
+  .industry-gantt-sync {
+    right: 25px;
+    bottom: 13px;
+    color: #78837a;
+    font-size: 8px;
+    letter-spacing: .025em;
+  }
+
+  .industry-gantt-sync__dot {
+    width: 5px;
+    height: 5px;
+    background: #57916c;
+    box-shadow: 0 0 0 3px rgba(87, 145, 108, .11);
+  }
+
+  .industry-gantt-toolbar {
+    flex-basis: 46px;
+    gap: 8px;
+    padding: 7px 14px 7px 20px;
+    border-bottom-color: #dfe3da;
+    background: rgba(251, 250, 245, .94);
+  }
+
+  .industry-gantt-toolbar__label {
+    color: #445e4e;
+    font-size: 11px;
+    font-weight: 720;
+    letter-spacing: .01em;
+  }
+
+  .industry-gantt-toolbar__label::before {
+    display: inline-block;
+    width: 18px;
+    height: 8px;
+    margin-right: 8px;
+    border: 1px solid #81a08a;
+    border-radius: 5px;
+    background: linear-gradient(90deg, #4f8665 0 62%, #d7e0d8 62%);
+    content: '';
+  }
+
+  .industry-gantt-toolbar__legend {
+    max-width: 230px;
+    margin-right: 7px;
+    color: #7b715f;
+    font-size: 8px;
+    font-style: italic;
+  }
+
+  .industry-gantt-toolbar__legend::before {
+    width: 10px;
+    height: 10px;
+    border: 1px solid #d0a05f;
+    border-radius: 50%;
+    background: #f8e9cf;
+  }
+
+  .industry-gantt-toggle {
+    min-height: 29px;
+    padding: 4px 12px;
+    border-color: #ccd6cc;
+    border-radius: 999px;
+    color: #476452;
+    background: #fffefa;
+    font-size: 9px;
+    font-weight: 750;
+    letter-spacing: .015em;
+  }
+
+  .industry-gantt-toggle[aria-pressed='true'] {
+    border-color: #4a7f5f;
+    color: #fff;
+    background: #4a7f5f;
+    box-shadow: 0 4px 12px rgba(57, 104, 75, .16);
+  }
+
+  .industry-gantt-toggle:focus-visible {
+    outline-color: #43795a;
+  }
+
+  .industry-gantt-grid,
+  revo-grid {
+    width: calc(100% - 20px);
+    margin: 0 10px 10px;
+    overflow: hidden;
+    border: 1px solid #d0d4e4;
+    border-radius: 0 0 10px 10px;
+    background: #fff;
+    box-shadow: 0 7px 18px rgba(50, 51, 56, .07);
+  }
+
+  revo-grid.gantt-plugin {
+    --revo-grid-primary: #0073ea;
+    --revo-grid-primary-transparent: rgba(0, 115, 234, .12);
+    --revo-grid-background: #fff;
+    --revo-grid-foreground: #323338;
+    --revo-grid-divider: #d0d4e4;
+    --revo-grid-text: #323338;
+    --revo-grid-border: #d0d4e4;
+    --revo-grid-header-bg: #f6f7fb;
+    --revo-grid-header-color: #676879;
+    --revo-grid-header-border: #d0d4e4;
+    --revo-grid-header-focused-bg: #edf5ff;
+    --revo-grid-header-hover-bg: #eef0f6;
+    --revo-grid-cell-border: #e6e9ef;
+    --revo-grid-cell-vertical-border: #dfe3ec;
+    --revo-grid-focused-bg: rgba(0, 115, 234, .06);
+    --revo-grid-row-hover: #f5f6f8;
+    --revo-grid-font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --revo-grid-font-size: 11px;
+    --revo-grid-header-font-size: 10px;
+    --revo-grid-header-font-weight: 650;
+    --revo-grid-header-height: 42px;
+    --revo-grid-cell-padding: 0 9px;
+    --gantt-border-color-soft: #e6e9ef;
+    --gantt-border-color-strong: #d0d4e4;
+    --gantt-header-bg: #f6f7fb;
+    --gantt-header-band-bg: #f6f7fb;
+    --gantt-header-tick-bg: #fff;
+    --gantt-text-strong: #323338;
+    --gantt-text-muted: #676879;
+    --gantt-non-working-bg: rgba(103, 104, 121, .045);
+    --gantt-project-line: #0073ea;
+    --gantt-header-task-interaction-range-bg: rgba(0, 115, 234, .13);
+    --gantt-resource-load-bg: #0073ea;
+    --gantt-resource-load-over-bg: #e2445c;
+    --gantt-resource-capacity-line: rgba(0, 115, 234, .58);
+  }
+
+  revogr-header .rgHeaderCell {
+    padding-right: 8px;
+    padding-left: 8px;
+    font-size: 10px;
+  }
+
+  .gantt-header-cell--top {
+    color: #323338;
+    background: #f6f7fb;
+    font-size: 10px;
+    font-weight: 650;
+  }
+
+  .gantt-header-cell--leaf {
+    color: #676879;
+    background: #fff;
+    font-size: 9px;
+  }
+
+  .gantt-header-task-interaction-range {
+    border-bottom: 2px solid #0073ea;
+    box-shadow: inset 0 0 0 1px rgba(0, 115, 234, .08);
+  }
+
+  .gantt-background__project-line {
+    width: 3px;
+    opacity: .52;
+    box-shadow: 0 0 0 1px rgba(0, 115, 234, .09), 0 0 10px rgba(0, 115, 234, .14);
+  }
+
+  .gantt-resource-name-cell {
+    width: 100%;
+    height: 100%;
+    gap: 9px;
+    color: #323338;
+    font-size: 11px;
+    font-weight: 680;
+  }
+
+  .gantt-resource-name-avatar {
+    --avatar-cell-size: 26px !important;
+
+    flex: 0 0 26px;
+    width: 26px;
+    height: 26px;
+    min-width: 26px;
+    box-sizing: border-box;
+    aspect-ratio: 1;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    box-shadow: 0 0 0 1px #c5c7d0;
+    font-size: 9px;
+    font-weight: 700;
+  }
+
+  .industry-gantt-grid revogr-data .rgCell.capacity-grid-cell {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    box-sizing: border-box;
+    padding-top: 0;
+    padding-bottom: 0;
+    line-height: 1.2;
+  }
+
+  .capacity-resource-role {
+    display: block;
+    width: 100%;
+    overflow: hidden;
+    color: #676879;
+    font-size: 10px;
+    font-weight: 520;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .capacity-resource-capacity {
+    display: block;
+    width: 100%;
+    padding: 0;
+    border: 0;
+    color: #0060b9;
+    background: transparent;
+    font-size: 10.5px;
+    font-variant-numeric: tabular-nums;
+    font-weight: 700;
+    line-height: 1.2;
+    text-align: center;
+  }
+
+  .capacity-resource-load {
+    display: block;
+    width: 100%;
+    padding: 0;
+    border: 0;
+    overflow: hidden;
+    color: #0060b9;
+    background: transparent;
+    font-size: 10.5px;
+    font-variant-numeric: tabular-nums;
+    font-weight: 720;
+    line-height: 1.2;
+    text-align: center;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .capacity-resource-load--conversation {
+    color: #b63546;
+    background: transparent;
+  }
+
+  .gantt-resource-load {
+    bottom: 5px;
+    height: 29px !important;
+    border-radius: 2px 2px 0 0;
+    background: #0073ea;
+    box-shadow: inset 0 0 0 1px rgba(0, 81, 166, .14);
+  }
+
+  .gantt-resource-load--overallocated {
+    background: #e2445c;
+    box-shadow: inset 0 0 0 1px #c9354d, 0 -1px 0 rgba(226, 68, 92, .2);
+  }
+
+  .gantt-resource-capacity-line {
+    border-top: 2px dashed rgba(0, 115, 234, .58);
+  }
+
+  .gantt-resource-load__label {
+    font-size: 10px;
+    font-weight: 750;
+    text-shadow: 0 1px 1px rgba(0, 50, 102, .28);
+  }
+}
+
+.industry-gantt-shell--resource-planning.industry-gantt-shell--dark {
+  --ig-border: #3c4c40;
+  --ig-muted: #aab6ac;
+  --ig-surface: #172019;
+  --ig-text: #edf3ed;
+  --capacity-paper: #172019;
+  --capacity-paper-light: #1d2820;
+  --capacity-rule: #3a4b3e;
+  --capacity-ink: #edf3ed;
+
+  background: #172019;
+
+  .industry-gantt-header {
+    border-bottom-color: #3a4b3e;
+    background:
+      radial-gradient(circle at 78% -20%, rgba(91, 142, 106, .15), transparent 43%),
+      repeating-linear-gradient(0deg, transparent 0 25px, rgba(171, 199, 178, .025) 25px 26px),
+      linear-gradient(110deg, #1d2820, #19241c);
+  }
+
+  .industry-gantt-mark { border-color: #344d3c; border-top-color: #72a483; border-right-color: #547d62; color: #cfe2d2; background: #202c23; }
+  .industry-gantt-mark::after { border-color: #202c23; }
+  .industry-gantt-title { color: #edf3ed; }
+  .industry-gantt-subtitle, .industry-gantt-sync { color: #9aaa9d; }
+  .industry-gantt-metrics { border-color: #415244; background: rgba(30, 42, 33, .86); }
+  .industry-gantt-metrics::before { color: #a7b5aa; background: #1c281f; }
+  .industry-gantt-metric { border-left-color: #405044; }
+  .industry-gantt-metric__label { color: #9ba99e; }
+  .industry-gantt-metric__value { color: #c9ded0; }
+  .industry-gantt-toolbar { border-bottom-color: #3b4b3f; background: #1b261e; }
+  .industry-gantt-toolbar__label { color: #c3d3c7; }
+  .industry-gantt-toolbar__legend { color: #c0a87e; }
+  .industry-gantt-toggle { border-color: #475a4b; color: #bacbbf; background: #202c23; }
+  .industry-gantt-grid, revo-grid { border-color: #454651; background: #1f1f24; }
+  revo-grid.gantt-plugin {
+    --revo-grid-primary: #579bfc;
+    --revo-grid-primary-transparent: rgba(87, 155, 252, .14);
+    --revo-grid-background: #1f1f24;
+    --revo-grid-foreground: #f5f6f8;
+    --revo-grid-divider: #454651;
+    --revo-grid-text: #f5f6f8;
+    --revo-grid-border: #454651;
+    --revo-grid-header-bg: #292a30;
+    --revo-grid-header-color: #c5c7d0;
+    --revo-grid-header-border: #454651;
+    --revo-grid-header-focused-bg: #26384f;
+    --revo-grid-header-hover-bg: #34353d;
+    --revo-grid-cell-border: #34353d;
+    --revo-grid-cell-vertical-border: #454651;
+    --revo-grid-focused-bg: rgba(87, 155, 252, .1);
+    --revo-grid-row-hover: #292a30;
+    --gantt-border-color-soft: #34353d;
+    --gantt-border-color-strong: #454651;
+    --gantt-header-bg: #292a30;
+    --gantt-header-band-bg: #292a30;
+    --gantt-header-tick-bg: #1f1f24;
+    --gantt-text-strong: #f5f6f8;
+    --gantt-text-muted: #c5c7d0;
+    --gantt-non-working-bg: rgba(255, 255, 255, .025);
+    --gantt-project-line: #579bfc;
+    --gantt-header-task-interaction-range-bg: rgba(87, 155, 252, .16);
+    --gantt-resource-load-bg: #579bfc;
+    --gantt-resource-load-over-bg: #ff5a72;
+    --gantt-resource-capacity-line: rgba(87, 155, 252, .64);
+  }
+
+  .gantt-header-cell--top { color: #f5f6f8; background: #292a30; }
+  .gantt-header-cell--leaf { color: #c5c7d0; background: #1f1f24; }
+  .gantt-header-task-interaction-range { border-bottom-color: #579bfc; }
+  .gantt-resource-name-cell { color: #f5f6f8; }
+  .gantt-resource-name-avatar { border-color: #1f1f24; box-shadow: 0 0 0 1px #676879; }
+  .capacity-resource-role { color: #c5c7d0; }
+  .capacity-resource-capacity, .capacity-resource-load { color: #9bc8ff; background: transparent; }
+  .capacity-resource-load--conversation { color: #ffb3c0; background: transparent; }
+  .gantt-resource-load { background: #579bfc; }
+  .gantt-resource-load--overallocated { background: #ff5a72; box-shadow: inset 0 0 0 1px #df455d; }
+  .gantt-resource-capacity-line { border-top-color: rgba(87, 155, 252, .64); }
+}
+
+@media (max-width: 900px) {
+  .industry-gantt-shell--resource-planning.industry-gantt-shell {
+    .industry-gantt-header {
+      grid-template-columns: 1fr;
+      min-height: 118px;
+    }
+
+    .industry-gantt-metrics { display: none; }
+    .industry-gantt-toolbar__legend { display: none; }
+  }
+}

@@ -1,0 +1,526 @@
+.industry-gantt-shell--internal-tools.industry-gantt-shell {
+  --ig-accent: #7c4bd8;
+  --ig-accent-deep: #4d246d;
+  --ig-border: #dfdfe8;
+  --ig-muted: #706d7c;
+  --ig-surface: #fff;
+  --ig-text: #211e28;
+  --internal-plum: #5f2d79;
+  --internal-violet: #7c4bd8;
+  --internal-rose: #dc4f6d;
+
+  border-color: #dddce6;
+  border-radius: 18px;
+  background: #f7f7fa;
+  box-shadow: 0 22px 54px rgba(43, 31, 57, .12);
+
+  .industry-gantt-header {
+    grid-template-columns: minmax(420px, 1.18fr) minmax(430px, .82fr);
+    gap: 28px;
+    min-height: 122px;
+    padding: 35px 20px 19px;
+    border-bottom-color: #e3e2ea;
+    background:
+      radial-gradient(circle at 68% -60%, rgba(124, 75, 216, .13), transparent 48%),
+      linear-gradient(112deg, #fff 0 48%, #f8f6fd 100%);
+  }
+
+  .industry-gantt-header::before {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    display: flex;
+    height: 27px;
+    align-items: center;
+    padding: 0 20px 0 68px;
+    border-bottom: 1px solid #ebeaef;
+    color: #868290;
+    background: rgba(250, 250, 252, .9);
+    content: 'Workspace     Releases     Teams     Settings';
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: .035em;
+    word-spacing: 11px;
+  }
+
+  .industry-gantt-header::after {
+    position: absolute;
+    top: 26px;
+    left: 120px;
+    width: 48px;
+    height: 2px;
+    border-radius: 2px;
+    background: var(--internal-violet);
+    content: '';
+  }
+
+  .industry-gantt-identity {
+    gap: 14px;
+    align-items: center;
+  }
+
+  .industry-gantt-mark {
+    position: absolute;
+    z-index: 2;
+    top: 5px;
+    left: 20px;
+    width: 17px;
+    height: 17px;
+    border: 1px solid rgba(74, 35, 105, .2);
+    border-radius: 5px;
+    background: linear-gradient(145deg, #8e5bea, #582879);
+    box-shadow: 0 3px 8px rgba(89, 43, 121, .2);
+    font-size: 7px;
+    font-weight: 850;
+  }
+
+  .industry-gantt-product {
+    position: relative;
+    margin: 0 0 7px;
+    color: #777281;
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: .025em;
+    text-transform: none;
+  }
+
+  .industry-gantt-product::before {
+    margin-right: 7px;
+    color: #a09ba9;
+    content: '←';
+    font-size: 10px;
+  }
+
+  .industry-gantt-title {
+    color: #241e2b;
+    font-size: 25px;
+    font-weight: 680;
+    letter-spacing: -.035em;
+  }
+
+  .industry-gantt-subtitle {
+    max-width: 570px;
+    margin-top: 6px;
+    color: #777280;
+    font-size: 10px;
+    line-height: 1.4;
+    white-space: normal;
+  }
+
+  .industry-gantt-metrics {
+    grid-template-columns: 1.08fr .92fr .92fr 1fr;
+    gap: 0;
+    overflow: hidden;
+    border: 1px solid #e5e2eb;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, .84);
+    box-shadow: 0 6px 20px rgba(54, 40, 68, .045);
+  }
+
+  .industry-gantt-metric {
+    min-height: 51px;
+    padding: 10px 12px 8px;
+    border: 0;
+    border-left: 1px solid #ece9ef;
+    border-radius: 0;
+    background: transparent;
+  }
+
+  .industry-gantt-metric:first-child {
+    border-left: 0;
+    background: linear-gradient(140deg, #f2ecff, #faf8ff);
+  }
+
+  .industry-gantt-metric__value {
+    color: #3d3444;
+    font-size: 17px;
+    font-variant-numeric: tabular-nums;
+    font-weight: 720;
+    letter-spacing: -.025em;
+  }
+
+  .industry-gantt-metric__label {
+    margin-top: 5px;
+    color: #888390;
+    font-size: 7px;
+    font-weight: 750;
+    letter-spacing: .065em;
+  }
+
+  .industry-gantt-metric:first-child .industry-gantt-metric__value { color: #633593; }
+  .industry-gantt-metric--warning .industry-gantt-metric__value { color: #7d4fa0; }
+  .industry-gantt-metric--danger .industry-gantt-metric__value { color: #c14360; }
+
+  .industry-gantt-sync {
+    right: 22px;
+    bottom: 6px;
+    color: #918b98;
+    font-size: 7px;
+    letter-spacing: .025em;
+  }
+
+  .industry-gantt-sync__dot {
+    width: 5px;
+    height: 5px;
+    background: #40a874;
+    box-shadow: 0 0 0 3px rgba(64, 168, 116, .1);
+  }
+
+  .industry-gantt-toolbar {
+    flex-basis: 43px;
+    gap: 7px;
+    padding: 6px 13px 6px 18px;
+    border-bottom-color: #e5e4eb;
+    background: #fbfbfc;
+  }
+
+  .industry-gantt-toolbar__label {
+    display: inline-flex;
+    align-items: center;
+    color: #4a4351;
+    font-size: 10px;
+    font-weight: 720;
+  }
+
+  .industry-gantt-toolbar__label::before {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    margin-right: 7px;
+    border: 1px solid #d8d2e0;
+    border-radius: 4px;
+    background:
+      linear-gradient(#7c4bd8, #7c4bd8) 3px 4px / 8px 2px no-repeat,
+      linear-gradient(#b397e9, #b397e9) 3px 8px / 5px 2px no-repeat,
+      #f5f1fc;
+    content: '';
+  }
+
+  .industry-gantt-toolbar__legend {
+    margin-right: 5px;
+    color: #8a6470;
+    font-size: 8px;
+  }
+
+  .industry-gantt-toolbar__legend::before {
+    width: 7px;
+    height: 7px;
+    border-radius: 2px;
+    background: #dc4f6d;
+  }
+
+  .industry-gantt-toggle {
+    min-height: 27px;
+    padding: 3px 10px;
+    border-color: #ddd9e4;
+    border-radius: 999px;
+    color: #675f70;
+    background: #fff;
+    font-size: 9px;
+    font-weight: 700;
+  }
+
+  .industry-gantt-toggle[aria-pressed='true'] {
+    border-color: #7650c3;
+    color: #fff;
+    background: #7650c3;
+    box-shadow: 0 4px 12px rgba(100, 57, 146, .17);
+  }
+
+  .industry-gantt-toggle:focus-visible { outline-color: #7650c3; }
+
+  .industry-gantt-grid,
+  revo-grid {
+    width: calc(100% - 20px);
+    margin: 0 10px 10px;
+    overflow: hidden;
+    border: 1px solid #dfe1e6;
+    border-radius: 10px;
+    background: #fff;
+    box-shadow:
+      0 1px 2px rgba(31, 35, 41, .035),
+      0 10px 28px rgba(31, 35, 41, .045);
+    font-variant-numeric: tabular-nums;
+    --revo-grid-primary: #7b52d8;
+    --revo-grid-primary-transparent: rgba(123, 82, 216, .14);
+    --revo-grid-background: #fff;
+    --revo-grid-foreground: #292d34;
+    --revo-grid-text: #292d34;
+    --revo-grid-divider: #e4e6ea;
+    --revo-grid-shadow: rgba(31, 35, 41, .08);
+    --revo-grid-border: #dfe1e6;
+    --revo-grid-header-bg: #f7f8fa;
+    --revo-grid-header-color: #6b717a;
+    --revo-grid-header-border: #e4e6ea;
+    --revo-grid-header-focused-bg: #f0ecfb;
+    --revo-grid-header-hover-bg: #f1f2f5;
+    --revo-grid-cell-border: #e6e8ec;
+    --revo-grid-cell-vertical-border: #e4e6ea;
+    --revo-grid-row-hover: #faf9fe;
+    --revo-grid-focused-bg: #f3effc;
+    --revo-grid-selection-border: #7b52d8;
+    --revo-grid-selection-bg: rgba(123, 82, 216, .045);
+    --revo-grid-font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --revo-grid-header-height: 34px;
+    --revo-grid-header-font-size: 8.5px;
+    --revo-grid-header-font-weight: 720;
+    --revo-grid-header-text-transform: uppercase;
+    --revo-grid-header-padding: 0 8px;
+    --revo-grid-cell-padding: 0 7px;
+    --revo-grid-font-size: 10px;
+    --gantt-border-color-soft: #e6e8ec;
+    --gantt-border-color-strong: #dfe1e6;
+    --gantt-header-bg: #fff;
+    --gantt-header-band-bg: #f7f8fa;
+    --gantt-header-tick-bg: #fbfbfc;
+    --gantt-text-strong: #292d34;
+    --gantt-text-muted: #737983;
+    --gantt-task-bg: #8b5cf6;
+    --gantt-task-border: rgba(91, 58, 163, .28);
+    --gantt-task-progress-bg: #6d3fc9;
+    --gantt-task-text: #fff;
+    --gantt-critical-bg: #d9469f;
+    --gantt-critical-border: #b82f83;
+    --gantt-critical-progress-bg: #b92e82;
+    --gantt-summary-bg: #5f2d79;
+    --gantt-summary-critical-bg: #c13d91;
+    --gantt-bar-mix-bg: #fff;
+    --gantt-bar-progress-mix: #fff;
+    --gantt-bar-label-shadow: rgba(30, 20, 42, .22);
+    --gantt-shadow-soft: 0 2px 5px rgba(61, 39, 88, .09);
+    --gantt-dependency-stroke: #747984;
+    --gantt-dependency-stroke-hover: #7b52d8;
+    --gantt-dependency-stroke-selected: #c13d91;
+    --gantt-dependency-stroke-critical: #d9469f;
+    --gantt-baseline-bg: rgba(149, 154, 166, .58);
+    --gantt-indicator-custom: #8b5cf6;
+    --gantt-range-bg: rgba(217, 70, 159, .07);
+    --gantt-non-working-bg: rgba(41, 45, 52, .025);
+    --gantt-project-line: #d9469f;
+    --gantt-today-line: #7b52d8;
+    --gantt-milestone-line: #b83280;
+    --gantt-selection-blue: #7b52d8;
+    --gantt-tooltip-bg: #fff;
+    --gantt-tooltip-color: #292d34;
+    --gantt-tooltip-title-color: #202329;
+    --gantt-tooltip-label-color: #6b717a;
+    --gantt-tooltip-value-color: #292d34;
+    --gantt-tooltip-muted-color: #737983;
+    --gantt-tooltip-border: #dfe1e6;
+    --gantt-tooltip-shadow: 0 18px 44px rgba(31, 35, 41, .15);
+  }
+
+  revo-grid revogr-header .rgHeaderCell {
+    letter-spacing: .065em;
+  }
+
+  revo-grid revogr-data .rgCell {
+    letter-spacing: -.005em;
+  }
+
+  revo-grid revogr-viewport-scroll.colPinEnd {
+    box-shadow:
+      -1px 0 0 #dfe1e6,
+      -8px 0 18px rgba(31, 35, 41, .025);
+  }
+
+  .internal-owner {
+    display: flex;
+    min-width: 0;
+    align-items: center;
+    gap: 4px;
+    color: #292d34;
+    font-size: 7.2px;
+    font-weight: 680;
+  }
+
+  .internal-owner__avatar {
+    display: inline-flex;
+    flex: 0 0 17px;
+    width: 17px;
+    height: 17px;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #ddd6f4;
+    border-radius: 50%;
+    color: #6546a7;
+    background: #f0ecfa;
+    font-size: 6px;
+    font-weight: 820;
+  }
+
+  .internal-owner__name,
+  .internal-source__label,
+  .internal-readiness__label {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .internal-source {
+    display: inline-flex;
+    max-width: calc(100% - 3px);
+    align-items: center;
+    gap: 3px;
+    padding: 3px 4px;
+    border: 1px solid #e4e6ea;
+    border-radius: 5px;
+    overflow: hidden;
+    color: #4f5560;
+    background: #fff;
+    box-shadow: 0 1px 1px rgba(31, 35, 41, .025);
+    font-size: 7.6px;
+    font-weight: 680;
+    line-height: 1;
+  }
+
+  .internal-source__dot {
+    flex: 0 0 5px;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #7650c3;
+  }
+
+  .internal-source--github .internal-source__dot { background: #24242b; }
+  .internal-source--linear .internal-source__dot { background: #5e6ad2; }
+  .internal-source--vanta .internal-source__dot { background: #1f9b91; }
+  .internal-source--ironclad .internal-source__dot { background: #c97936; }
+  .internal-source--stripe .internal-source__dot { background: #635bff; }
+  .internal-source--salesforce .internal-source__dot { background: #1798c1; }
+  .internal-source--zendesk .internal-source__dot { background: #17494d; }
+  .internal-source--contentful .internal-source__dot { background: #2478cc; }
+  .internal-source--release-hub .internal-source__dot { background: #7c4bd8; }
+
+  .internal-approval {
+    display: inline-block;
+    max-width: calc(100% - 3px);
+    padding: 4px 5px;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    overflow: hidden;
+    font-size: 7.6px;
+    font-weight: 760;
+    line-height: 1;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .internal-approval--approved {
+    border-color: #ddd3f8;
+    color: #6044a2;
+    background: #f0ebfc;
+  }
+
+  .internal-approval--attention {
+    border-color: #f3cfe1;
+    color: #ad2f70;
+    background: #fdecf4;
+  }
+
+  .internal-approval--review {
+    border-color: #d9d2fa;
+    color: #5f47ae;
+    background: #eeebff;
+  }
+
+  .internal-approval--neutral {
+    border-color: #e2e4e8;
+    color: #626872;
+    background: #f3f4f6;
+  }
+
+  .internal-readiness {
+    display: grid;
+    width: 100%;
+    height: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+    grid-template-rows: 1fr 3px;
+    gap: 2px;
+    align-items: center;
+    padding: 5px 3px;
+  }
+
+  .internal-readiness__track {
+    display: block;
+    width: 100%;
+    height: 3px;
+    overflow: hidden;
+    border-radius: 4px;
+    background: #e9eaf0;
+  }
+
+  .internal-readiness__fill {
+    display: block;
+    height: 100%;
+    border-radius: inherit;
+    background: linear-gradient(90deg, #7b5ad9, #b64b9a);
+  }
+
+  .internal-readiness__label {
+    display: block;
+    width: 100%;
+    overflow: visible;
+    color: #4f5560;
+    font-size: 8px;
+    font-variant-numeric: tabular-nums;
+    font-weight: 720;
+    line-height: 1;
+    text-align: center;
+    text-overflow: clip;
+  }
+
+  .internal-readiness--blocked .internal-readiness__fill { background: #d23f86; }
+  .internal-readiness--blocked .internal-readiness__label {
+    overflow: hidden;
+    color: #ad2f70;
+    text-overflow: ellipsis;
+  }
+  .internal-readiness--done .internal-readiness__fill { background: #7b52d8; }
+  .internal-readiness--done .internal-readiness__label { color: #6044a2; }
+}
+
+.industry-gantt-shell--internal-tools.industry-gantt-shell--dark {
+  --ig-border: #3c3845;
+  --ig-muted: #ada7b6;
+  --ig-surface: #1c1920;
+  --ig-text: #f2edf5;
+
+  background: #1a181d;
+
+  .industry-gantt-header {
+    border-bottom-color: #3a3541;
+    background: radial-gradient(circle at 68% -60%, rgba(132, 80, 224, .18), transparent 48%), #201c24;
+  }
+
+  .industry-gantt-header::before { border-bottom-color: #37323d; color: #a39daa; background: #1d1a20; }
+  .industry-gantt-title { color: #f5eff8; }
+  .industry-gantt-product,
+  .industry-gantt-subtitle,
+  .industry-gantt-sync { color: #aaa4b0; }
+  .industry-gantt-metrics { border-color: #423b49; background: rgba(38, 33, 43, .88); }
+  .industry-gantt-metric { border-left-color: #443d4a; }
+  .industry-gantt-metric:first-child { background: linear-gradient(140deg, #352945, #2b2532); }
+  .industry-gantt-metric__value { color: #e6dce9; }
+  .industry-gantt-metric__label { color: #aaa3af; }
+  .industry-gantt-toolbar { border-bottom-color: #3b3641; background: #211e24; }
+  .industry-gantt-toolbar__label { color: #ddd5e2; }
+  .industry-gantt-toolbar__legend { color: #e1a7b5; }
+  .industry-gantt-toggle { border-color: #48404f; color: #d1c9d6; background: #29242d; }
+  .industry-gantt-grid,
+  revo-grid { border-color: #3e3944; background: #201d23; }
+}
+
+@media (max-width: 900px) {
+  .industry-gantt-shell--internal-tools.industry-gantt-shell {
+    .industry-gantt-header {
+      grid-template-columns: 1fr;
+      min-height: 116px;
+    }
+
+    .industry-gantt-metrics,
+    .industry-gantt-toolbar__legend { display: none; }
+  }
+}

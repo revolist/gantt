@@ -1,0 +1,362 @@
+.industry-gantt-shell--construction.industry-gantt-shell {
+  --ig-accent: #f26722;
+  --ig-accent-deep: #1f2529;
+  --ig-border: #b9ad98;
+  --ig-muted: #625d53;
+  --ig-surface: #f6f0e4;
+  --ig-text: #1f2529;
+  border: 2px solid #1f2529;
+  border-radius: 3px;
+  background: #f6f0e4;
+  box-shadow: 9px 9px 0 rgb(31 37 41 / 12%);
+}
+
+.industry-gantt-shell--construction .industry-gantt-header {
+  grid-template-columns: minmax(420px, 1fr) minmax(390px, 0.82fr);
+  gap: 30px;
+  min-height: 126px;
+  padding: 20px 22px 17px 30px;
+  overflow: hidden;
+  border-bottom: 4px solid #1f2529;
+  background:
+    linear-gradient(90deg, #f26722 0 9px, transparent 9px),
+    repeating-linear-gradient(135deg, rgb(31 37 41 / 4%) 0 1px, transparent 1px 14px),
+    #f6f0e4;
+}
+
+.industry-gantt-shell--construction .industry-gantt-header::after {
+  position: absolute;
+  right: -28px;
+  bottom: -34px;
+  width: 150px;
+  height: 64px;
+  transform: rotate(-8deg);
+  background: repeating-linear-gradient(135deg, #f26722 0 11px, #1f2529 11px 22px);
+  content: '';
+  opacity: 0.1;
+  pointer-events: none;
+}
+
+.industry-gantt-shell--construction .industry-gantt-identity {
+  gap: 18px;
+  align-self: start;
+}
+
+.industry-gantt-shell--construction .industry-gantt-mark {
+  position: relative;
+  flex-basis: 58px;
+  width: 58px;
+  height: 67px;
+  border: 2px solid #1f2529;
+  border-radius: 1px;
+  color: #1f2529;
+  background: #f26722;
+  box-shadow: 5px 5px 0 rgb(31 37 41 / 15%);
+  font-size: 16px;
+  font-weight: 950;
+  letter-spacing: -0.04em;
+}
+
+.industry-gantt-shell--construction .industry-gantt-mark::after {
+  position: absolute;
+  right: 6px;
+  bottom: 6px;
+  left: 6px;
+  height: 4px;
+  background: #1f2529;
+  content: '';
+}
+
+.industry-gantt-shell--construction .industry-gantt-product {
+  display: inline-block;
+  margin: 0 0 7px;
+  padding: 3px 7px 2px;
+  color: #f6f0e4;
+  background: #1f2529;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.07em;
+}
+
+.industry-gantt-shell--construction .industry-gantt-title {
+  max-width: 560px;
+  color: #1f2529;
+  font-size: 29px;
+  font-weight: 900;
+  line-height: 0.98;
+  letter-spacing: -0.045em;
+  text-transform: uppercase;
+}
+
+.industry-gantt-shell--construction .industry-gantt-subtitle {
+  max-width: 590px;
+  margin-top: 8px;
+  color: #625d53;
+  font-size: 11px;
+  font-weight: 650;
+  letter-spacing: 0.01em;
+}
+
+.industry-gantt-shell--construction .industry-gantt-metrics {
+  display: grid;
+  grid-template-columns: 0.82fr 1.22fr 0.95fr;
+  grid-template-rows: repeat(2, 43px);
+  gap: 6px;
+  align-self: center;
+}
+
+.industry-gantt-shell--construction .industry-gantt-metric {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  justify-content: center;
+  padding: 5px 8px;
+  border: 1px solid #877e6d;
+  border-radius: 0;
+  background: rgb(255 251 242 / 82%);
+  box-shadow: none;
+}
+
+.industry-gantt-shell--construction .industry-gantt-metric:nth-child(1) {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.industry-gantt-shell--construction .industry-gantt-metric:nth-child(2) {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  align-items: center;
+  border: 2px solid #1f2529;
+  background: #f26722;
+  box-shadow: 4px 4px 0 rgb(31 37 41 / 14%);
+  text-align: center;
+}
+
+.industry-gantt-shell--construction .industry-gantt-metric:nth-child(3) {
+  grid-column: 1;
+  grid-row: 2;
+  border-color: #b33725;
+  background: #fff1e8;
+}
+
+.industry-gantt-shell--construction .industry-gantt-metric:nth-child(4) {
+  grid-column: 3;
+  grid-row: 1 / span 2;
+  border-left: 5px solid #1f2529;
+}
+
+.industry-gantt-shell--construction .industry-gantt-metric__value {
+  color: #1f2529;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 15px;
+  font-weight: 900;
+}
+
+.industry-gantt-shell--construction .industry-gantt-metric:nth-child(2) .industry-gantt-metric__value {
+  font-size: 27px;
+  letter-spacing: -0.06em;
+}
+
+.industry-gantt-shell--construction .industry-gantt-metric:nth-child(3) .industry-gantt-metric__value {
+  color: #b33725;
+}
+
+.industry-gantt-shell--construction .industry-gantt-metric__label {
+  margin-top: 3px;
+  color: #625d53;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 8px;
+  font-weight: 850;
+  letter-spacing: 0.06em;
+}
+
+.industry-gantt-shell--construction .industry-gantt-metric:nth-child(2) .industry-gantt-metric__label {
+  color: #1f2529;
+}
+
+.industry-gantt-shell--construction .industry-gantt-sync {
+  right: auto;
+  bottom: 3px;
+  left: 30px;
+  gap: 7px;
+  color: #625d53;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 8px;
+  font-weight: 750;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.industry-gantt-shell--construction .industry-gantt-sync__dot {
+  width: 7px;
+  height: 7px;
+  border: 1px solid #1f2529;
+  border-radius: 0;
+  background: #f26722;
+  box-shadow: none;
+}
+
+.industry-gantt-shell--construction .industry-gantt-toolbar {
+  flex-basis: 43px;
+  gap: 7px;
+  padding: 5px 11px 5px 15px;
+  border-bottom: 2px solid #1f2529;
+  background: #1f2529;
+}
+
+.industry-gantt-shell--construction .industry-gantt-toolbar__label {
+  color: #fffaf0;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 10px;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.industry-gantt-shell--construction .industry-gantt-toolbar__legend {
+  margin-right: 10px;
+  color: #d9d0c0;
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.industry-gantt-shell--construction .industry-gantt-toolbar__legend::before {
+  width: 18px;
+  height: 8px;
+  border: 1px solid #f26722;
+  border-radius: 0;
+  background: repeating-linear-gradient(135deg, #f26722 0 2px, transparent 2px 4px);
+}
+
+.industry-gantt-shell--construction .industry-gantt-toggle {
+  min-height: 29px;
+  padding: 4px 12px;
+  border: 1px solid #d9d0c0;
+  border-radius: 1px;
+  color: #fffaf0;
+  background: #343b40;
+  box-shadow: none;
+  font-size: 10px;
+  letter-spacing: 0.025em;
+  text-transform: uppercase;
+}
+
+.industry-gantt-shell--construction .industry-gantt-toggle[aria-pressed='true'] {
+  border-color: #f26722;
+  color: #1f2529;
+  background: #f26722;
+  box-shadow: inset 0 -3px 0 rgb(31 37 41 / 22%);
+}
+
+.industry-gantt-shell--construction .industry-gantt-toggle:focus-visible {
+  outline-color: #fffaf0;
+}
+
+.industry-gantt-shell--construction .industry-gantt-grid,
+.industry-gantt-shell--construction revo-grid {
+  --gantt-cell-min-height: 26px;
+  --gantt-task-height: 18px;
+  --gantt-summary-height: 14px;
+  --gantt-bar-size: 14px;
+  background: #fffdf8;
+}
+
+.industry-gantt-shell--construction .industry-gantt-grid .tree-toggle {
+  display: none;
+}
+
+.industry-gantt-shell--construction .industry-status {
+  border: 1px solid #8b8170;
+  border-radius: 1px;
+  color: #4f4a42;
+  background: #eee8dc;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 9px;
+  font-weight: 850;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.industry-gantt-shell--construction .industry-status--done {
+  border-color: #597267;
+  color: #244b3d;
+  background: #dfe9df;
+}
+
+.industry-gantt-shell--construction .industry-status--in-progress {
+  border-color: #b1521d;
+  color: #7d3311;
+  background: #ffe4d2;
+}
+
+.industry-gantt-shell--construction .industry-status--blocked {
+  border-color: #a82f21;
+  color: #fff;
+  background: #b33725;
+}
+
+.industry-gantt-shell--construction.industry-gantt-shell--dark {
+  --ig-border: #827868;
+  --ig-muted: #cfc4b2;
+  --ig-surface: #292b2b;
+  --ig-text: #fff8ec;
+  background: #292b2b;
+}
+
+.industry-gantt-shell--construction.industry-gantt-shell--dark .industry-gantt-header {
+  background:
+    linear-gradient(90deg, #f26722 0 9px, transparent 9px),
+    repeating-linear-gradient(135deg, rgb(255 255 255 / 4%) 0 1px, transparent 1px 14px),
+    #292b2b;
+}
+
+.industry-gantt-shell--construction.industry-gantt-shell--dark .industry-gantt-title {
+  color: #fff8ec;
+}
+
+.industry-gantt-shell--construction.industry-gantt-shell--dark .industry-gantt-subtitle,
+.industry-gantt-shell--construction.industry-gantt-shell--dark .industry-gantt-sync {
+  color: #cfc4b2;
+}
+
+.industry-gantt-shell--construction.industry-gantt-shell--dark .industry-gantt-metric {
+  border-color: #827868;
+  background: #363837;
+}
+
+.industry-gantt-shell--construction.industry-gantt-shell--dark .industry-gantt-metric:nth-child(2) {
+  border-color: #fff8ec;
+  background: #f26722;
+}
+
+.industry-gantt-shell--construction.industry-gantt-shell--dark .industry-gantt-metric:nth-child(3) {
+  border-color: #e76f52;
+  background: #442e28;
+}
+
+.industry-gantt-shell--construction.industry-gantt-shell--dark .industry-gantt-metric__value,
+.industry-gantt-shell--construction.industry-gantt-shell--dark .industry-gantt-metric:nth-child(2) .industry-gantt-metric__label {
+  color: #fff8ec;
+}
+
+.industry-gantt-shell--construction.industry-gantt-shell--dark .industry-gantt-metric:nth-child(2) .industry-gantt-metric__value,
+.industry-gantt-shell--construction.industry-gantt-shell--dark .industry-gantt-metric:nth-child(2) .industry-gantt-metric__label {
+  color: #1f2529;
+}
+
+.industry-gantt-shell--construction.industry-gantt-shell--dark .industry-gantt-metric__label {
+  color: #cfc4b2;
+}
+
+@media (max-width: 900px) {
+  .industry-gantt-shell--construction .industry-gantt-header {
+    grid-template-columns: 1fr;
+    min-height: 116px;
+  }
+
+  .industry-gantt-shell--construction .industry-gantt-metrics {
+    display: none;
+  }
+}
