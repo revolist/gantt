@@ -115,7 +115,7 @@ timeline example. New examples live in an isolated
 ## Run it
 
 ```bash
-pnpm install
+pnpm install --no-lockfile
 pnpm dev          # Vanilla TypeScript
 pnpm dev:react
 pnpm dev:vue
@@ -129,7 +129,7 @@ trial installation guide](https://pro.rv-grid.com/guides/installation-npm-trial/
 No registry token belongs in this repository. Licensed users can replace the two
 trial aliases in `package.json` with the matching licensed RevoGrid packages;
 source imports remain unchanged. `package.json` is authoritative for these
-direct versions, while `pnpm-lock.yaml` preserves the resolved install graph.
+direct versions, and installs intentionally do not rely on `pnpm-lock.yaml`.
 
 ## License
 

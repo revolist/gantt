@@ -10,7 +10,7 @@ const packageManifest = JSON.parse(await readFile(join(root, 'package.json'), 'u
 const requiredStrings = ['slug', 'title', 'summary', 'edition', 'repositoryUrl', 'productUrl', 'trialUrl', 'demoOutput'];
 const failures = [];
 
-for (const requiredFile of ['package.json', 'pnpm-lock.yaml', 'pnpm-workspace.yaml']) {
+for (const requiredFile of ['package.json', 'pnpm-workspace.yaml']) {
   try {
     await stat(join(root, requiredFile));
   } catch {
@@ -18,7 +18,6 @@ for (const requiredFile of ['package.json', 'pnpm-lock.yaml', 'pnpm-workspace.ya
   }
 }
 const workspace = await readFile(join(root, 'pnpm-workspace.yaml'), 'utf8');
-const lockfile = await readFile(join(root, 'pnpm-lock.yaml'), 'utf8');
 if (!/^packages:\s*\n\s*- ["']?\.["']?\s*$/m.test(workspace)) {
   failures.push('pnpm-workspace.yaml: repository root must be its own workspace');
 }
@@ -50,9 +49,6 @@ for (const [packageName, trialPackageName] of commercialDependencies) {
     continue;
   }
   commercialVersions.set(packageName, version);
-  if (!lockfile.includes(`specifier: ${specifier}`)) {
-    failures.push(`pnpm-lock.yaml: importer specifier for ${packageName} must match package.json`);
-  }
 }
 if (new Set(commercialVersions.values()).size > 1) {
   failures.push('package.json: RevoGrid Pro and Enterprise versions must match');
