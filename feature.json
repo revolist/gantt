@@ -8,7 +8,7 @@
   "productUrl": "https://rv-grid.com/gantt/",
   "trialUrl": "https://pro.rv-grid.com/guides/installation-npm-trial/",
   "pricingUrl": "https://rv-grid.com/pricing/",
-  "liveDemoUrl": "https://gantt.rv-grid.com/demo/",
+  "liveDemoUrl": "https://gantt.rv-grid.com/",
   "frameworks": ["ts", "react", "vue", "angular"],
   "examples": [
     {
