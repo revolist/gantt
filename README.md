@@ -1,6 +1,6 @@
 <div align="center">
 
-# RevoGrid Gantt
+# RevoGantt
 
 **Editable project timelines, dependencies, resources, and schedule intelligence.**
 
@@ -9,7 +9,7 @@
 
 [View live demo](https://gantt.rv-grid.com/) · [Request trial](https://pro.rv-grid.com/guides/installation-npm-trial/) · [Get Pro Advanced](https://rv-grid.com/pricing/)
 
-[![RevoGrid Gantt walkthrough](./assets/gantt-walkthrough.gif)](./assets/gantt-walkthrough.mp4)
+[![RevoGantt walkthrough](./assets/gantt-walkthrough.gif)](./assets/gantt-walkthrough.mp4)
 
 </div>
 

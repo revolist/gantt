@@ -1,7 +1,7 @@
 {
   "$schema": "./feature.schema.json",
   "slug": "gantt",
-  "title": "RevoGrid Gantt",
+  "title": "RevoGantt",
   "summary": "Editable project timelines with dependencies, working calendars, resources, baselines, task editing, and critical-path analysis.",
   "edition": "Pro Advanced",
   "repositoryUrl": "https://github.com/revolist/gantt",
