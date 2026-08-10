@@ -291,7 +291,10 @@ function benchmarkMarkup(options: GanttBenchmarkOptions): string {
   return `
     <header class="gantt-benchmark__header">
       <div><span class="gantt-benchmark__eyebrow">Reproducible browser benchmark</span><h1>RevoGrid Gantt at measurable scale</h1><p><a href="?example=big-data">10,000 editable tasks and 19,796 dependencies in a live browser demo</a></p></div>
-      <a class="gantt-benchmark__raw" href="./benchmarks/latest.json">Raw JSON</a>
+      <nav class="gantt-benchmark__links" aria-label="Benchmark resources">
+        <a class="gantt-benchmark__raw" href="https://rv-grid.com/benchmarks/gantt">Methodology &amp; results</a>
+        <a class="gantt-benchmark__raw" href="./benchmarks/latest.json">Raw JSON</a>
+      </nav>
     </header>
     <form class="gantt-benchmark__controls">
       <label>Tasks<select name="tasks">${taskOptions}</select></label>

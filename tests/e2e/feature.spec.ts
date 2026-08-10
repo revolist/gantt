@@ -91,6 +91,7 @@ test('mounts the reproducible browser benchmark with a measurable readiness cont
   expect(readiness.dom.taskBars).toBeGreaterThan(0);
   expect(readiness.dom.uniqueMountedRows).toBeLessThan(100);
   await expect(page.getByText('10,000 editable tasks and 19,796 dependencies in a live browser demo')).toBeVisible();
+  await expect(page.getByRole('link', { name: 'Methodology & results' })).toHaveAttribute('href', 'https://rv-grid.com/benchmarks/gantt');
   expect(errors).toEqual([]);
 });
 

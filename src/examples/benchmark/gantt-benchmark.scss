@@ -12,6 +12,7 @@
 .gantt-benchmark__header p { margin: 0; font-size: 16px; }
 .gantt-benchmark__header a { color: #2563eb; font-weight: 700; }
 .gantt-benchmark__eyebrow { color: #2563eb; font-size: 12px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+.gantt-benchmark__links { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px; }
 .gantt-benchmark__raw { padding: 10px 14px; border: 1px solid rgb(37 99 235 / 28%); border-radius: 999px; background: var(--bench-card); text-decoration: none; white-space: nowrap; }
 .gantt-benchmark__controls { display: grid; grid-template-columns: repeat(3, minmax(140px, 1fr)) auto; gap: 12px; max-width: 1500px; margin: 0 auto 12px; padding: 14px; border: 1px solid rgb(100 116 139 / 20%); border-radius: 16px; background: var(--bench-card); box-shadow: 0 16px 44px rgb(15 23 42 / 8%); }
 .gantt-benchmark__controls label { display: grid; gap: 6px; color: #64748b; font-size: 11px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
@@ -28,6 +29,7 @@
 
 @media (max-width: 800px) {
   .gantt-benchmark__header { display: grid; }
+  .gantt-benchmark__links { justify-content: flex-start; }
   .gantt-benchmark__controls { grid-template-columns: 1fr 1fr; }
   .gantt-benchmark__results { grid-template-columns: 1fr 1fr; }
 }
