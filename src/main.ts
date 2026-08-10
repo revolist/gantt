@@ -10,6 +10,12 @@ const framework: GanttEntryFramework = import.meta.env.MODE === 'development'
 const entry = resolveGanttEntry(window.location.search);
 
 async function bootstrap() {
+  if (entry.frameworks && !entry.frameworks.includes(framework)) {
+    const load = await entry.loadTs();
+    load('#app');
+    return;
+  }
+
   switch (framework) {
     case 'react': {
       const [{ createElement }, { createRoot }, Demo] = await Promise.all([

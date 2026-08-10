@@ -1,6 +1,6 @@
 import type { GanttEntryDefinition } from './gantt-entry';
 
-export const GANTT_EXAMPLE_IDS = ['showcase', 'big-data', 'horizontal-big-data'] as const;
+export const GANTT_EXAMPLE_IDS = ['showcase', 'big-data', 'horizontal-big-data', 'benchmark'] as const;
 
 export type GanttExampleId = typeof GANTT_EXAMPLE_IDS[number];
 export type GanttExampleDefinition = GanttEntryDefinition<GanttExampleId>;
@@ -31,6 +31,16 @@ export const GANTT_EXAMPLES: Readonly<Record<GanttExampleId, GanttExampleDefinit
     loadReact: async () => (await import('./examples/horizontal-big-data/gantt-horizontal-big-data.react')).default,
     loadVue: async () => (await import('./examples/horizontal-big-data/gantt-horizontal-big-data.vue')).default,
     loadAngular: async () => (await import('./examples/horizontal-big-data/gantt-horizontal-big-data.angular')).GanttHorizontalBigDataGridComponent,
+  },
+  benchmark: {
+    id: 'benchmark',
+    angularSelector: 'gantt-benchmark-grid',
+    frameworks: ['ts'],
+    loadTs: async () => (await import('./examples/benchmark/gantt-benchmark')).load,
+    // These loaders are unreachable because non-TS builds intentionally fall back to loadTs.
+    loadReact: async () => (await import('./examples/benchmark/gantt-benchmark')).load,
+    loadVue: async () => (await import('./examples/benchmark/gantt-benchmark')).load,
+    loadAngular: async () => (await import('./examples/benchmark/gantt-benchmark')).load,
   },
 };
 
