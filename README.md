@@ -1,15 +1,15 @@
 <div align="center">
 
-# RevoGantt
+# RevoGrid Gantt — JavaScript Gantt Chart
 
-**Editable project timelines, dependencies, resources, and schedule intelligence.**
+**An editable JavaScript Gantt chart for project timelines, dependencies, resources, and schedule intelligence.**
 
 [![Frameworks](https://img.shields.io/badge/TypeScript%20%7C%20React%20%7C%20Vue%20%7C%20Angular-4f46e5)](#framework-examples)
 [![License: MIT](https://img.shields.io/badge/Example%20license-MIT-16a34a.svg)](./LICENSE)
 
 [View live demo](https://gantt.rv-grid.com/) · [Request trial](https://pro.rv-grid.com/guides/installation-npm-trial/) · [Get Pro Advanced](https://rv-grid.com/pricing/)
 
-[![RevoGantt walkthrough](./assets/gantt-walkthrough.gif)](./assets/gantt-walkthrough.mp4)
+[![RevoGrid Gantt walkthrough](./assets/gantt-walkthrough.gif)](./assets/gantt-walkthrough.mp4)
 
 </div>
 

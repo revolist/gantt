@@ -1,8 +1,8 @@
 {
   "$schema": "./feature.schema.json",
   "slug": "gantt",
-  "title": "RevoGantt",
-  "summary": "Editable project timelines with dependencies, working calendars, resources, baselines, task editing, and critical-path analysis.",
+  "title": "RevoGrid Gantt — JavaScript Gantt Chart",
+  "summary": "An editable JavaScript Gantt chart with task timelines, dependencies, working calendars, resources, baselines, task editing, and critical-path analysis.",
   "edition": "Pro Advanced",
   "repositoryUrl": "https://github.com/revolist/gantt",
   "productUrl": "https://rv-grid.com/gantt/",

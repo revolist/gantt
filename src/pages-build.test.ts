@@ -29,7 +29,7 @@ describe('GitHub Pages artifact routing', () => {
       feature: {
         demoOutput: 'dist',
         liveDemoUrl: 'https://gantt.rv-grid.com/',
-        title: 'RevoGantt',
+        title: 'RevoGrid Gantt',
       },
     });
 
