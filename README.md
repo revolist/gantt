@@ -24,6 +24,7 @@ the framework is selected by the existing Vite mode.
 | Project planning showcase | `/?example=showcase` | Resources, assignments, baselines, critical path, rich task bars, and editing controls. |
 | 10,000-task performance | `/?example=big-data` | 10,000 editable tasks and 19,796 dependencies over three months with bounded virtual rendering. |
 | Twenty-year timeline performance | `/?example=horizontal-big-data` | 100 editable tasks and 194 dependencies across twenty years with responsive horizontal navigation and zooming. |
+| Reproducible browser benchmark | `/?example=benchmark` | Full 100/1K/5K/10K task matrix across sparse, normal, and highly connected projects with raw JSON/CSV results. |
 
 Missing or unknown example ids fall back to the project planning showcase.
 
@@ -146,3 +147,9 @@ Commercial RevoGrid packages are not covered by this repository's MIT license.
 - `src/examples/showcase/data/gantt-showcase-data.ts` — showcase tasks, dependencies, resources, assignments, and baselines
 - `src/examples/showcase/data/gantt-showcase-columns.ts` — showcase task-table columns and task-bar renderers
 - `src/theme.ts` — the framework-neutral theme observer shared by all examples
+`http://localhost:5173/?example=benchmark` opens the interactive browser
+benchmark. Run `pnpm benchmark:smoke` for a quick correctness sample or
+`pnpm benchmark:run` for the one-warmup plus five-run reference matrix. The
+runner writes raw samples, medians, screenshots, and video under
+`benchmarks/results/`; benchmark values are machine-specific evidence rather
+than a cross-vendor “fastest” claim.

@@ -29,6 +29,12 @@
       "title": "Twenty-year timeline performance",
       "summary": "Responsive horizontal navigation, zooming, editing, and 194 dependencies across twenty years.",
       "query": "example=horizontal-big-data"
+    },
+    {
+      "id": "benchmark",
+      "title": "Reproducible browser benchmark",
+      "summary": "Measured Gantt rendering, navigation, editing, scheduling, hierarchy, memory, and DOM across twelve deterministic project shapes.",
+      "query": "example=benchmark"
     }
   ],
   "recipes": [

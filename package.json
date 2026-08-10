@@ -28,6 +28,10 @@
     "test:unit": "vitest run",
     "test:repository": "node scripts/verify-repository.mjs",
     "test:e2e": "playwright test",
+    "test:benchmark": "vitest run src/examples/benchmark",
+    "benchmark:smoke": "node scripts/run-gantt-benchmark.mjs --smoke",
+    "benchmark:run": "node scripts/run-gantt-benchmark.mjs --full",
+    "benchmark:results": "node scripts/run-gantt-benchmark.mjs --format-only",
     "media:verify": "node scripts/verify-repository.mjs --media",
     "media:inspect": "pnpm build && node scripts/record-media.mjs --inspect",
     "media:record": "pnpm build && node scripts/record-media.mjs"
