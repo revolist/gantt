@@ -35,6 +35,11 @@ export async function assemblePages(options = {}) {
 
   await rm(output, { recursive: true, force: true });
   await cp(join(root, feature.demoOutput), output, { recursive: true });
+  try {
+    await cp(join(root, 'benchmarks', 'results'), join(output, 'benchmarks'), { recursive: true });
+  } catch (error) {
+    if (!(error instanceof Error) || !('code' in error) || error.code !== 'ENOENT') throw error;
+  }
   await mkdir(join(output, 'demo'), { recursive: true });
   await writeFile(join(output, 'demo', 'index.html'), legacyDemoRedirect(feature));
   await writeFile(join(output, 'CNAME'), `${demoUrl.hostname}\n`);

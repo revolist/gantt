@@ -8,7 +8,7 @@ import {
 
 describe('Gantt example registry', () => {
   it('contains technical examples only', () => {
-    expect(GANTT_EXAMPLE_IDS).toEqual(['showcase', 'big-data', 'horizontal-big-data']);
+    expect(GANTT_EXAMPLE_IDS).toEqual(['showcase', 'big-data', 'horizontal-big-data', 'benchmark']);
     expect(GANTT_EXAMPLE_IDS.some((id) => id.startsWith('industry-'))).toBe(false);
   });
 

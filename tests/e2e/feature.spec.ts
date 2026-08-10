@@ -75,6 +75,25 @@ test('mounts the twenty-year horizontal example from the multi-example host', as
   expect(errors).toEqual([]);
 });
 
+test('mounts the reproducible browser benchmark with a measurable readiness contract', async ({ page }) => {
+  const errors: string[] = [];
+  page.on('console', (message) => {
+    if (message.type() === 'error') errors.push(message.text());
+  });
+  page.on('pageerror', (error) => errors.push(error.message));
+
+  await page.goto('/?example=benchmark&tasks=100&density=normal&span=quarter');
+  await page.waitForFunction(() => Boolean(window.__GANTT_BENCHMARK__), undefined, { timeout: 20_000 });
+  const readiness = await page.evaluate(() => window.__GANTT_BENCHMARK__!.readiness);
+  expect(readiness.taskCount).toBe(100);
+  expect(readiness.dependencyCount).toBe(198);
+  expect(readiness.applyToInteractiveMs).toBeGreaterThan(0);
+  expect(readiness.dom.taskBars).toBeGreaterThan(0);
+  expect(readiness.dom.uniqueMountedRows).toBeLessThan(100);
+  await expect(page.getByText('10,000 editable tasks and 19,796 dependencies in a live browser demo')).toBeVisible();
+  expect(errors).toEqual([]);
+});
+
 for (const useCase of industryUseCases) {
   test(`${useCase.id} renders its polished Gantt without viewport artifacts`, async ({ page }) => {
     const errors: string[] = [];
