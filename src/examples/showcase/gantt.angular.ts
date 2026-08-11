@@ -6,9 +6,9 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { RevoGrid } from '@revolist/angular-datagrid';
-import { GanttPlugin } from '@revolist/revogrid-enterprise';
+import { GanttPlugin } from '@revolist/gantt';
+import type { GanttPluginConfig } from '@revolist/gantt';
 import { ExportExcelPlugin, RowStatusPlugin } from '@revolist/revogrid-pro';
-import type { GanttPluginConfig } from '@revolist/revogrid-enterprise';
 import {
   STANDARD_CALENDAR,
   SHOWCASE_ASSIGNMENTS,

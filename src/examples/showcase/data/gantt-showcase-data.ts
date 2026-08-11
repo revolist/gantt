@@ -6,8 +6,8 @@ import type {
   GanttPluginConfig,
   GanttTaskSourceRow,
   ResourceEntity,
-} from '@revolist/revogrid-enterprise';
-import { createDefaultTaskTableColumn } from '@revolist/revogrid-enterprise';
+} from '@revolist/gantt';
+import { createDefaultTaskTableColumn } from '@revolist/gantt';
 import { CALENDAR_ID, GANTT_BASE_CONFIG } from './gantt-project-base-data';
 
 export const SHOWCASE_COLUMN_OPTIONS = [

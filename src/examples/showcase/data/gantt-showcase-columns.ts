@@ -1,6 +1,6 @@
 /** Project column presets owned by the showcase example. */
 import type { ColumnRegular } from '@revolist/revogrid';
-import { createDefaultTaskTableColumn, isGanttAddTaskRow } from '@revolist/revogrid-enterprise';
+import { createDefaultTaskTableColumn, isGanttAddTaskRow } from '@revolist/gantt';
 import { getShowcaseTaskIcon } from './gantt-showcase-icons';
 
 const SHOWCASE_TAG_TONES: Record<string, string> = {

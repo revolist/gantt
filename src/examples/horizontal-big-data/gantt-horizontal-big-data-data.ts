@@ -4,7 +4,7 @@ import type {
   GanttPluginConfig,
   GanttTaskSourceRow,
   ISODateString,
-} from '@revolist/revogrid-enterprise';
+} from '@revolist/gantt';
 
 export const GANTT_HORIZONTAL_BIG_DATA_TASK_COUNT = 100;
 export const GANTT_HORIZONTAL_BIG_DATA_DEPENDENCY_COUNT = 194;

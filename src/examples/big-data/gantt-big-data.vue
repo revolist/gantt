@@ -17,7 +17,7 @@
 <script setup lang="ts">
 import { onBeforeUnmount, ref } from 'vue';
 import RevoGrid from '@revolist/vue3-datagrid';
-import { GanttPlugin, createDefaultTaskTableColumn } from '@revolist/revogrid-enterprise';
+import { GanttPlugin, createDefaultTaskTableColumn } from '@revolist/gantt';
 import { currentTheme, observeCurrentTheme } from '../../theme';
 import {
   createGanttBigDataSet,

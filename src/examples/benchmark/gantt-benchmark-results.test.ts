@@ -44,7 +44,7 @@ describe('published Gantt benchmark result', () => {
     expect(Object.keys(result.environment.machine).sort()).toEqual([
       'architecture', 'chip', 'cores', 'memory', 'model', 'os', 'osBuild',
     ]);
-    expect(result.environment.revogrid).toMatchObject({ core: '4.25.1', pro: '2.5.10', enterprise: '2.5.10' });
+    expect(result.environment.revogrid).toMatchObject({ core: '4.25.1', pro: '2.6.1', enterprise: '2.6.1' });
     expect(readFileSync(resolve(resultsDirectory, 'latest.csv'), 'utf8').trim().split('\n')).toHaveLength(577);
     expect(statSync(resolve(resultsDirectory, 'gantt-benchmark-reference.png')).size).toBeGreaterThan(100_000);
     expect(statSync(resolve(resultsDirectory, 'gantt-benchmark-walkthrough.webm')).size).toBeGreaterThan(100_000);

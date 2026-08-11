@@ -4,7 +4,7 @@ import type {
   GanttPluginConfig,
   GanttTaskSourceRow,
   ISODateString,
-} from '@revolist/revogrid-enterprise';
+} from '@revolist/gantt';
 
 export const GANTT_BIG_DATA_TASK_COUNT = 10_000;
 export const GANTT_BIG_DATA_PROJECT_START = '2026-01-01';

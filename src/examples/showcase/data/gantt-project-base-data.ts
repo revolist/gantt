@@ -7,8 +7,8 @@ import type {
   GanttPluginConfig,
   GanttTaskSourceRow,
   ResourceEntity,
-} from '@revolist/revogrid-enterprise';
-import { createDefaultTaskTableColumn } from '@revolist/revogrid-enterprise';
+} from '@revolist/gantt';
+import { createDefaultTaskTableColumn } from '@revolist/gantt';
 
 export const PROJECT_ID = 'project-web-redesign';
 export const CALENDAR_ID = 'cal-standard';

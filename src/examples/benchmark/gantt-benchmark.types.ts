@@ -1,4 +1,4 @@
-import type { DependencyEntity, GanttPluginConfig, GanttTaskSourceRow } from '@revolist/revogrid-enterprise';
+import type { DependencyEntity, GanttPluginConfig, GanttTaskSourceRow } from '@revolist/gantt';
 
 export const GANTT_BENCHMARK_TASK_COUNTS = [100, 1_000, 5_000, 10_000] as const;
 export const GANTT_BENCHMARK_DENSITIES = ['sparse', 'normal', 'high'] as const;

@@ -1,7 +1,7 @@
 import { Component, NO_ERRORS_SCHEMA, ViewEncapsulation } from '@angular/core';
 import type { OnDestroy } from '@angular/core';
 import { RevoGrid } from '@revolist/angular-datagrid';
-import type { GanttPluginConfig } from '@revolist/revogrid-enterprise';
+import type { GanttPluginConfig } from '@revolist/gantt';
 import { currentTheme, observeCurrentTheme } from '../../theme';
 import { resolveIndustryGantt } from './industry-use-case.catalog';
 import { createIndustryGanttConfig } from './industry-use-case.types';

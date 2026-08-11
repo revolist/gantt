@@ -1,4 +1,4 @@
-import type { CalendarEntity, DependencyEntity, GanttTaskSourceRow, ISODateString } from '@revolist/revogrid-enterprise';
+import type { CalendarEntity, DependencyEntity, GanttTaskSourceRow, ISODateString } from '@revolist/gantt';
 import type { GanttBenchmarkDataset, GanttBenchmarkDensity, GanttBenchmarkOptions } from './gantt-benchmark.types';
 
 export const GANTT_BENCHMARK_SEED = 20_260_810;

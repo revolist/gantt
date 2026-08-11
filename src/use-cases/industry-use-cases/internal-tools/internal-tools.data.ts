@@ -7,7 +7,7 @@ import {
   type DependencyEntity,
   type GanttPluginConfig,
   type ResourceEntity,
-} from '@revolist/revogrid-enterprise';
+} from '@revolist/gantt';
 import type { IndustryGanttDefinition, IndustryTaskRow } from '../industry-use-case.types';
 
 const OPERATIONS_CALENDAR_ID = 'internal-operations-core';

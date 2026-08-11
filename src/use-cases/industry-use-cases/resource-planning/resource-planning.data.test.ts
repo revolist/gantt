@@ -6,7 +6,7 @@ import {
   InMemoryTaskStore,
   type GanttGridRow,
   type ProjectSnapshot,
-} from '@revolist/revogrid-enterprise';
+} from '@revolist/gantt';
 import {
   RESOURCE_PLANNING_ASSIGNMENTS,
   RESOURCE_PLANNING_BASELINES,

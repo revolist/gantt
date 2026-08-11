@@ -1,6 +1,6 @@
 import './gantt-benchmark.scss';
 import { defineCustomElements } from '@revolist/revogrid/loader';
-import { GanttPlugin, createDefaultTaskTableColumn } from '@revolist/revogrid-enterprise';
+import { GanttPlugin, createDefaultTaskTableColumn } from '@revolist/gantt';
 import { currentTheme, observeCurrentTheme } from '../../theme';
 import { createGanttBenchmarkDataset, GANTT_BENCHMARK_SEED, ganttBenchmarkCalendars } from './gantt-benchmark-data';
 import { median, percentile95, roundMetric } from './gantt-benchmark-math';

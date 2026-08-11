@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from 'vitest';
 
-vi.mock('@revolist/revogrid-enterprise', () => ({
+vi.mock('@revolist/gantt', () => ({
   createDefaultTaskTableColumn: (prop: string) => ({ prop }),
 }));
 

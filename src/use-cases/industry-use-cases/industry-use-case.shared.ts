@@ -1,5 +1,5 @@
 import type { PluginProviders } from '@revolist/revogrid';
-import { GanttPanelResizePlugin, GanttPlugin } from '@revolist/revogrid-enterprise';
+import { GanttPanelResizePlugin, GanttPlugin } from '@revolist/gantt';
 import { ExportExcelPlugin, RowStatusPlugin } from '@revolist/revogrid-pro';
 import type { IndustryGanttDefinition, IndustryGridTheme } from './industry-use-case.types';
 

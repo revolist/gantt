@@ -22,8 +22,8 @@
     "pnpm": "10.13.1",
     "revogrid": {
       "core": "4.25.1",
-      "pro": "2.5.10",
-      "enterprise": "2.5.10"
+      "pro": "2.6.1",
+      "enterprise": "2.6.1"
     },
     "machine": {
       "model": "MacBookPro18,3",

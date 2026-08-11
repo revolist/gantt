@@ -22,7 +22,15 @@ test(`${feature.title} mounts without browser errors`, async ({ page }) => {
   page.on('pageerror', (error) => errors.push(error.message));
 
   await page.goto('/');
-  await expect(page.locator('revo-grid').first()).toBeVisible({ timeout: 15_000 });
+  const grid = page.locator('revo-grid').first();
+  await expect(grid).toBeVisible({ timeout: 15_000 });
+  await expect(grid.locator('.gantt-bar').first()).toBeVisible({ timeout: 15_000 });
+  const criticalPath = page.getByRole('checkbox', { name: 'Critical path' });
+  const baselines = page.getByRole('checkbox', { name: 'Baselines' });
+  await expect(criticalPath).toBeVisible();
+  await expect(baselines).toBeVisible();
+  await baselines.check();
+  await expect(baselines).toBeChecked();
   const screenshot = await page.locator('body').screenshot({ animations: 'disabled' });
   expect(screenshot.byteLength).toBeGreaterThan(10_000);
   expect(errors).toEqual([]);

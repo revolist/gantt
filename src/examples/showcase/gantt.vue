@@ -95,7 +95,7 @@ onMounted(async () => {
   disconnectTheme = observeCurrentTheme((value) => {
     isDark.value = value;
   });
-  const { GanttPlugin } = await import('@revolist/revogrid-enterprise');
+  const { GanttPlugin } = await import('@revolist/gantt');
 
   plugins.value = [GanttPlugin, ExportExcelPlugin, RowStatusPlugin];
 });

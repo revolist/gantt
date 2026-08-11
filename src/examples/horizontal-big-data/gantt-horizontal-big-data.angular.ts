@@ -1,6 +1,6 @@
 import { Component, NO_ERRORS_SCHEMA, OnDestroy, ViewEncapsulation } from '@angular/core';
 import { RevoGrid } from '@revolist/angular-datagrid';
-import { GanttPlugin, createDefaultTaskTableColumn } from '@revolist/revogrid-enterprise';
+import { GanttPlugin, createDefaultTaskTableColumn } from '@revolist/gantt';
 import { currentTheme, observeCurrentTheme } from '../../theme';
 import {
   createGanttHorizontalBigDataSet,

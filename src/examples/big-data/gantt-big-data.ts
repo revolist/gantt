@@ -1,6 +1,6 @@
 import './gantt-big-data.scss';
 import { defineCustomElements } from '@revolist/revogrid/loader';
-import { GanttPlugin, createDefaultTaskTableColumn } from '@revolist/revogrid-enterprise';
+import { GanttPlugin, createDefaultTaskTableColumn } from '@revolist/gantt';
 import { currentTheme, observeCurrentTheme } from '../../theme';
 import {
   createGanttBigDataSet,

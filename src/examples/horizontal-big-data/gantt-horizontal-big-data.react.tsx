@@ -1,7 +1,7 @@
 import './gantt-horizontal-big-data.scss';
 import React, { useEffect, useMemo, useState } from 'react';
 import { RevoGrid } from '@revolist/react-datagrid';
-import { GanttPlugin, createDefaultTaskTableColumn } from '@revolist/revogrid-enterprise';
+import { GanttPlugin, createDefaultTaskTableColumn } from '@revolist/gantt';
 import { currentTheme, observeCurrentTheme } from '../../theme';
 import {
   createGanttHorizontalBigDataSet,

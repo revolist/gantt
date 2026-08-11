@@ -1,5 +1,5 @@
 import type { ColumnRegular } from '@revolist/revogrid';
-import type { AssignmentEntity, BaselineSnapshot, CalendarEntity, DependencyEntity, GanttPluginConfig, GanttTaskBarColorHook, GanttTaskSourceRow, ResourceEntity } from '@revolist/revogrid-enterprise';
+import type { AssignmentEntity, BaselineSnapshot, CalendarEntity, DependencyEntity, GanttPluginConfig, GanttTaskBarColorHook, GanttTaskSourceRow, ResourceEntity } from '@revolist/gantt';
 
 export type IndustryTaskRow = GanttTaskSourceRow & {
   readonly statusLabel: string;

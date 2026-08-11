@@ -3,7 +3,7 @@ import './gantt.scss';
 import { defineCustomElements } from '@revolist/revogrid/loader';
 defineCustomElements();
 
-import { GanttPlugin } from '@revolist/revogrid-enterprise';
+import { GanttPlugin } from '@revolist/gantt';
 import { ExportExcelPlugin, RowStatusPlugin } from '@revolist/revogrid-pro';
 import {
   STANDARD_CALENDAR,
@@ -48,12 +48,11 @@ export function load(parentSelector: string): (() => void) | undefined {
   grid.plugins        = [GanttPlugin, ExportExcelPlugin, RowStatusPlugin];
   grid.hideColumns    = [...SHOWCASE_DEFAULT_HIDDEN];
   grid.columns        = [...SHOWCASE_COLUMNS_WITH_COMPLETION];
-  grid.source         = [...SHOWCASE_TASKS];
   grid.ganttDependencies = [...SHOWCASE_DEPENDENCIES];
-  grid.ganttCalendars    = [{ ...STANDARD_CALENDAR }];
-  grid.ganttResources    = [...SHOWCASE_RESOURCES];
-  grid.ganttAssignments  = [...SHOWCASE_ASSIGNMENTS];
-  grid.ganttBaselines    = [...SHOWCASE_BASELINES];
+  grid.ganttCalendars = [{ ...STANDARD_CALENDAR }];
+  grid.ganttResources = [...SHOWCASE_RESOURCES];
+  grid.ganttAssignments = [...SHOWCASE_ASSIGNMENTS];
+  grid.ganttBaselines = [...SHOWCASE_BASELINES];
   const disconnectTheme = observeCurrentTheme((isDark) => {
     grid.theme = isDark ? 'darkCompact' : 'compact';
     container.classList.toggle('gantt-showcase-shell--dark', isDark);
@@ -107,6 +106,7 @@ export function load(parentSelector: string): (() => void) | undefined {
 
   applyGanttConfig();
   container.appendChild(grid);
+  grid.source = [...SHOWCASE_TASKS];
 
   return () => {
     disconnectTheme();

@@ -2,7 +2,7 @@
 import './gantt.scss';
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { RevoGrid } from '@revolist/react-datagrid';
-import { GanttPlugin } from '@revolist/revogrid-enterprise';
+import { GanttPlugin } from '@revolist/gantt';
 import { ExportExcelPlugin, RowStatusPlugin } from '@revolist/revogrid-pro';
 import {
   STANDARD_CALENDAR,
@@ -17,7 +17,7 @@ import {
   renderShowcaseTaskBarColor,
   renderShowcaseTaskBarContent,
 } from './data/gantt-project-data';
-import type { GanttPluginConfig } from '@revolist/revogrid-enterprise';
+import type { GanttPluginConfig } from '@revolist/gantt';
 import { currentTheme, observeCurrentTheme } from '../../theme';
 
 const plugins = [GanttPlugin, ExportExcelPlugin, RowStatusPlugin];

@@ -328,8 +328,7 @@ function environmentManifest(browserVersion, packageManifest) {
     pnpm: command('pnpm', ['--version']),
     revogrid: {
       core: dependencyVersion(packageManifest.dependencies['@revolist/revogrid']),
-      pro: dependencyVersion(packageManifest.dependencies['@revolist/revogrid-pro']),
-      enterprise: dependencyVersion(packageManifest.dependencies['@revolist/revogrid-enterprise']),
+      gantt: dependencyVersion(packageManifest.dependencies['@revolist/gantt']),
     },
     machine: {
       model: value('Model Identifier'),

@@ -7,7 +7,7 @@ import {
   type DependencyEntity,
   type GanttPluginConfig,
   type ResourceEntity,
-} from '@revolist/revogrid-enterprise';
+} from '@revolist/gantt';
 import { resolveIndustryWorkflowStatus, type IndustryGanttDefinition, type IndustryTaskRow } from '../industry-use-case.types';
 
 const FULL_TIME_CALENDAR_ID = 'resource-full-time';

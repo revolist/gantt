@@ -1,5 +1,5 @@
 import type { ColumnRegular } from '@revolist/revogrid';
-import { createDefaultTaskTableColumn, type AssignmentEntity, type BaselineSnapshot, type CalendarEntity, type DependencyEntity, type GanttPluginConfig, type ResourceEntity } from '@revolist/revogrid-enterprise';
+import { createDefaultTaskTableColumn, type AssignmentEntity, type BaselineSnapshot, type CalendarEntity, type DependencyEntity, type GanttPluginConfig, type ResourceEntity } from '@revolist/gantt';
 import { resolveIndustryWorkflowStatus, type IndustryGanttDefinition, type IndustryTaskRow } from '../industry-use-case.types';
 
 const CALENDAR_ID = 'erp-standard';
