@@ -102,50 +102,6 @@ test('mounts the reproducible browser benchmark with a measurable readiness cont
   expect(errors).toEqual([]);
 });
 
-test('Construction + Fabrication Operations drills into Riverbank and retains Look-Ahead edits', async ({ page }) => {
-  const errors: string[] = [];
-  page.on('console', (message) => { if (message.type() === 'error') errors.push(message.text()); });
-  page.on('pageerror', (error) => errors.push(error.message));
-  await page.goto('/?use-case=industry-construction-fabrication');
-  const shell = page.locator('.construction-fabrication');
-  await expect(shell).toBeVisible({ timeout: 20_000 });
-  await expect(page.getByRole('button', { name: 'Riverbank Apartments', exact: true }).first()).toBeVisible();
-  await expect.poll(async () => page.locator('revo-grid').evaluate((element) => (element as HTMLRevoGridElement).source?.filter((row: any) => String(row.id).startsWith('project:')).length)).toBe(3);
-  const riverbankCell = page.getByRole('gridcell', { name: /Riverbank Apartments/ }).first();
-  await expect(riverbankCell.locator('[data-folder-state]')).toHaveAttribute('data-folder-state', 'open');
-  await riverbankCell.locator('.tree-toggle').click();
-  await expect(riverbankCell.locator('[data-folder-state]')).toHaveAttribute('data-folder-state', 'closed');
-  await riverbankCell.locator('.tree-toggle').click();
-  await expect(riverbankCell.locator('[data-folder-state]')).toHaveAttribute('data-folder-state', 'open');
-  await page.getByRole('button', { name: 'Riverbank Apartments', exact: true }).first().click();
-  const projectGrid = page.locator('revo-grid');
-  await expect(page.locator('.construction-fabrication__header')).toHaveCount(0);
-  await expect(page.getByRole('button', { name: 'Days', exact: true })).toHaveAttribute('aria-pressed', 'true');
-  await expect.poll(async () => projectGrid.evaluate((element) => (element as HTMLRevoGridElement).gantt?.zoomPreset)).toBe('day-week');
-  await expect.poll(async () => projectGrid.evaluate((element) => ({
-    fabrication: (element as HTMLRevoGridElement).source?.some((row: any) => row.name === 'Fabrication'),
-    installation: (element as HTMLRevoGridElement).source?.some((row: any) => row.name === 'Installation'),
-  }))).toEqual({ fabrication: true, installation: true });
-  await page.getByRole('button', { name: 'Weeks', exact: true }).click();
-  await expect.poll(async () => page.locator('revo-grid').evaluate((element) => (element as HTMLRevoGridElement).gantt?.zoomPreset)).toBe('week-month');
-  await page.getByRole('button', { name: 'Days', exact: true }).click();
-  await page.getByRole('button', { name: 'Open 2-week Look-Ahead', exact: true }).click();
-  await expect(page.getByText('17 Aug 2026 – 30 Aug 2026')).toBeVisible();
-  await page.getByRole('button', { name: 'Installation', exact: true }).click();
-  await expect(page.getByRole('button', { name: 'Installation', exact: true })).toHaveAttribute('aria-pressed', 'true');
-  const lookAheadGrid = page.locator('revo-grid');
-  await lookAheadGrid.evaluate(async (element) => {
-    const grid = element as HTMLRevoGridElement;
-    const plugins = await grid.getPlugins();
-    const gantt = plugins.find((plugin: any) => typeof plugin.updateTask === 'function') as any;
-    await gantt.updateTask('task:2801:lookahead:3', { endDate: '2026-09-02', percentDone: 58 });
-  });
-  await page.getByRole('button', { name: 'Riverbank Apartments', exact: true }).first().click();
-  await expect.poll(async () => page.locator('revo-grid').evaluate((element) => (element as HTMLRevoGridElement).source?.find((row: any) => row.id === 'task:2801:lookahead:3')?.endDate)).toBe('2026-09-02');
-  const viewport = await shell.evaluate((element) => ({ overflowX: document.documentElement.scrollWidth - document.documentElement.clientWidth, gridFits: (() => { const grid = element.querySelector('revo-grid')!.getBoundingClientRect(); const frame = element.getBoundingClientRect(); return grid.left >= frame.left && grid.right <= frame.right + 1; })() }));
-  expect(viewport).toEqual({ overflowX: 0, gridFits: true }); expect(errors).toEqual([]);
-});
-
 for (const useCase of industryUseCases) {
   test(`${useCase.id} renders its polished Gantt without viewport artifacts`, async ({ page }) => {
     const errors: string[] = [];

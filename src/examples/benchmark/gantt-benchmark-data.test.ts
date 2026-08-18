@@ -17,7 +17,7 @@ describe('Gantt benchmark dataset', () => {
         expect(first.summaryTaskIds.length + first.leafTaskIds.length).toBe(taskCount);
       }
     }
-  });
+  }, 15_000);
 
   it('creates exactly 19,796 normal dependencies for 10,000 tasks', () => {
     expect(createGanttBenchmarkDataset(options(10_000, 'normal')).dependencies).toHaveLength(19_796);

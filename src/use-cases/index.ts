@@ -4,7 +4,6 @@ export const GANTT_USE_CASE_IDS = [
   'industry-erp',
   'industry-professional-services',
   'industry-construction',
-  'industry-construction-fabrication',
   'industry-manufacturing',
   'industry-resource-planning',
   'industry-internal-tools',
@@ -22,17 +21,8 @@ const industryUseCase = (id: GanttUseCaseId): GanttUseCaseDefinition => ({
   loadAngular: async () => (await import('./industry-use-cases/industry-use-case.angular')).IndustryGanttGridComponent,
 });
 
-const constructionFabricationUseCase: GanttUseCaseDefinition = {
-  id: 'industry-construction-fabrication',
-  angularSelector: 'construction-fabrication-gantt',
-  loadTs: async () => (await import('./construction-fabrication/construction-fabrication')).load,
-  loadReact: async () => (await import('./construction-fabrication/construction-fabrication.react')).default,
-  loadVue: async () => (await import('./construction-fabrication/construction-fabrication.vue')).default,
-  loadAngular: async () => (await import('./construction-fabrication/construction-fabrication.angular')).ConstructionFabricationGanttComponent,
-};
-
 export const GANTT_USE_CASES: Readonly<Record<GanttUseCaseId, GanttUseCaseDefinition>> = Object.fromEntries(
-  GANTT_USE_CASE_IDS.map((id) => [id, id === 'industry-construction-fabrication' ? constructionFabricationUseCase : industryUseCase(id)]),
+  GANTT_USE_CASE_IDS.map((id) => [id, industryUseCase(id)]),
 ) as unknown as Readonly<Record<GanttUseCaseId, GanttUseCaseDefinition>>;
 
 export function resolveGanttUseCase(search: string): GanttUseCaseDefinition | undefined {
