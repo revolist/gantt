@@ -11,6 +11,7 @@ describe('Gantt use-case registry', () => {
       'industry-erp',
       'industry-professional-services',
       'industry-construction',
+      'industry-construction-fabrication',
       'industry-manufacturing',
       'industry-resource-planning',
       'industry-internal-tools',
@@ -21,7 +22,7 @@ describe('Gantt use-case registry', () => {
     for (const id of GANTT_USE_CASE_IDS) {
       const useCase = resolveGanttUseCase(`?use-case=${id}`);
       expect(useCase).toBe(GANTT_USE_CASES[id]);
-      expect(useCase?.angularSelector).toBe('industry-gantt-grid');
+      expect(useCase?.angularSelector).toBe(id === 'industry-construction-fabrication' ? 'construction-fabrication-gantt' : 'industry-gantt-grid');
       expect(typeof useCase?.loadTs).toBe('function');
       expect(typeof useCase?.loadReact).toBe('function');
       expect(typeof useCase?.loadVue).toBe('function');
