@@ -1,5 +1,4 @@
 import { defineConfig } from 'vite';
-import { fileURLToPath } from 'node:url';
 import angular from '@analogjs/vite-plugin-angular';
 import react from '@vitejs/plugin-react';
 import vue from '@vitejs/plugin-vue';
@@ -7,15 +6,6 @@ import vue from '@vitejs/plugin-vue';
 export default defineConfig(({ mode }) => ({
   base: './',
   resolve: {
-    alias: {
-      ...(mode === 'test'
-        ? {
-            '@revolist/revogrid-column-date': fileURLToPath(
-              new URL('./tests/revogrid-column-date.stub.ts', import.meta.url),
-            ),
-          }
-        : {}),
-    },
     ...(mode === 'angular' ? { mainFields: ['module'] } : {}),
   },
   plugins: [

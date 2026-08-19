@@ -7,6 +7,7 @@ export const GANTT_USE_CASE_IDS = [
   'industry-manufacturing',
   'industry-resource-planning',
   'industry-internal-tools',
+  'simple-construction',
 ] as const;
 
 export type GanttUseCaseId = typeof GANTT_USE_CASE_IDS[number];
@@ -21,8 +22,17 @@ const industryUseCase = (id: GanttUseCaseId): GanttUseCaseDefinition => ({
   loadAngular: async () => (await import('./industry-use-cases/industry-use-case.angular')).IndustryGanttGridComponent,
 });
 
+const simpleConstructionUseCase: GanttUseCaseDefinition = {
+  id: 'simple-construction',
+  angularSelector: 'simple-construction-gantt',
+  loadTs: async () => (await import('./simple-construction/simple-construction')).load,
+  loadReact: async () => (await import('./simple-construction/simple-construction.react')).default,
+  loadVue: async () => (await import('./simple-construction/simple-construction.vue')).default,
+  loadAngular: async () => (await import('./simple-construction/simple-construction.angular')).SimpleConstructionGanttComponent,
+};
+
 export const GANTT_USE_CASES: Readonly<Record<GanttUseCaseId, GanttUseCaseDefinition>> = Object.fromEntries(
-  GANTT_USE_CASE_IDS.map((id) => [id, industryUseCase(id)]),
+  GANTT_USE_CASE_IDS.map((id) => [id, id === 'simple-construction' ? simpleConstructionUseCase : industryUseCase(id)]),
 ) as unknown as Readonly<Record<GanttUseCaseId, GanttUseCaseDefinition>>;
 
 export function resolveGanttUseCase(search: string): GanttUseCaseDefinition | undefined {

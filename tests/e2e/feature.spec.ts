@@ -170,3 +170,27 @@ for (const useCase of industryUseCases) {
     expect(errors).toEqual([]);
   });
 }
+
+test('simple-construction mounts with its Gantt bindings', async ({ page }) => {
+  const errors: string[] = [];
+  page.on('console', (message) => {
+    if (message.type() === 'error') errors.push(message.text());
+  });
+  page.on('pageerror', (error) => errors.push(error.message));
+
+  await page.goto('/?use-case=simple-construction');
+  const grid = page.locator('revo-grid').first();
+  await expect(grid).toBeVisible({ timeout: 20_000 });
+  await expect.poll(async () => grid.evaluate((element) => ({
+    project: (element as HTMLRevoGridElement).gantt?.id,
+    tasks: (element as HTMLRevoGridElement).source?.length ?? 0,
+  })), { timeout: 20_000 }).toMatchObject({
+    project: 'simple-construction-gantt',
+    tasks: expect.any(Number),
+  });
+  await expect.poll(async () => grid.evaluate((element) => (
+    (element as HTMLRevoGridElement).source?.length ?? 0
+  )), { timeout: 20_000 }).toBeGreaterThan(3);
+  await expect(grid.locator('.gantt-bar').first()).toBeVisible({ timeout: 20_000 });
+  expect(errors).toEqual([]);
+});
