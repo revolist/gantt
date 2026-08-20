@@ -1,37 +1,6 @@
 import type { ColumnRegular } from '@revolist/revogrid';
 import type { AssignmentEntity, BaselineSnapshot, CalendarEntity, DependencyEntity, GanttPluginConfig, GanttTaskBarColorHook, GanttTaskSourceRow, ResourceEntity } from '@revolist/gantt';
 
-export type IndustryTaskRow = GanttTaskSourceRow & {
-  readonly statusLabel: string;
-  readonly orderNumber?: string;
-  readonly customer?: string;
-  readonly site?: string;
-  readonly workCenter?: string;
-  readonly machine?: string;
-  readonly material?: string;
-  readonly operation?: string;
-  readonly shift?: string;
-  readonly risk?: string;
-  readonly projectCode?: string;
-  readonly clientName?: string;
-  readonly commercialModel?: string;
-  readonly phase?: string;
-  readonly owner?: string;
-  readonly budgetBurn?: string;
-  readonly grossMargin?: string;
-  readonly wbs?: string;
-  readonly contractor?: string;
-  readonly crew?: string;
-  readonly inspection?: string;
-  readonly supplier?: string;
-  readonly team?: string;
-  readonly role?: string;
-  readonly allocation?: string;
-  readonly sourceSystem?: string;
-  readonly approval?: string;
-  readonly readiness?: string;
-};
-
 export interface IndustryMetric {
   readonly label: string;
   readonly value: string;
@@ -54,7 +23,7 @@ export interface IndustryGridPresentation {
   readonly timelinePanelWidth?: number | string;
 }
 
-export interface IndustryGanttDefinition {
+export interface IndustryGanttDefinition<TTask extends GanttTaskSourceRow = GanttTaskSourceRow> {
   readonly id: string;
   readonly productLabel: string;
   readonly title: string;
@@ -65,7 +34,7 @@ export interface IndustryGanttDefinition {
   readonly mark: string;
   readonly metrics: readonly IndustryMetric[];
   readonly grid?: IndustryGridPresentation;
-  readonly tasks: readonly IndustryTaskRow[];
+  readonly tasks: readonly TTask[];
   readonly dependencies: readonly DependencyEntity[];
   readonly calendars: readonly CalendarEntity[];
   readonly resources: readonly ResourceEntity[];

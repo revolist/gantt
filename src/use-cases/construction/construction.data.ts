@@ -6,9 +6,23 @@ import {
   type CalendarEntity,
   type DependencyEntity,
   type GanttPluginConfig,
+  type GanttTaskSourceRow,
   type ResourceEntity,
 } from '@revolist/gantt';
-import type { IndustryGanttDefinition, IndustryTaskRow } from '../industry-use-case.types';
+import type { IndustryGanttDefinition } from '../shared/industry-use-case.types';
+
+type ConstructionTaskRow = GanttTaskSourceRow & {
+  statusLabel: string;
+  site?: string;
+  phase?: string;
+  owner?: string;
+  wbs?: string;
+  contractor?: string;
+  crew?: string;
+  inspection?: string;
+  supplier?: string;
+  risk?: string;
+};
 
 const CALENDAR_ID = 'construction-site-calendar';
 const taskDefaults = {
@@ -23,8 +37,8 @@ const taskDefaults = {
   tags: [] as readonly string[],
 };
 const task = (
-  row: Omit<IndustryTaskRow, keyof typeof taskDefaults> & Partial<Pick<IndustryTaskRow, keyof typeof taskDefaults>>,
-): IndustryTaskRow => ({ ...taskDefaults, ...row } as IndustryTaskRow);
+  row: Omit<ConstructionTaskRow, keyof typeof taskDefaults> & Partial<Pick<ConstructionTaskRow, keyof typeof taskDefaults>>,
+): ConstructionTaskRow => ({ ...taskDefaults, ...row } as ConstructionTaskRow);
 
 export const CONSTRUCTION_TASK_IDS = [
   'clinic-expansion',
@@ -50,7 +64,7 @@ export const CONSTRUCTION_TASK_IDS = [
   'practical-completion',
 ] as const;
 
-export const CONSTRUCTION_TASKS: IndustryTaskRow[] = [
+export const CONSTRUCTION_TASKS: ConstructionTaskRow[] = [
   task({ id: 'clinic-expansion', parentId: null, type: 'summary', name: 'Riverside Clinic Expansion', wbs: 'RCX', phase: 'Programme', statusLabel: 'At risk', workflowStatus: 'blocked', startDate: '2026-08-03', endDate: '2026-11-27', duration: 85, percentDone: 47, risk: 'Late switchgear delivery threatens commissioning float' }),
   task({ id: 'site-foundations', parentId: 'clinic-expansion', type: 'summary', name: 'Site setup and foundations', wbs: '1.0', phase: 'Foundations', contractor: 'Alden Construction', crew: 'Groundworks', statusLabel: 'In delivery', workflowStatus: 'in-progress', startDate: '2026-08-03', endDate: '2026-09-11', duration: 30, percentDone: 78 }),
   task({ id: 'site-mobilisation', parentId: 'site-foundations', type: 'task', name: 'Mobilise site and temporary works', wbs: '1.1', phase: 'Site', contractor: 'Alden Construction', crew: 'Site logistics', statusLabel: 'Complete', workflowStatus: 'done', startDate: '2026-08-03', endDate: '2026-08-07', duration: 5, percentDone: 100 }),
@@ -207,7 +221,7 @@ export const CONSTRUCTION_GANTT_CONFIG: GanttPluginConfig = {
   },
 };
 
-export const CONSTRUCTION_INDUSTRY_DEFINITION: IndustryGanttDefinition = {
+export const CONSTRUCTION_INDUSTRY_DEFINITION: IndustryGanttDefinition<ConstructionTaskRow> = {
   id: 'industry-construction',
   productLabel: 'FIELD CONTROL / RC-01 · RIVERSIDE CLINIC',
   title: 'Six-week look-ahead',

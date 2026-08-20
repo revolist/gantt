@@ -11,16 +11,28 @@ const industries = [
   'internal-tools',
 ] as const;
 
-const presentationRoot = resolve(process.cwd(), 'src/use-cases/industry-use-cases');
-const sharedSource = readFileSync(resolve(presentationRoot, 'industry-use-case.scss'), 'utf8');
+const useCasesRoot = resolve(process.cwd(), 'src/use-cases');
+const sharedSource = readFileSync(resolve(useCasesRoot, 'shared/industry-use-case.scss'), 'utf8');
 
 describe('industry showcase presentation contract', () => {
-  it('loads a substantial, scoped presentation for every industry', () => {
+  it('loads only the common shell and local presentation from each industry entry', () => {
+    expect(sharedSource).not.toContain('.presentation');
+
     const sources = industries.map((industry) => {
       const relativePath = `./${industry}/${industry}.presentation.scss`;
-      const source = readFileSync(resolve(presentationRoot, relativePath), 'utf8');
+      const source = readFileSync(resolve(useCasesRoot, relativePath), 'utf8');
+      const entries = [
+        `${industry}.ts`,
+        `${industry}.react.tsx`,
+        `${industry}.vue`,
+        `${industry}.angular.ts`,
+      ].map((file) => readFileSync(resolve(useCasesRoot, industry, file), 'utf8'));
 
-      expect(sharedSource).toContain(`@use '${relativePath.replace(/\.scss$/, '')}'`);
+      for (const entry of entries) {
+        expect(entry).toContain('industry-use-case.scss');
+        expect(entry).toContain(`${industry}.presentation.scss`);
+        expect(entry.match(/\.presentation\.scss/g)).toHaveLength(1);
+      }
       expect(source.length).toBeGreaterThan(2_000);
       expect(source).toContain(`.industry-gantt-shell--${industry}`);
       expect(source).toContain('.industry-gantt-header');
@@ -34,7 +46,7 @@ describe('industry showcase presentation contract', () => {
 
   it('customizes the working grid in addition to the shared header shell', () => {
     const gridSpecificPresentations = industries.filter((industry) => {
-      const source = readFileSync(resolve(presentationRoot, industry, `${industry}.presentation.scss`), 'utf8');
+      const source = readFileSync(resolve(useCasesRoot, industry, `${industry}.presentation.scss`), 'utf8');
       return source.includes('.industry-gantt-grid') || source.includes('revo-grid');
     });
 
@@ -42,7 +54,7 @@ describe('industry showcase presentation contract', () => {
   });
 
   it('keeps the internal-tools readiness label and progress track aligned to the cell', () => {
-    const source = readFileSync(resolve(presentationRoot, 'internal-tools/internal-tools.presentation.scss'), 'utf8');
+    const source = readFileSync(resolve(useCasesRoot, 'internal-tools/internal-tools.presentation.scss'), 'utf8');
 
     expect(source).toContain('grid-template-rows: 1fr 3px');
     expect(source).toContain('padding: 5px 3px');
@@ -55,7 +67,7 @@ describe('industry showcase presentation contract', () => {
   });
 
   it('vertically aligns professional-services grid copy across all three columns', () => {
-    const source = readFileSync(resolve(presentationRoot, 'professional-services/professional-services.presentation.scss'), 'utf8');
+    const source = readFileSync(resolve(useCasesRoot, 'professional-services/professional-services.presentation.scss'), 'utf8');
 
     expect(source).toContain('.rgCell.psa-grid-cell {');
     expect(source).toContain('align-items: center');
@@ -64,7 +76,7 @@ describe('industry showcase presentation contract', () => {
   });
 
   it('keeps construction task bars compact within its denser rows', () => {
-    const source = readFileSync(resolve(presentationRoot, 'construction/construction.presentation.scss'), 'utf8');
+    const source = readFileSync(resolve(useCasesRoot, 'construction/construction.presentation.scss'), 'utf8');
 
     expect(source).toContain('--gantt-task-height: 18px');
     expect(source).toContain('--gantt-summary-height: 14px');
@@ -73,7 +85,7 @@ describe('industry showcase presentation contract', () => {
   });
 
   it('matches the manufacturing valve-plan grid contract', () => {
-    const source = readFileSync(resolve(presentationRoot, 'manufacturing/manufacturing.presentation.scss'), 'utf8');
+    const source = readFileSync(resolve(useCasesRoot, 'manufacturing/manufacturing.presentation.scss'), 'utf8');
 
     expect(source).toContain("--revo-grid-font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif");
     expect(source).toContain('--revo-grid-font-size: 11.5px');
@@ -85,7 +97,7 @@ describe('industry showcase presentation contract', () => {
   });
 
   it('uses compact inline capacity values instead of oversized resource badges', () => {
-    const source = readFileSync(resolve(presentationRoot, 'resource-planning/resource-planning.presentation.scss'), 'utf8');
+    const source = readFileSync(resolve(useCasesRoot, 'resource-planning/resource-planning.presentation.scss'), 'utf8');
 
     expect(source).toContain('.capacity-resource-capacity {');
     expect(source).toContain('.capacity-resource-load {');
@@ -94,7 +106,7 @@ describe('industry showcase presentation contract', () => {
   });
 
   it('keeps resource avatars circular and all resource cells vertically aligned', () => {
-    const source = readFileSync(resolve(presentationRoot, 'resource-planning/resource-planning.presentation.scss'), 'utf8');
+    const source = readFileSync(resolve(useCasesRoot, 'resource-planning/resource-planning.presentation.scss'), 'utf8');
 
     expect(source).toContain('--avatar-cell-size: 26px !important');
     expect(source).toContain('aspect-ratio: 1');
@@ -103,7 +115,7 @@ describe('industry showcase presentation contract', () => {
   });
 
   it('matches the approved resource-capacity sheet density and typography', () => {
-    const source = readFileSync(resolve(presentationRoot, 'resource-planning/resource-planning.presentation.scss'), 'utf8');
+    const source = readFileSync(resolve(useCasesRoot, 'resource-planning/resource-planning.presentation.scss'), 'utf8');
 
     expect(source).toContain('--revo-grid-font-size: 11px');
     expect(source).toContain('--revo-grid-header-font-size: 10px');
@@ -117,7 +129,7 @@ describe('industry showcase presentation contract', () => {
   });
 
   it('keeps ERP work orders readable and state pills vertically aligned', () => {
-    const source = readFileSync(resolve(presentationRoot, 'erp/erp.presentation.scss'), 'utf8');
+    const source = readFileSync(resolve(useCasesRoot, 'erp/erp.presentation.scss'), 'utf8');
 
     expect(source).toContain('.rgCell.erp-grid-cell {');
     expect(source).toContain('.erp-work-order {');

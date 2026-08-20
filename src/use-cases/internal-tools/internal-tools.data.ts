@@ -6,9 +6,20 @@ import {
   type CalendarEntity,
   type DependencyEntity,
   type GanttPluginConfig,
+  type GanttTaskSourceRow,
   type ResourceEntity,
 } from '@revolist/gantt';
-import type { IndustryGanttDefinition, IndustryTaskRow } from '../industry-use-case.types';
+import type { IndustryGanttDefinition } from '../shared/industry-use-case.types';
+
+type InternalToolsTaskRow = GanttTaskSourceRow & {
+  statusLabel: string;
+  team?: string;
+  owner?: string;
+  sourceSystem?: string;
+  approval?: string;
+  readiness?: string;
+  risk?: string;
+};
 
 const OPERATIONS_CALENDAR_ID = 'internal-operations-core';
 const GOVERNANCE_CALENDAR_ID = 'internal-governance';
@@ -23,8 +34,8 @@ const taskDefaults = {
   tags: [] as readonly string[],
 };
 const task = (
-  row: Omit<IndustryTaskRow, keyof typeof taskDefaults> & Partial<Pick<IndustryTaskRow, keyof typeof taskDefaults>>,
-): IndustryTaskRow => ({ ...taskDefaults, ...row } as IndustryTaskRow);
+  row: Omit<InternalToolsTaskRow, keyof typeof taskDefaults> & Partial<Pick<InternalToolsTaskRow, keyof typeof taskDefaults>>,
+): InternalToolsTaskRow => ({ ...taskDefaults, ...row } as InternalToolsTaskRow);
 
 export const INTERNAL_TOOLS_TASK_IDS = [
   'release-48-program',
@@ -51,7 +62,7 @@ export const INTERNAL_TOOLS_TASK_IDS = [
   'release-48-general-availability',
 ] as const;
 
-export const INTERNAL_TOOLS_TASKS: IndustryTaskRow[] = [
+export const INTERNAL_TOOLS_TASKS: InternalToolsTaskRow[] = [
   task({ id: 'release-48-program', parentId: null, type: 'summary', name: 'Release 4.8 customer readiness', statusLabel: 'At risk', workflowStatus: 'blocked', startDate: '2026-08-03', endDate: '2026-10-13', duration: 52, percentDone: 58, approval: 'Gate at risk', readiness: '58%', risk: 'Billing approval is late and now gates production deployment and customer onboarding' }),
   task({ id: 'source-ownership-check', parentId: 'release-48-program', type: 'task', name: 'Source ownership and permission check', statusLabel: 'Complete', workflowStatus: 'done', startDate: '2026-08-03', endDate: '2026-08-05', duration: 3, percentDone: 100, approval: 'Owners confirmed', readiness: '100%', risk: 'The release hub links source records; each owning system remains authoritative' }),
 
@@ -308,7 +319,7 @@ export const INTERNAL_TOOLS_GANTT_CONFIG: GanttPluginConfig = {
   },
 };
 
-export const INTERNAL_TOOLS_INDUSTRY_DEFINITION: IndustryGanttDefinition = {
+export const INTERNAL_TOOLS_INDUSTRY_DEFINITION: IndustryGanttDefinition<InternalToolsTaskRow> = {
   id: 'industry-internal-tools',
   productLabel: 'Relay Ops / Releases / 4.8',
   title: 'Customer readiness',

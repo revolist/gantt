@@ -128,6 +128,23 @@ The same query parameter works with `pnpm dev:react`, `pnpm dev:vue`, and
 `pnpm dev:angular`. The benchmark is TypeScript-only; other framework modes
 automatically load its TypeScript implementation.
 
+## Use cases
+
+Each scenario is an independently loaded subproject under `src/use-cases/`
+and keeps its TypeScript, React, Vue, Angular, data, and presentation source
+together. Use the same `use-case` query with any framework development
+command.
+
+| Use case | Live | Source |
+| --- | --- | --- |
+| ERP production planning | [Open](https://gantt.rv-grid.com/?use-case=industry-erp) | [`src/use-cases/erp/`](./src/use-cases/erp/) |
+| Professional services | [Open](https://gantt.rv-grid.com/?use-case=industry-professional-services) | [`src/use-cases/professional-services/`](./src/use-cases/professional-services/) |
+| Construction | [Open](https://gantt.rv-grid.com/?use-case=industry-construction) | [`src/use-cases/construction/`](./src/use-cases/construction/) |
+| Manufacturing | [Open](https://gantt.rv-grid.com/?use-case=industry-manufacturing) | [`src/use-cases/manufacturing/`](./src/use-cases/manufacturing/) |
+| Resource planning | [Open](https://gantt.rv-grid.com/?use-case=industry-resource-planning) | [`src/use-cases/resource-planning/`](./src/use-cases/resource-planning/) |
+| Internal tools | [Open](https://gantt.rv-grid.com/?use-case=industry-internal-tools) | [`src/use-cases/internal-tools/`](./src/use-cases/internal-tools/) |
+| Simple construction | [Open](https://gantt.rv-grid.com/?use-case=simple-construction) | [`src/use-cases/simple-construction/`](./src/use-cases/simple-construction/) |
+
 ## Resources
 
 - [Gantt documentation](https://pro.rv-grid.com/guides/gantt/)

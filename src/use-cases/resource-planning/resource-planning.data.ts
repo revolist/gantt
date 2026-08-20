@@ -6,9 +6,20 @@ import {
   type CalendarEntity,
   type DependencyEntity,
   type GanttPluginConfig,
+  type GanttTaskSourceRow,
   type ResourceEntity,
 } from '@revolist/gantt';
-import { resolveIndustryWorkflowStatus, type IndustryGanttDefinition, type IndustryTaskRow } from '../industry-use-case.types';
+import { resolveIndustryWorkflowStatus, type IndustryGanttDefinition } from '../shared/industry-use-case.types';
+
+type ResourcePlanningTaskRow = GanttTaskSourceRow & {
+  statusLabel: string;
+  projectCode?: string;
+  team?: string;
+  role?: string;
+  owner?: string;
+  allocation?: string;
+  risk?: string;
+};
 
 const FULL_TIME_CALENDAR_ID = 'resource-full-time';
 const FLEX_CALENDAR_ID = 'resource-flex-four-day';
@@ -23,8 +34,8 @@ const taskDefaults = {
   tags: [] as readonly string[],
 };
 const task = (
-  row: Omit<IndustryTaskRow, keyof typeof taskDefaults> & Partial<Pick<IndustryTaskRow, keyof typeof taskDefaults>>,
-): IndustryTaskRow => ({ ...taskDefaults, ...row } as IndustryTaskRow);
+  row: Omit<ResourcePlanningTaskRow, keyof typeof taskDefaults> & Partial<Pick<ResourcePlanningTaskRow, keyof typeof taskDefaults>>,
+): ResourcePlanningTaskRow => ({ ...taskDefaults, ...row } as ResourcePlanningTaskRow);
 
 export const RESOURCE_PLANNING_TASK_IDS = [
   'capacity-portfolio',
@@ -51,7 +62,7 @@ export const RESOURCE_PLANNING_TASK_IDS = [
   'portfolio-release-gate',
 ] as const;
 
-export const RESOURCE_PLANNING_TASKS: IndustryTaskRow[] = [
+export const RESOURCE_PLANNING_TASKS: ResourcePlanningTaskRow[] = [
   task({ id: 'capacity-portfolio', parentId: null, type: 'summary', name: 'Q4 delivery capacity portfolio', statusLabel: 'Needs alignment', workflowStatus: 'blocked', startDate: '2026-08-03', endDate: '2026-10-23', duration: 60, percentDone: 47, risk: 'Two shared-capacity decisions need agreement across delivery leads' }),
   task({ id: 'solution-architect-overlap-review', parentId: 'capacity-portfolio', type: 'task', name: 'Solution architect overlap review', projectCode: 'PORT-Q4', team: 'Portfolio', role: 'Capacity decision', owner: 'Elena Costa', allocation: 'Shared 150%', statusLabel: 'Planning conversation', workflowStatus: 'blocked', startDate: '2026-08-10', endDate: '2026-08-14', duration: 5, percentDone: 25, deadlineDate: '2026-08-14', risk: 'Delivery leads agree which sessions need the architect live and which can use delegated review' }),
   task({ id: 'test-lab-booking-review', parentId: 'capacity-portfolio', type: 'task', name: 'Test lab booking review', projectCode: 'PORT-Q4', team: 'Portfolio', role: 'Capacity decision', owner: 'Elena Costa', allocation: 'Shared 175%', statusLabel: 'Planning conversation', workflowStatus: 'blocked', startDate: '2026-09-24', endDate: '2026-09-25', duration: 2, percentDone: 0, deadlineDate: '2026-09-25', risk: 'Owners agree a safe validation sequence; the warning is about the plan, not the teams' }),
@@ -314,7 +325,7 @@ export const RESOURCE_PLANNING_GANTT_CONFIG: GanttPluginConfig = {
   },
 };
 
-export const RESOURCE_PLANNING_INDUSTRY_DEFINITION: IndustryGanttDefinition = {
+export const RESOURCE_PLANNING_INDUSTRY_DEFINITION: IndustryGanttDefinition<ResourcePlanningTaskRow> = {
   id: 'industry-resource-planning',
   productLabel: 'Pace · Portfolio capacity · Week 37',
   title: 'People & shared capacity',

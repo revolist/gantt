@@ -6,9 +6,22 @@ import {
   type CalendarEntity,
   type DependencyEntity,
   type GanttPluginConfig,
+  type GanttTaskSourceRow,
   type ResourceEntity,
 } from '@revolist/gantt';
-import { resolveIndustryWorkflowStatus, type IndustryGanttDefinition, type IndustryTaskRow } from '../industry-use-case.types';
+import { resolveIndustryWorkflowStatus, type IndustryGanttDefinition } from '../shared/industry-use-case.types';
+
+type ManufacturingTaskRow = GanttTaskSourceRow & {
+  statusLabel: string;
+  orderNumber?: string;
+  operation?: string;
+  workCenter?: string;
+  machine?: string;
+  material?: string;
+  shift?: string;
+  owner?: string;
+  risk?: string;
+};
 
 const PRODUCTION_CALENDAR_ID = 'manufacturing-two-shift';
 const QUALITY_CALENDAR_ID = 'manufacturing-quality-day';
@@ -24,8 +37,8 @@ const taskDefaults = {
   tags: [] as readonly string[],
 };
 const task = (
-  row: Omit<IndustryTaskRow, keyof typeof taskDefaults> & Partial<Pick<IndustryTaskRow, keyof typeof taskDefaults>>,
-): IndustryTaskRow => ({ ...taskDefaults, ...row } as IndustryTaskRow);
+  row: Omit<ManufacturingTaskRow, keyof typeof taskDefaults> & Partial<Pick<ManufacturingTaskRow, keyof typeof taskDefaults>>,
+): ManufacturingTaskRow => ({ ...taskDefaults, ...row } as ManufacturingTaskRow);
 
 export const MANUFACTURING_TASK_IDS = [
   'plant-production-plan',
@@ -51,7 +64,7 @@ export const MANUFACTURING_TASK_IDS = [
   'shipment-commitment',
 ] as const;
 
-export const MANUFACTURING_TASKS: IndustryTaskRow[] = [
+export const MANUFACTURING_TASKS: ManufacturingTaskRow[] = [
   task({ id: 'plant-production-plan', parentId: null, type: 'summary', name: 'September valve and actuator production plan', operation: 'PLAN', statusLabel: 'At risk', workflowStatus: 'blocked', startDate: '2026-08-03', endDate: '2026-10-05', duration: 46, percentDone: 52, risk: 'Late valve material and CNC-07 contention move shipment beyond commitment' }),
   task({ id: 'valve-batch', parentId: 'plant-production-plan', type: 'summary', name: 'Valve batch · SO-48217', orderNumber: 'SO-48217', operation: 'VALVE', workCenter: 'Valve line', material: '17-4PH / seals', statusLabel: 'At risk', workflowStatus: 'blocked', startDate: '2026-08-03', endDate: '2026-09-30', duration: 43, percentDone: 55, risk: 'Material release and CNC-07 changeover are behind baseline' }),
   task({ id: 'valve-material-release', parentId: 'valve-batch', type: 'task', name: 'Material release for valve batch', orderNumber: 'SO-48217', operation: 'OP-010', workCenter: 'Materials QA', machine: 'Receipt bay', material: '17-4PH bar', shift: 'Day', owner: 'Sara Duarte', statusLabel: 'Supplier delay', workflowStatus: 'blocked', startDate: '2026-08-03', endDate: '2026-08-20', duration: 14, percentDone: 78, deadlineDate: '2026-08-14', risk: 'Mill certificates arrived late; CNC setup cannot release until incoming inspection closes' }),
@@ -246,7 +259,7 @@ export const MANUFACTURING_GANTT_CONFIG: GanttPluginConfig = {
   },
 };
 
-export const MANUFACTURING_INDUSTRY_DEFINITION: IndustryGanttDefinition = {
+export const MANUFACTURING_INDUSTRY_DEFINITION: IndustryGanttDefinition<ManufacturingTaskRow> = {
   id: 'industry-manufacturing',
   productLabel: 'NEXUS MES // PORTO-02',
   title: 'Cell 07 production command',

@@ -1,10 +1,3 @@
-@use './erp/erp.presentation';
-@use './professional-services/professional-services.presentation';
-@use './construction/construction.presentation';
-@use './manufacturing/manufacturing.presentation';
-@use './resource-planning/resource-planning.presentation';
-@use './internal-tools/internal-tools.presentation';
-
 .industry-gantt-shell { --ig-accent:#5b4bdb; --ig-accent-deep:#4133b5; --ig-border:#dfe3ea; --ig-muted:#667085; --ig-surface:#fff; --ig-text:#17202e; display:flex; flex-direction:column; width:100%; height:100%; min-height:0; overflow:hidden; border:1px solid var(--ig-border); border-radius:14px; color:var(--ig-text); background:var(--ig-surface); box-shadow:0 14px 42px rgba(20,31,48,.08); }
 .industry-gantt-shell--professional-services { --ig-accent:#147d87; --ig-accent-deep:#0b5962; }
 .industry-gantt-shell--construction { --ig-accent:#d4662d; --ig-accent-deep:#9f3f16; }

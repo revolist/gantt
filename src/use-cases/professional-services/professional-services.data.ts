@@ -6,9 +6,22 @@ import {
   type CalendarEntity,
   type DependencyEntity,
   type GanttPluginConfig,
+  type GanttTaskSourceRow,
   type ResourceEntity,
 } from '@revolist/gantt';
-import { resolveIndustryWorkflowStatus, type IndustryGanttDefinition, type IndustryTaskRow } from '../industry-use-case.types';
+import { resolveIndustryWorkflowStatus, type IndustryGanttDefinition } from '../shared/industry-use-case.types';
+
+type ProfessionalServicesTaskRow = GanttTaskSourceRow & {
+  statusLabel: string;
+  clientName?: string;
+  commercialModel?: string;
+  projectCode?: string;
+  phase?: string;
+  owner?: string;
+  budgetBurn?: string;
+  grossMargin?: string;
+  risk?: string;
+};
 
 const CALENDAR_ID = 'psa-client-delivery';
 const taskDefaults = {
@@ -23,8 +36,8 @@ const taskDefaults = {
   tags: [] as readonly string[],
 };
 const task = (
-  row: Omit<IndustryTaskRow, keyof typeof taskDefaults> & Partial<Pick<IndustryTaskRow, keyof typeof taskDefaults>>,
-): IndustryTaskRow => ({ ...taskDefaults, ...row } as IndustryTaskRow);
+  row: Omit<ProfessionalServicesTaskRow, keyof typeof taskDefaults> & Partial<Pick<ProfessionalServicesTaskRow, keyof typeof taskDefaults>>,
+): ProfessionalServicesTaskRow => ({ ...taskDefaults, ...row } as ProfessionalServicesTaskRow);
 
 export const PROFESSIONAL_SERVICES_TASK_IDS = [
   'psa-portfolio',
@@ -48,7 +61,7 @@ export const PROFESSIONAL_SERVICES_TASK_IDS = [
   'governance-close',
 ] as const;
 
-export const PROFESSIONAL_SERVICES_TASKS: IndustryTaskRow[] = [
+export const PROFESSIONAL_SERVICES_TASKS: ProfessionalServicesTaskRow[] = [
   task({ id: 'psa-portfolio', parentId: null, type: 'summary', name: 'Client delivery portfolio · Q3', statusLabel: 'At risk', workflowStatus: 'blocked', startDate: '2026-08-10', endDate: '2026-10-23', duration: 55, percentDone: 43, risk: 'Senior consultant capacity' }),
   task({ id: 'orion', parentId: 'psa-portfolio', type: 'summary', name: 'Orion operating model rollout', clientName: 'Orion Foods', commercialModel: 'Fixed fee', projectCode: 'ORI-2418', phase: 'Delivery', owner: 'Elena Rossi', budgetBurn: '68%', grossMargin: '31%', statusLabel: 'At risk', workflowStatus: 'blocked', startDate: '2026-08-10', endDate: '2026-10-02', duration: 40, percentDone: 58, risk: 'UAT readiness and shared specialist' }),
   task({ id: 'orion-discovery', parentId: 'orion', type: 'task', name: 'Discovery and process mapping', clientName: 'Orion Foods', commercialModel: 'Fixed fee', projectCode: 'ORI-2418', phase: 'Discovery', owner: 'Noah Williams', budgetBurn: '100%', grossMargin: '36%', statusLabel: 'Complete', workflowStatus: 'done', startDate: '2026-08-10', endDate: '2026-08-21', duration: 10, percentDone: 100 }),
@@ -147,7 +160,7 @@ type PsaCellRole = 'client' | 'engagement' | 'team';
 type PsaCellContext = Parameters<NonNullable<ColumnRegular['cellProperties']>>[0];
 
 const psaCellProperties = (role: PsaCellRole) => ({ model }: PsaCellContext) => {
-  const taskModel = model as IndustryTaskRow;
+  const taskModel = model as ProfessionalServicesTaskRow;
   const workflowStatus = resolveIndustryWorkflowStatus(taskModel);
   return {
     class: {
@@ -165,7 +178,7 @@ const psaCellProperties = (role: PsaCellRole) => ({ model }: PsaCellContext) => 
   };
 };
 
-const healthLabel = (model: IndustryTaskRow) => {
+const healthLabel = (model: ProfessionalServicesTaskRow) => {
   const workflowStatus = resolveIndustryWorkflowStatus(model);
   if (workflowStatus === 'blocked') return 'Watch';
   if (workflowStatus === 'done') return 'Done';
@@ -173,7 +186,7 @@ const healthLabel = (model: IndustryTaskRow) => {
   return 'Ready';
 };
 
-const clientTone = (model: IndustryTaskRow) => model.projectCode === 'ORI-2418'
+const clientTone = (model: ProfessionalServicesTaskRow) => model.projectCode === 'ORI-2418'
   ? 'orion'
   : model.projectCode === 'MER-1096'
     ? 'meridian'
@@ -186,12 +199,12 @@ const clientColumn: ColumnRegular = {
   cellProperties: psaCellProperties('client'),
   cellTemplate: (h, { model }) => h('div', { class: 'psa-client-cell', title: `${model.clientName} · ${model.projectCode}` }, [
     h('span', { class: 'psa-client-cell__identity' }, [
-      h('span', { class: `psa-client-cell__dot psa-client-cell__dot--${clientTone(model as IndustryTaskRow)}`, 'aria-hidden': 'true' }),
+      h('span', { class: `psa-client-cell__dot psa-client-cell__dot--${clientTone(model as ProfessionalServicesTaskRow)}`, 'aria-hidden': 'true' }),
       h('span', { class: 'psa-client-cell__name' }, model.clientName),
     ]),
     h('span', { class: 'psa-client-cell__details' }, [
       h('span', { class: 'psa-client-cell__code' }, model.projectCode),
-      h('span', { class: `psa-health-label psa-health-label--${resolveIndustryWorkflowStatus(model as IndustryTaskRow)}` }, healthLabel(model as IndustryTaskRow)),
+      h('span', { class: `psa-health-label psa-health-label--${resolveIndustryWorkflowStatus(model as ProfessionalServicesTaskRow)}` }, healthLabel(model as ProfessionalServicesTaskRow)),
     ]),
   ]),
 };
@@ -199,7 +212,7 @@ const ownerColumn: ColumnRegular = {
   prop: 'owner', name: 'Team / terms', size: 135, readonly: true,
   cellProperties: psaCellProperties('team'),
   cellTemplate: (h, { model }) => h('div', { class: 'psa-consultant', title: model.owner }, [
-    h('span', { class: `psa-consultant__avatar psa-consultant__avatar--${clientTone(model as IndustryTaskRow)}`, 'aria-hidden': 'true' }, String(model.owner ?? '').split(' ').map((part: string) => part[0]).slice(0, 2).join('')),
+    h('span', { class: `psa-consultant__avatar psa-consultant__avatar--${clientTone(model as ProfessionalServicesTaskRow)}`, 'aria-hidden': 'true' }, String(model.owner ?? '').split(' ').map((part: string) => part[0]).slice(0, 2).join('')),
     h('span', { class: 'psa-consultant__copy' }, [
       h('span', { class: 'psa-consultant__name' }, String(model.owner ?? '').split(' ')[0]),
       h('span', { class: 'psa-consultant__meta' }, [
@@ -251,7 +264,7 @@ export const PROFESSIONAL_SERVICES_GANTT_CONFIG: GanttPluginConfig = {
   },
 };
 
-export const PROFESSIONAL_SERVICES_INDUSTRY_DEFINITION: IndustryGanttDefinition = {
+export const PROFESSIONAL_SERVICES_INDUSTRY_DEFINITION: IndustryGanttDefinition<ProfessionalServicesTaskRow> = {
   id: 'industry-professional-services',
   productLabel: 'Helio Consulting Studio · Client Portfolio',
   title: 'Client work, beautifully aligned',
