@@ -8,7 +8,7 @@ import {
   CONSTRUCTION_RESOURCES,
   CONSTRUCTION_TASK_IDS,
   CONSTRUCTION_TASKS,
-} from './construction.data';
+} from '../../../../src/use-cases/construction/construction.data';
 
 describe('construction industry Gantt fixture', () => {
   it('models a stable clinic programme with site delivery context', () => {

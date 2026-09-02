@@ -4,7 +4,7 @@ import {
   GANTT_EXAMPLES,
   GANTT_EXAMPLE_IDS,
   resolveGanttExample,
-} from './examples';
+} from '../../src/examples';
 
 describe('Gantt example registry', () => {
   it('contains technical examples only', () => {

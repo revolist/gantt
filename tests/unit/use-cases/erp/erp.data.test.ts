@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { ERP_ASSIGNMENTS, ERP_BASELINES, ERP_CALENDARS, ERP_DEPENDENCIES, ERP_INDUSTRY_DEFINITION, ERP_RESOURCES, ERP_TASK_IDS, ERP_TASKS } from './erp.data';
+import { ERP_ASSIGNMENTS, ERP_BASELINES, ERP_CALENDARS, ERP_DEPENDENCIES, ERP_INDUSTRY_DEFINITION, ERP_RESOURCES, ERP_TASK_IDS, ERP_TASKS } from '../../../../src/use-cases/erp/erp.data';
 
 describe('ERP industry Gantt fixture', () => {
   it('keeps stable, unique production task ids and required business fields', () => {

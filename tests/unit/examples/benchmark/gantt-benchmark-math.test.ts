@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { median, percentile95, roundMetric } from './gantt-benchmark-math';
+import { median, percentile95, roundMetric } from '../../../../src/examples/benchmark/gantt-benchmark-math';
 
 describe('benchmark aggregation', () => {
   it('calculates medians for odd and even sample counts', () => {

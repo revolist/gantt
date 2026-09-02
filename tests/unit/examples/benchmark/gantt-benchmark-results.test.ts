@@ -2,7 +2,7 @@ import { readFileSync, statSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { describe, expect, it } from 'vitest';
 
-const resultsDirectory = resolve(import.meta.dirname, '../../../benchmarks/results');
+const resultsDirectory = resolve(import.meta.dirname, '../../../../benchmarks/results');
 const result = JSON.parse(readFileSync(resolve(resultsDirectory, 'latest.json'), 'utf8')) as {
   schemaVersion: number;
   methodology: { warmupRuns: number; measuredRuns: number; claim: string };

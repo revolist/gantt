@@ -8,7 +8,7 @@ import {
   PROFESSIONAL_SERVICES_RESOURCES,
   PROFESSIONAL_SERVICES_TASK_IDS,
   PROFESSIONAL_SERVICES_TASKS,
-} from './professional-services.data';
+} from '../../../../src/use-cases/professional-services/professional-services.data';
 
 describe('professional-services industry Gantt fixture', () => {
   it('models a stable client portfolio with commercial and delivery context', () => {

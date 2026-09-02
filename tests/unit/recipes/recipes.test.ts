@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
-import { dependenciesAndCalendarsRecipe } from './dependencies-calendars';
-import { resourcesAndBaselinesRecipe } from './resources-baselines';
-import { criticalPathAndEditingRecipe } from './critical-path-editing';
+import { dependenciesAndCalendarsRecipe } from '../../../recipes/dependencies-calendars';
+import { resourcesAndBaselinesRecipe } from '../../../recipes/resources-baselines';
+import { criticalPathAndEditingRecipe } from '../../../recipes/critical-path-editing';
 
 describe('Gantt recipes', () => {
   it('keeps linked tasks and working calendars together', () => {

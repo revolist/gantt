@@ -3,10 +3,10 @@ import {
   constructionTrimmedRows,
   constructionViewTrimmedRows,
   visibleConstructionIds,
-} from './shared/lookahead';
-import { createConstructionRows } from './shared/data';
-import { projectKeepOnlyFilter } from './shared/filters';
-import { DEFAULT_PERIOD } from './shared/types';
+} from '../../../../src/use-cases/simple-construction/shared/lookahead';
+import { createConstructionRows } from '../../../../src/use-cases/simple-construction/shared/data';
+import { projectKeepOnlyFilter } from '../../../../src/use-cases/simple-construction/shared/filters';
+import { DEFAULT_PERIOD } from '../../../../src/use-cases/simple-construction/shared/types';
 
 describe('simple construction Gantt filters', () => {
   const rows = createConstructionRows();

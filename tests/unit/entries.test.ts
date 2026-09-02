@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { resolveGanttEntry } from './entries';
+import { resolveGanttEntry } from '../../src/entries';
 
 describe('Gantt entry routing', () => {
   it('routes technical examples and use cases through separate query parameters', () => {
