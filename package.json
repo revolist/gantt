@@ -52,7 +52,7 @@
     "@angular/platform-browser-dynamic": "20.3.26",
     "@revolist/angular-datagrid": "4.27.0",
     "@revolist/react-datagrid": "4.27.0",
-    "@revolist/revogrid": "4.27.0",
+    "@revolist/revogrid": "4.27.6",
     "@fortawesome/fontawesome-free": "7.3.1",
     "@revolist/gantt": "npm:@revolist/gantt-trial@2.8.2",
     "@revolist/revogrid-pro": "npm:@revolist/rv-pro-trial@2.8.2",
