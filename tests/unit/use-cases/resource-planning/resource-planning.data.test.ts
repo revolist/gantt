@@ -17,7 +17,7 @@ import {
   RESOURCE_PLANNING_RESOURCES,
   RESOURCE_PLANNING_TASK_IDS,
   RESOURCE_PLANNING_TASKS,
-} from './resource-planning.data';
+} from '../../../../src/use-cases/resource-planning/resource-planning.data';
 
 const overlaps = (firstId: string, secondId: string): boolean => {
   const first = RESOURCE_PLANNING_TASKS.find(({ id }) => id === firstId)!;

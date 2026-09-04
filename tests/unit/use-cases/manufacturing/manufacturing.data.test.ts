@@ -10,7 +10,7 @@ import {
   MANUFACTURING_RESOURCES,
   MANUFACTURING_TASK_IDS,
   MANUFACTURING_TASKS,
-} from './manufacturing.data';
+} from '../../../../src/use-cases/manufacturing/manufacturing.data';
 
 describe('manufacturing industry Gantt fixture', () => {
   it('models a stable production plan with complete shop-floor context', () => {

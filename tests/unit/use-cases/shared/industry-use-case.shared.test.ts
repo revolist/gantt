@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { industryGridClass, industryGridTheme } from './industry-use-case.shared';
-import { resolveIndustryWorkflowStatus, type IndustryGanttDefinition, type IndustryGridPresentation } from './industry-use-case.types';
+import { industryGridClass, industryGridTheme } from '../../../../src/use-cases/shared/industry-use-case.shared';
+import { resolveIndustryWorkflowStatus, type IndustryGanttDefinition, type IndustryGridPresentation } from '../../../../src/use-cases/shared/industry-use-case.types';
 
 const definitionWithGrid = (grid: IndustryGridPresentation) => ({
   id: 'industry-test',

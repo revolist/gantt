@@ -8,7 +8,7 @@ import {
   INTERNAL_TOOLS_RESOURCES,
   INTERNAL_TOOLS_TASK_IDS,
   INTERNAL_TOOLS_TASKS,
-} from './internal-tools.data';
+} from '../../../../src/use-cases/internal-tools/internal-tools.data';
 
 describe('internal-tools industry Gantt fixture', () => {
   it('models a stable cross-functional release plan with source and ownership context', () => {

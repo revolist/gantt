@@ -5,7 +5,7 @@ vi.mock('@revolist/gantt', () => ({
 }));
 
 async function loadShowcaseData() {
-  return import('./gantt-project-data');
+  return import('../../../../../src/examples/showcase/data/gantt-project-data');
 }
 
 function getParentTaskIds(tasks: readonly { parentId?: string | null }[]) {

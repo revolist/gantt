@@ -6,7 +6,7 @@ import {
   GANTT_HORIZONTAL_BIG_DATA_PROJECT_START,
   GANTT_HORIZONTAL_BIG_DATA_TASK_COUNT,
   ganttHorizontalBigDataConfig,
-} from './gantt-horizontal-big-data-data';
+} from '../../../../src/examples/horizontal-big-data/gantt-horizontal-big-data-data';
 
 describe('Gantt horizontal big-data fixture', () => {
   it('creates exact, dependency-safe data across twenty calendar years', () => {

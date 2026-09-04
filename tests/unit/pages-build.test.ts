@@ -4,7 +4,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 
 // @ts-expect-error The Pages assembler is an executable ESM build script.
-import { assemblePages } from '../scripts/build-pages.mjs';
+import { assemblePages } from '../../scripts/build-pages.mjs';
 
 const temporaryRoots: string[] = [];
 

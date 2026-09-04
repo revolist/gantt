@@ -5,7 +5,7 @@ import {
   GANTT_BIG_DATA_PROJECT_END,
   GANTT_BIG_DATA_PROJECT_START,
   GANTT_BIG_DATA_TASK_COUNT,
-} from './gantt-big-data-data';
+} from '../../../../src/examples/big-data/gantt-big-data-data';
 
 describe('Gantt big-data fixture', () => {
   it('creates exact, dependency-safe data inside the three-month range', () => {

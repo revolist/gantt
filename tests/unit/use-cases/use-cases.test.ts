@@ -3,7 +3,7 @@ import {
   GANTT_USE_CASES,
   GANTT_USE_CASE_IDS,
   resolveGanttUseCase,
-} from '.';
+} from '../../../src/use-cases';
 
 describe('Gantt use-case registry', () => {
   it('keeps all industry use cases in the dedicated registry', () => {

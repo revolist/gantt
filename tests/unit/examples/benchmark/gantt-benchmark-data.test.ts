@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { createGanttBenchmarkDataset, dependencyTarget, GANTT_BENCHMARK_GROUP_SIZE, GANTT_BENCHMARK_SEED } from './gantt-benchmark-data';
-import { GANTT_BENCHMARK_DENSITIES, GANTT_BENCHMARK_TASK_COUNTS, type GanttBenchmarkOptions } from './gantt-benchmark.types';
+import { createGanttBenchmarkDataset, dependencyTarget, GANTT_BENCHMARK_GROUP_SIZE, GANTT_BENCHMARK_SEED } from '../../../../src/examples/benchmark/gantt-benchmark-data';
+import { GANTT_BENCHMARK_DENSITIES, GANTT_BENCHMARK_TASK_COUNTS, type GanttBenchmarkOptions } from '../../../../src/examples/benchmark/gantt-benchmark.types';
 
 const options = (taskCount: GanttBenchmarkOptions['taskCount'], density: GanttBenchmarkOptions['density'], timelineSpan: GanttBenchmarkOptions['timelineSpan'] = 'quarter'): GanttBenchmarkOptions => ({ taskCount, density, timelineSpan, seed: GANTT_BENCHMARK_SEED });
 

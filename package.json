@@ -36,7 +36,7 @@
     "test:unit": "vitest run",
     "test:repository": "node scripts/verify-repository.mjs",
     "test:e2e": "playwright test",
-    "test:benchmark": "vitest run src/examples/benchmark",
+    "test:benchmark": "vitest run tests/unit/examples/benchmark",
     "benchmark:smoke": "node scripts/run-gantt-benchmark.mjs --smoke",
     "benchmark:run": "node scripts/run-gantt-benchmark.mjs --full",
     "benchmark:results": "node scripts/run-gantt-benchmark.mjs --format-only",
