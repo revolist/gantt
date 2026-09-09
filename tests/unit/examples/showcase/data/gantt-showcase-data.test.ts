@@ -2,6 +2,12 @@ import { describe, expect, it, vi } from 'vitest';
 
 vi.mock('@revolist/gantt', () => ({
   createDefaultTaskTableColumn: (prop: string) => ({ prop }),
+  fitGanttToProject: vi.fn(),
+  getGanttTimelineNavigationRuntime: vi.fn(),
+  TIMELINE_ZOOM_PRESET_LEVELS: [
+    { id: 'day-week', label: 'Day / Week', tickUnit: 'day', tickWidth: 30, headerRows: [] },
+    { id: 'week-month', label: 'Week / Month', tickUnit: 'week', tickWidth: 84, headerRows: [] },
+  ],
 }));
 
 async function loadShowcaseData() {
@@ -138,5 +144,75 @@ describe('Gantt showcase data', () => {
     expect(singleStack.props.class['gantt-bar__assignee-stack--multiple']).toBe(false);
     expect(singleStack.children).toHaveLength(1);
     expect(singleStack.children[0].children).toBe('RP');
+  });
+
+  it('omits a task label unless its complete text fits beside its assignees', async () => {
+    const { renderShowcaseTaskBarContent } = await loadShowcaseData();
+    const h = (tag: string, props: Record<string, unknown>, children?: unknown) => ({ tag, props, children });
+    const label = { props: { class: { 'gantt-bar__label': true } } };
+    const progress = { props: { class: { 'gantt-bar__progress': true } } };
+
+    const narrow = renderShowcaseTaskBarContent({
+      h,
+      row: { taskKind: 'task', taskLabel: 'Integration Tests', ganttLayout: { width: 90 } },
+      defaultContent: [progress, label],
+    });
+    const roomy = renderShowcaseTaskBarContent({
+      h,
+      row: { taskKind: 'task', taskLabel: 'Integration Tests', ganttLayout: { width: 150 } },
+      defaultContent: [progress, label],
+    });
+    const assigned = renderShowcaseTaskBarContent({
+      h,
+      row: {
+        taskKind: 'task',
+        taskLabel: 'Test Plan',
+        ganttLayout: { width: 82 },
+        assigneeDetails: [{ name: 'Ravi Patel', initials: 'RP', color: '#facc15' }],
+      },
+      defaultContent: [progress, label],
+    });
+
+    expect(narrow).toEqual([progress]);
+    expect(roomy).toEqual([progress, label]);
+    expect(assigned).not.toContain(label);
+    expect(assigned.at(-1)).toMatchObject({
+      props: { class: { 'gantt-bar__assignee-stack': true } },
+    });
+  });
+
+  it('maps Week and Month to their Gantt runtime levels and delegates Fit', async () => {
+    const gantt = await import('@revolist/gantt');
+    const {
+      applyShowcaseTimelineScale,
+      SHOWCASE_GANTT_CONFIG,
+      SHOWCASE_TIMELINE_LEVELS,
+    } = await loadShowcaseData();
+    const setZoomLevel = vi.fn(() => true);
+    const grid = {} as HTMLRevoGridElement;
+
+    vi.mocked(gantt.getGanttTimelineNavigationRuntime).mockResolvedValue({
+      getZoomLevel: () => ({ id: 'day-week' }),
+      setZoomLevel,
+    });
+    vi.mocked(gantt.fitGanttToProject).mockResolvedValue(true);
+
+    expect(SHOWCASE_TIMELINE_LEVELS).toEqual({ week: 'day-week', month: 'week-month' });
+    expect(SHOWCASE_GANTT_CONFIG.zoom).toMatchObject({
+      defaultLevelId: 'day-week',
+      minLevelId: 'day-week',
+      maxLevelId: 'week-month',
+    });
+    expect(SHOWCASE_GANTT_CONFIG.zoom.levels).toEqual(expect.arrayContaining([
+      expect.objectContaining({ id: 'day-week', tickWidth: 44 }),
+    ]));
+    await expect(applyShowcaseTimelineScale(grid, 'week')).resolves.toBe(true);
+    expect(setZoomLevel).not.toHaveBeenCalled();
+    await expect(applyShowcaseTimelineScale(grid, 'month')).resolves.toBe(true);
+    expect(setZoomLevel).toHaveBeenCalledWith('week-month');
+    await expect(applyShowcaseTimelineScale(grid, 'fit')).resolves.toBe(true);
+    expect(gantt.fitGanttToProject).toHaveBeenCalledWith(grid);
+    vi.mocked(gantt.fitGanttToProject).mockResolvedValueOnce(false);
+    await expect(applyShowcaseTimelineScale(grid, 'fit')).resolves.toBe(false);
   });
 });

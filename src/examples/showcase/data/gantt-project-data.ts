@@ -7,3 +7,4 @@
 export * from './gantt-project-base-data';
 export * from './gantt-showcase-data';
 export * from './gantt-showcase-columns';
+export * from './gantt-showcase-timeline';

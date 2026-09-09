@@ -27,10 +27,46 @@ test(`${feature.title} mounts without browser errors`, async ({ page }) => {
   await expect(grid.locator('.gantt-bar').first()).toBeVisible({ timeout: 15_000 });
   const criticalPath = page.getByRole('checkbox', { name: 'Critical path' });
   const baselines = page.getByRole('checkbox', { name: 'Baselines' });
+  const fit = page.getByRole('button', { name: 'Fit' });
+  const week = page.getByRole('button', { name: 'Week' });
+  const month = page.getByRole('button', { name: 'Month' });
+  const getClippedLabels = () => grid.locator('.gantt-bar__label').evaluateAll((labels) => labels
+    .filter((label) => (label as HTMLElement).scrollWidth > (label as HTMLElement).clientWidth)
+    .map((label) => ({
+      label: label.textContent,
+      available: (label as HTMLElement).clientWidth,
+      required: (label as HTMLElement).scrollWidth,
+    })));
   await expect(criticalPath).toBeVisible();
   await expect(baselines).toBeVisible();
+  await expect(fit).toBeVisible();
+  await expect(week).toHaveAttribute('aria-pressed', 'true');
+  await expect(month).toHaveAttribute('aria-pressed', 'false');
+  await expect.poll(getClippedLabels).toEqual([]);
+  await month.click();
+  await expect(month).toHaveAttribute('aria-pressed', 'true');
+  await expect.poll(async () => grid.evaluate(async (element) => {
+    const plugins = await (element as HTMLRevoGridElement).getPlugins();
+    const runtime = plugins.find((plugin) => typeof (plugin as { getZoomLevel?: unknown }).getZoomLevel === 'function') as {
+      getZoomLevel?: () => { id?: string };
+    } | undefined;
+    return runtime?.getZoomLevel?.()?.id;
+  })).toBe('week-month');
+  await expect.poll(getClippedLabels).toEqual([]);
+  await week.click();
+  await expect.poll(async () => grid.evaluate(async (element) => {
+    const plugins = await (element as HTMLRevoGridElement).getPlugins();
+    const runtime = plugins.find((plugin) => typeof (plugin as { getZoomLevel?: unknown }).getZoomLevel === 'function') as {
+      getZoomLevel?: () => { id?: string };
+    } | undefined;
+    return runtime?.getZoomLevel?.()?.id;
+  })).toBe('day-week');
+  await expect.poll(getClippedLabels).toEqual([]);
+  await fit.click();
+  await expect(fit).toHaveAttribute('aria-pressed', 'true');
   await baselines.check();
   await expect(baselines).toBeChecked();
+  await expect.poll(getClippedLabels).toEqual([]);
   const screenshot = await page.locator('body').screenshot({ animations: 'disabled' });
   expect(screenshot.byteLength).toBeGreaterThan(10_000);
   expect(errors).toEqual([]);

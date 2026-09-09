@@ -9,6 +9,10 @@ import type {
 } from '@revolist/gantt';
 import { createDefaultTaskTableColumn } from '@revolist/gantt';
 import { CALENDAR_ID, GANTT_BASE_CONFIG } from './gantt-project-base-data';
+import {
+  SHOWCASE_TIMELINE_LEVELS,
+  SHOWCASE_TIMELINE_ZOOM_LEVELS,
+} from './gantt-showcase-timeline';
 
 export const SHOWCASE_COLUMN_OPTIONS = [
   { prop: 'wbs',          label: 'WBS',          defaultVisible: false },
@@ -60,7 +64,12 @@ export const SHOWCASE_GANTT_CONFIG = {
   name: 'Launch SaaS Product',
   updatedAt: '2026-04-28T10:00:00Z',
   statusDate: '2026-04-28',
-  zoomPreset: 'day-week' as const,
+  zoom: {
+    levels: SHOWCASE_TIMELINE_ZOOM_LEVELS,
+    defaultLevelId: SHOWCASE_TIMELINE_LEVELS.week,
+    minLevelId: SHOWCASE_TIMELINE_LEVELS.week,
+    maxLevelId: SHOWCASE_TIMELINE_LEVELS.month,
+  },
   allowTaskCreate: true,
   taskCreateRow: true,
   visuals: {

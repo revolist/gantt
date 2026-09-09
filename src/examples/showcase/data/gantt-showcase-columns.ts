@@ -131,13 +131,38 @@ function hasClass(node: any, className: string) {
   return Boolean(nodeClass?.[className]);
 }
 
-export function renderShowcaseTaskBarContent({ h, row, defaultContent }: any) {
-  if (row.taskKind === 'summary' || row.type === 'summary') {
-    return defaultContent.filter((node: any) => !hasClass(node, 'gantt-bar__label'));
+function estimateTaskLabelWidth(label: string) {
+  return Array.from(label).reduce((width, character) => {
+    if (/\s/.test(character)) return width + 3;
+    if (/[ilI1.,'|]/.test(character)) return width + 3.2;
+    if (/[MW@#%&]/.test(character)) return width + 8.2;
+    if (/[A-Z0-9]/.test(character)) return width + 6.5;
+    return width + 5.7;
+  }, 0);
+}
+
+function canShowTaskLabel(row: any) {
+  const label = typeof row.taskLabel === 'string' ? row.taskLabel.trim() : '';
+  const barWidth = row.ganttLayout?.width;
+
+  if (!label || typeof barWidth !== 'number') {
+    return false;
   }
 
+  const assigneeCount = row.assigneeDetails?.length ?? 0;
+  const labelStart = assigneeCount > 0 ? 30 + (assigneeCount > 1 ? 5 : 0) : 10;
+  const requiredWidth = labelStart + estimateTaskLabelWidth(label) + 10;
+
+  return barWidth >= requiredWidth;
+}
+
+export function renderShowcaseTaskBarContent({ h, row, defaultContent }: any) {
+  const content = row.taskKind === 'summary' || row.type === 'summary' || !canShowTaskLabel(row)
+    ? defaultContent.filter((node: any) => !hasClass(node, 'gantt-bar__label'))
+    : defaultContent;
+
   if (!row.assigneeDetails?.length) {
-    return defaultContent;
+    return content;
   }
 
   const primaryAssignee = row.assigneeDetails[0];
@@ -151,7 +176,7 @@ export function renderShowcaseTaskBarContent({ h, row, defaultContent }: any) {
   }, assignee.initials);
 
   return [
-    ...defaultContent,
+    ...content,
     h('span', {
       class: {
         'gantt-bar__assignee-stack': true,
