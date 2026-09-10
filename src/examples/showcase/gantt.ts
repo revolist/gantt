@@ -17,7 +17,6 @@ import {
   SHOWCASE_TASKS,
   SHOWCASE_TIMELINE_SCALE_OPTIONS,
   applyShowcaseTimelineScale,
-  observeShowcaseTaskBarLabels,
   renderShowcaseTaskBarColor,
   renderShowcaseTaskBarContent,
   type ShowcaseTimelineScale,
@@ -140,11 +139,9 @@ export function load(parentSelector: string): (() => void) | undefined {
   applyGanttConfig();
   container.appendChild(grid);
   grid.source = [...SHOWCASE_TASKS];
-  const disconnectLabels = observeShowcaseTaskBarLabels(grid);
 
   return () => {
     disconnectTheme();
-    disconnectLabels();
     container.remove();
   };
 }

@@ -39,67 +39,6 @@ export const SHOWCASE_TIMELINE_ZOOM_LEVELS: readonly TimelineZoomLevel[] = [
   getPresetLevel(SHOWCASE_TIMELINE_LEVELS.month),
 ];
 
-function getTaskBarLabels(grid: HTMLRevoGridElement) {
-  const labels: HTMLElement[] = [];
-  const ElementClass = grid.ownerDocument?.defaultView?.Element;
-  const collectLabels = (root: ParentNode) => {
-    labels.push(...root.querySelectorAll<HTMLElement>('.gantt-bar__label'));
-    if (ElementClass && root instanceof ElementClass && root.shadowRoot) {
-      collectLabels(root.shadowRoot);
-    }
-    root.querySelectorAll<HTMLElement>('*').forEach((element) => {
-      if (element.shadowRoot) {
-        collectLabels(element.shadowRoot);
-      }
-    });
-  };
-  collectLabels(grid);
-  return labels;
-}
-
-function syncTaskBarLabelVisibility(grid: HTMLRevoGridElement) {
-  getTaskBarLabels(grid).forEach((label) => {
-    label.removeAttribute('data-showcase-label-overflow');
-    if (label.scrollWidth > label.clientWidth) {
-      label.setAttribute('data-showcase-label-overflow', 'true');
-    }
-  });
-}
-
-export function observeShowcaseTaskBarLabels(grid: HTMLRevoGridElement) {
-  const view = grid.ownerDocument?.defaultView;
-  const MutationObserverClass = view?.MutationObserver;
-  const requestFrame = view?.requestAnimationFrame?.bind(view);
-  let frame = 0;
-  const scheduleSync = () => {
-    if (!requestFrame) {
-      syncTaskBarLabelVisibility(grid);
-      return;
-    }
-    if (frame) return;
-    frame = requestFrame(() => {
-      frame = 0;
-      syncTaskBarLabelVisibility(grid);
-    });
-  };
-  const observer = MutationObserverClass
-    ? new MutationObserverClass(scheduleSync)
-    : undefined;
-
-  observer?.observe(grid, {
-    subtree: true,
-    childList: true,
-    attributes: true,
-    attributeFilter: ['style'],
-  });
-  scheduleSync();
-
-  return () => {
-    observer?.disconnect();
-    if (frame && view?.cancelAnimationFrame) view.cancelAnimationFrame(frame);
-  };
-}
-
 export async function applyShowcaseTimelineScale(
   grid: HTMLRevoGridElement,
   scale: ShowcaseTimelineScale,

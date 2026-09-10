@@ -66,7 +66,6 @@ import {
   SHOWCASE_TASKS,
   SHOWCASE_TIMELINE_SCALE_OPTIONS,
   applyShowcaseTimelineScale,
-  observeShowcaseTaskBarLabels,
   renderShowcaseTaskBarColor,
   renderShowcaseTaskBarContent,
   type ShowcaseTimelineScale,
@@ -88,7 +87,6 @@ const showBaseline = ref(false);
 const timelineScale = ref<ShowcaseTimelineScale>('week');
 const isDark = ref(currentTheme().isDark());
 let disconnectTheme: (() => void) | undefined;
-let disconnectLabels: (() => void) | undefined;
 const gridTheme = computed(() => (isDark.value ? 'darkCompact' : 'compact'));
 const shellClass = computed(() => [
   'gantt-showcase',
@@ -128,13 +126,10 @@ onMounted(async () => {
 
   plugins.value = [GanttPlugin, ExportExcelPlugin, RowStatusPlugin];
   await nextTick();
-  const grid = ((gridRef.value as any)?.$el ?? gridRef.value) as HTMLRevoGridElement | null;
-  if (grid) disconnectLabels = observeShowcaseTaskBarLabels(grid);
 });
 
 onBeforeUnmount(() => {
   disconnectTheme?.();
-  disconnectLabels?.();
 });
 </script>
 

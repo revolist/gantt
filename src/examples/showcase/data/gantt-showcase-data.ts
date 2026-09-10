@@ -75,7 +75,7 @@ export const SHOWCASE_GANTT_CONFIG = {
   visuals: {
     showBaseline: true,
     showCriticalPath: true,
-    showTaskLabels: 'tasks',
+    showTaskLabels: false,
     shadeNonWorkingTime: true,
     showTodayLine: true,
     milestoneLines: [

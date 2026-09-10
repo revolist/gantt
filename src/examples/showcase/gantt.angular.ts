@@ -6,7 +6,7 @@ import {
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
-import type { AfterViewInit, OnDestroy } from '@angular/core';
+import type { OnDestroy } from '@angular/core';
 import { RevoGrid } from '@revolist/angular-datagrid';
 import { GanttPlugin } from '@revolist/gantt';
 import type { GanttPluginConfig } from '@revolist/gantt';
@@ -23,7 +23,6 @@ import {
   SHOWCASE_TASKS,
   SHOWCASE_TIMELINE_SCALE_OPTIONS,
   applyShowcaseTimelineScale,
-  observeShowcaseTaskBarLabels,
   renderShowcaseTaskBarColor,
   renderShowcaseTaskBarContent,
   type ShowcaseTimelineScale,
@@ -114,7 +113,7 @@ function createGanttConfig(showCriticalPath: boolean, showBaseline: boolean): Ga
     </div>
   `,
 })
-export class GanttShowcaseGridComponent implements AfterViewInit, OnDestroy {
+export class GanttShowcaseGridComponent implements OnDestroy {
   @ViewChild('grid', { read: ElementRef }) private gridElement?: ElementRef<HTMLRevoGridElement>;
   isDark                = currentTheme().isDark();
   theme                 = this.isDark ? 'darkCompact' : 'compact';
@@ -138,13 +137,6 @@ export class GanttShowcaseGridComponent implements AfterViewInit, OnDestroy {
   readonly baselines    = [...SHOWCASE_BASELINES];
   readonly columns      = [...SHOWCASE_COLUMNS_WITH_COMPLETION];
   readonly hiddenColumns = [...SHOWCASE_DEFAULT_HIDDEN];
-  private disconnectLabels?: () => void;
-
-  ngAfterViewInit(): void {
-    const grid = this.gridElement?.nativeElement;
-    if (grid) this.disconnectLabels = observeShowcaseTaskBarLabels(grid);
-  }
-
   setCriticalPath(value: boolean): void {
     this.showCriticalPath = value;
     this.ganttConfig = createGanttConfig(this.showCriticalPath, this.showBaseline);
@@ -165,6 +157,5 @@ export class GanttShowcaseGridComponent implements AfterViewInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.disconnectTheme();
-    this.disconnectLabels?.();
   }
 }

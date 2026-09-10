@@ -87,21 +87,12 @@ revo-grid.gantt-showcase-grid {
 }
 
 .gantt-showcase-grid {
-  .gantt-bar__label[data-showcase-label-overflow='true'] {
-    display: none;
-  }
-
   .rgRow[row-status] .gantt-showcase-task-name {
     color: var(--revo-row-status-color, color-mix(in srgb, currentColor 62%, transparent));
     opacity: var(--revo-row-status-opacity, 0.78);
     text-decoration: var(--revo-row-status-text-decoration, line-through);
   }
 
-  .gantt-bar--summary {
-    .gantt-bar__label {
-      display: none;
-    }
-  }
 }
 
 .gantt-showcase-status-icon {

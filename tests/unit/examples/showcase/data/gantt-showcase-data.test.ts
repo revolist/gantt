@@ -63,7 +63,13 @@ describe('Gantt showcase data', () => {
     });
   });
 
-  it('keeps default summary bar structure while hiding summary labels', async () => {
+  it('disables built-in labels for all showcase task bars', async () => {
+    const { SHOWCASE_GANTT_CONFIG } = await loadShowcaseData();
+
+    expect(SHOWCASE_GANTT_CONFIG.visuals.showTaskLabels).toBe(false);
+  });
+
+  it('keeps the default task-bar content when adding no assignee badges', async () => {
     const { renderShowcaseTaskBarContent } = await loadShowcaseData();
     const defaultContent = [
       { props: { class: { 'gantt-bar__line': true } } },
@@ -76,7 +82,7 @@ describe('Gantt showcase data', () => {
       h: () => null,
       row: { taskKind: 'summary' },
       defaultContent,
-    })).toEqual(defaultContent.slice(0, 3));
+    })).toEqual(defaultContent);
   });
 
   it('shows a secondary assignee edge behind the primary task-bar badge', async () => {
@@ -146,20 +152,15 @@ describe('Gantt showcase data', () => {
     expect(singleStack.children[0].children).toBe('RP');
   });
 
-  it('omits a task label unless its complete text fits beside its assignees', async () => {
+  it('preserves default task-bar content while adding assignee badges', async () => {
     const { renderShowcaseTaskBarContent } = await loadShowcaseData();
     const h = (tag: string, props: Record<string, unknown>, children?: unknown) => ({ tag, props, children });
     const label = { props: { class: { 'gantt-bar__label': true } } };
     const progress = { props: { class: { 'gantt-bar__progress': true } } };
 
-    const narrow = renderShowcaseTaskBarContent({
+    const rendered = renderShowcaseTaskBarContent({
       h,
-      row: { taskKind: 'task', taskLabel: 'Integration Tests', ganttLayout: { width: 90 } },
-      defaultContent: [progress, label],
-    });
-    const roomy = renderShowcaseTaskBarContent({
-      h,
-      row: { taskKind: 'task', taskLabel: 'Integration Tests', ganttLayout: { width: 150 } },
+      row: { taskKind: 'task' },
       defaultContent: [progress, label],
     });
     const assigned = renderShowcaseTaskBarContent({
@@ -173,9 +174,8 @@ describe('Gantt showcase data', () => {
       defaultContent: [progress, label],
     });
 
-    expect(narrow).toEqual([progress]);
-    expect(roomy).toEqual([progress, label]);
-    expect(assigned).not.toContain(label);
+    expect(rendered).toEqual([progress, label]);
+    expect(assigned).toContain(label);
     expect(assigned.at(-1)).toMatchObject({
       props: { class: { 'gantt-bar__assignee-stack': true } },
     });

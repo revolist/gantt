@@ -30,19 +30,12 @@ test(`${feature.title} mounts without browser errors`, async ({ page }) => {
   const fit = page.getByRole('button', { name: 'Fit' });
   const week = page.getByRole('button', { name: 'Week' });
   const month = page.getByRole('button', { name: 'Month' });
-  const getClippedLabels = () => grid.locator('.gantt-bar__label').evaluateAll((labels) => labels
-    .filter((label) => (label as HTMLElement).scrollWidth > (label as HTMLElement).clientWidth)
-    .map((label) => ({
-      label: label.textContent,
-      available: (label as HTMLElement).clientWidth,
-      required: (label as HTMLElement).scrollWidth,
-    })));
   await expect(criticalPath).toBeVisible();
   await expect(baselines).toBeVisible();
   await expect(fit).toBeVisible();
   await expect(week).toHaveAttribute('aria-pressed', 'true');
   await expect(month).toHaveAttribute('aria-pressed', 'false');
-  await expect.poll(getClippedLabels).toEqual([]);
+  await expect(grid.locator('.gantt-bar__label')).toHaveCount(0);
   await month.click();
   await expect(month).toHaveAttribute('aria-pressed', 'true');
   await expect.poll(async () => grid.evaluate(async (element) => {
@@ -52,7 +45,7 @@ test(`${feature.title} mounts without browser errors`, async ({ page }) => {
     } | undefined;
     return runtime?.getZoomLevel?.()?.id;
   })).toBe('week-month');
-  await expect.poll(getClippedLabels).toEqual([]);
+  await expect(grid.locator('.gantt-bar__label')).toHaveCount(0);
   await week.click();
   await expect.poll(async () => grid.evaluate(async (element) => {
     const plugins = await (element as HTMLRevoGridElement).getPlugins();
@@ -61,12 +54,12 @@ test(`${feature.title} mounts without browser errors`, async ({ page }) => {
     } | undefined;
     return runtime?.getZoomLevel?.()?.id;
   })).toBe('day-week');
-  await expect.poll(getClippedLabels).toEqual([]);
+  await expect(grid.locator('.gantt-bar__label')).toHaveCount(0);
   await fit.click();
   await expect(fit).toHaveAttribute('aria-pressed', 'true');
   await baselines.check();
   await expect(baselines).toBeChecked();
-  await expect.poll(getClippedLabels).toEqual([]);
+  await expect(grid.locator('.gantt-bar__label')).toHaveCount(0);
   const screenshot = await page.locator('body').screenshot({ animations: 'disabled' });
   expect(screenshot.byteLength).toBeGreaterThan(10_000);
   expect(errors).toEqual([]);

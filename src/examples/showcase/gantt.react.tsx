@@ -16,7 +16,6 @@ import {
   SHOWCASE_TASKS,
   SHOWCASE_TIMELINE_SCALE_OPTIONS,
   applyShowcaseTimelineScale,
-  observeShowcaseTaskBarLabels,
   renderShowcaseTaskBarColor,
   renderShowcaseTaskBarContent,
   type ShowcaseTimelineScale,
@@ -52,11 +51,6 @@ function GanttShowcase() {
   } as GanttPluginConfig), [showCriticalPath, showBaseline]);
 
   useEffect(() => observeCurrentTheme(setDarkTheme), []);
-  useEffect(() => {
-    const grid = gridRef.current;
-    return grid ? observeShowcaseTaskBarLabels(grid) : undefined;
-  }, []);
-
   const selectTimelineScale = async (scale: ShowcaseTimelineScale) => {
     if (gridRef.current && await applyShowcaseTimelineScale(gridRef.current, scale)) {
       setTimelineScale(scale);
