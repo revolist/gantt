@@ -1,14 +1,29 @@
 <template>
   <div :class="shellClass">
-    <div class="gantt-showcase-controls">
-      <label class="gantt-showcase-control">
-        <input v-model="showCriticalPath" class="gantt-showcase-control__input" type="checkbox" />
-        <span class="gantt-showcase-control__label">Critical path</span>
-      </label>
-      <label class="gantt-showcase-control">
-        <input v-model="showBaseline" class="gantt-showcase-control__input" type="checkbox" />
-        <span class="gantt-showcase-control__label">Baselines</span>
-      </label>
+    <div class="gantt-showcase-toolbar">
+      <div class="gantt-showcase-controls gantt-showcase-visual-controls">
+        <label class="gantt-showcase-control">
+          <input v-model="showCriticalPath" class="gantt-showcase-control__input" type="checkbox" />
+          <span class="gantt-showcase-control__label">Critical path</span>
+        </label>
+        <label class="gantt-showcase-control">
+          <input v-model="showBaseline" class="gantt-showcase-control__input" type="checkbox" />
+          <span class="gantt-showcase-control__label">Baselines</span>
+        </label>
+      </div>
+      <div class="gantt-showcase-zoom rv-segmented-switch" role="group" aria-label="Timeline scale">
+        <button
+          v-for="option in SHOWCASE_TIMELINE_SCALE_OPTIONS"
+          :key="option.value"
+          class="rv-segmented-switch-item"
+          :class="{ on: timelineScale === option.value }"
+          type="button"
+          :aria-pressed="timelineScale === option.value"
+          @click="setTimelineScale(option.value)"
+        >
+          {{ option.label }}
+        </button>
+      </div>
     </div>
     <RevoGrid
       ref="gridRef"
@@ -36,7 +51,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onBeforeUnmount, onMounted, ref } from 'vue';
+import { computed, nextTick, onBeforeUnmount, onMounted, ref } from 'vue';
 import RevoGrid from '@revolist/vue3-datagrid';
 import { ExportExcelPlugin, RowStatusPlugin } from '@revolist/revogrid-pro';
 import {
@@ -49,8 +64,11 @@ import {
   SHOWCASE_GANTT_CONFIG,
   SHOWCASE_RESOURCES,
   SHOWCASE_TASKS,
+  SHOWCASE_TIMELINE_SCALE_OPTIONS,
+  applyShowcaseTimelineScale,
   renderShowcaseTaskBarColor,
   renderShowcaseTaskBarContent,
+  type ShowcaseTimelineScale,
 } from './data/gantt-project-data';
 import { currentTheme, observeCurrentTheme } from '../../theme';
 
@@ -66,6 +84,7 @@ const columns      = ref([...SHOWCASE_COLUMNS_WITH_COMPLETION]);
 const hiddenColumns = [...SHOWCASE_DEFAULT_HIDDEN];
 const showCriticalPath = ref(Boolean(SHOWCASE_GANTT_CONFIG.visuals.showCriticalPath));
 const showBaseline = ref(false);
+const timelineScale = ref<ShowcaseTimelineScale>('week');
 const isDark = ref(currentTheme().isDark());
 let disconnectTheme: (() => void) | undefined;
 const gridTheme = computed(() => (isDark.value ? 'darkCompact' : 'compact'));
@@ -91,6 +110,14 @@ const ganttConfig = computed(() => ({
 // ── Refs ──────────────────────────────────────────────────────────────────────
 const gridRef    = ref<InstanceType<typeof RevoGrid> | HTMLRevoGridElement | null>(null);
 
+async function setTimelineScale(scale: ShowcaseTimelineScale) {
+  const grid = ((gridRef.value as any)?.$el ?? gridRef.value) as HTMLRevoGridElement | null;
+
+  if (grid && await applyShowcaseTimelineScale(grid, scale)) {
+    timelineScale.value = scale;
+  }
+}
+
 onMounted(async () => {
   disconnectTheme = observeCurrentTheme((value) => {
     isDark.value = value;
@@ -98,9 +125,12 @@ onMounted(async () => {
   const { GanttPlugin } = await import('@revolist/gantt');
 
   plugins.value = [GanttPlugin, ExportExcelPlugin, RowStatusPlugin];
+  await nextTick();
 });
 
-onBeforeUnmount(() => disconnectTheme?.());
+onBeforeUnmount(() => {
+  disconnectTheme?.();
+});
 </script>
 
 <style src="./gantt.scss" lang="scss"></style>

@@ -121,23 +121,11 @@ export const SHOWCASE_COLUMNS_WITH_COMPLETION: ColumnRegular[] = [
   ...showcaseTaskColumns,
 ];
 
-function hasClass(node: any, className: string) {
-  const nodeClass = node?.props?.class;
-
-  if (typeof nodeClass === 'string') {
-    return nodeClass.split(/\s+/).includes(className);
-  }
-
-  return Boolean(nodeClass?.[className]);
-}
-
 export function renderShowcaseTaskBarContent({ h, row, defaultContent }: any) {
-  if (row.taskKind === 'summary' || row.type === 'summary') {
-    return defaultContent.filter((node: any) => !hasClass(node, 'gantt-bar__label'));
-  }
+  const content = defaultContent;
 
   if (!row.assigneeDetails?.length) {
-    return defaultContent;
+    return content;
   }
 
   const primaryAssignee = row.assigneeDetails[0];
@@ -151,7 +139,7 @@ export function renderShowcaseTaskBarContent({ h, row, defaultContent }: any) {
   }, assignee.initials);
 
   return [
-    ...defaultContent,
+    ...content,
     h('span', {
       class: {
         'gantt-bar__assignee-stack': true,

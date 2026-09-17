@@ -27,12 +27,27 @@ $icon-size: 16px;
   min-height: 0;
 }
 
-.gantt-showcase-controls {
+.gantt-showcase-toolbar {
   display: flex;
   flex: 0 0 auto;
+  justify-content: space-between;
   gap: 8px;
   align-items: center;
   padding: 0 0 8px;
+}
+
+.gantt-showcase-controls {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.gantt-showcase-zoom {
+  flex: 0 0 auto;
+}
+
+.gantt-showcase-zoom .rv-segmented-switch-item {
+  min-width: 54px;
 }
 
 .gantt-showcase-control {
@@ -78,11 +93,6 @@ revo-grid.gantt-showcase-grid {
     text-decoration: var(--revo-row-status-text-decoration, line-through);
   }
 
-  .gantt-bar--summary {
-    .gantt-bar__label {
-      display: none;
-    }
-  }
 }
 
 .gantt-showcase-status-icon {

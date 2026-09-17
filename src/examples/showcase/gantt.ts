@@ -15,8 +15,11 @@ import {
   SHOWCASE_GANTT_CONFIG,
   SHOWCASE_RESOURCES,
   SHOWCASE_TASKS,
+  SHOWCASE_TIMELINE_SCALE_OPTIONS,
+  applyShowcaseTimelineScale,
   renderShowcaseTaskBarColor,
   renderShowcaseTaskBarContent,
+  type ShowcaseTimelineScale,
 } from './data/gantt-project-data';
 import { currentTheme, observeCurrentTheme } from '../../theme';
 
@@ -32,9 +35,16 @@ export function load(parentSelector: string): (() => void) | undefined {
   parent.appendChild(container);
 
   const grid = document.createElement('revo-grid') as HTMLRevoGridElement;
+  const toolbar = document.createElement('div');
+  toolbar.className = 'gantt-showcase-toolbar';
   const controls = document.createElement('div');
-  controls.className = 'gantt-showcase-controls';
-  container.appendChild(controls);
+  controls.className = 'gantt-showcase-controls gantt-showcase-visual-controls';
+  const zoomControls = document.createElement('div');
+  zoomControls.className = 'gantt-showcase-zoom rv-segmented-switch';
+  zoomControls.setAttribute('role', 'group');
+  zoomControls.setAttribute('aria-label', 'Timeline scale');
+  toolbar.append(controls, zoomControls);
+  container.appendChild(toolbar);
 
   grid.theme          = darkTheme ? 'darkCompact' : 'compact';
   grid.readonly       = false;
@@ -60,6 +70,7 @@ export function load(parentSelector: string): (() => void) | undefined {
   });
   let showCriticalPath = Boolean(SHOWCASE_GANTT_CONFIG.visuals.showCriticalPath);
   let showBaseline = false;
+  let timelineScale: ShowcaseTimelineScale = 'week';
 
   function applyGanttConfig() {
     grid.gantt = {
@@ -103,6 +114,27 @@ export function load(parentSelector: string): (() => void) | undefined {
       showBaseline = value;
     }),
   );
+
+  const zoomButtons = SHOWCASE_TIMELINE_SCALE_OPTIONS.map((option) => {
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'rv-segmented-switch-item';
+    button.textContent = option.label;
+    const sync = () => {
+      const active = timelineScale === option.value;
+      button.classList.toggle('on', active);
+      button.setAttribute('aria-pressed', String(active));
+    };
+    button.addEventListener('click', async () => {
+      if (await applyShowcaseTimelineScale(grid, option.value)) {
+        timelineScale = option.value;
+        zoomButtons.forEach((item) => item.sync());
+      }
+    });
+    sync();
+    return { button, sync };
+  });
+  zoomControls.append(...zoomButtons.map(({ button }) => button));
 
   applyGanttConfig();
   container.appendChild(grid);

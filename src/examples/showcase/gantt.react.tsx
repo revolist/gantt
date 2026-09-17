@@ -14,8 +14,11 @@ import {
   SHOWCASE_GANTT_CONFIG,
   SHOWCASE_RESOURCES,
   SHOWCASE_TASKS,
+  SHOWCASE_TIMELINE_SCALE_OPTIONS,
+  applyShowcaseTimelineScale,
   renderShowcaseTaskBarColor,
   renderShowcaseTaskBarContent,
+  type ShowcaseTimelineScale,
 } from './data/gantt-project-data';
 import type { GanttPluginConfig } from '@revolist/gantt';
 import { currentTheme, observeCurrentTheme } from '../../theme';
@@ -35,6 +38,7 @@ function GanttShowcase() {
   const gridRef = useRef<HTMLRevoGridElement>(null);
   const [showCriticalPath, setShowCriticalPath] = useState(Boolean(SHOWCASE_GANTT_CONFIG.visuals.showCriticalPath));
   const [showBaseline, setShowBaseline] = useState(false);
+  const [timelineScale, setTimelineScale] = useState<ShowcaseTimelineScale>('week');
   const ganttConfig: GanttPluginConfig = useMemo(() => ({
     ...SHOWCASE_GANTT_CONFIG,
     visuals: {
@@ -47,28 +51,48 @@ function GanttShowcase() {
   } as GanttPluginConfig), [showCriticalPath, showBaseline]);
 
   useEffect(() => observeCurrentTheme(setDarkTheme), []);
+  const selectTimelineScale = async (scale: ShowcaseTimelineScale) => {
+    if (gridRef.current && await applyShowcaseTimelineScale(gridRef.current, scale)) {
+      setTimelineScale(scale);
+    }
+  };
 
   return (
     <div className={`gantt-showcase-shell grow h-full ${darkTheme ? 'gantt-showcase-shell--dark' : 'gantt-showcase-shell--light'}`}>
-      <div className="gantt-showcase-controls">
-        <label className="gantt-showcase-control">
-          <input
-            className="gantt-showcase-control__input"
-            type="checkbox"
-            checked={showCriticalPath}
-            onChange={(event) => setShowCriticalPath(event.currentTarget.checked)}
-          />
-          <span className="gantt-showcase-control__label">Critical path</span>
-        </label>
-        <label className="gantt-showcase-control">
-          <input
-            className="gantt-showcase-control__input"
-            type="checkbox"
-            checked={showBaseline}
-            onChange={(event) => setShowBaseline(event.currentTarget.checked)}
-          />
-          <span className="gantt-showcase-control__label">Baselines</span>
-        </label>
+      <div className="gantt-showcase-toolbar">
+        <div className="gantt-showcase-controls gantt-showcase-visual-controls">
+          <label className="gantt-showcase-control">
+            <input
+              className="gantt-showcase-control__input"
+              type="checkbox"
+              checked={showCriticalPath}
+              onChange={(event) => setShowCriticalPath(event.currentTarget.checked)}
+            />
+            <span className="gantt-showcase-control__label">Critical path</span>
+          </label>
+          <label className="gantt-showcase-control">
+            <input
+              className="gantt-showcase-control__input"
+              type="checkbox"
+              checked={showBaseline}
+              onChange={(event) => setShowBaseline(event.currentTarget.checked)}
+            />
+            <span className="gantt-showcase-control__label">Baselines</span>
+          </label>
+        </div>
+        <div className="gantt-showcase-zoom rv-segmented-switch" role="group" aria-label="Timeline scale">
+          {SHOWCASE_TIMELINE_SCALE_OPTIONS.map((option) => (
+            <button
+              key={option.value}
+              className={`rv-segmented-switch-item ${timelineScale === option.value ? 'on' : ''}`}
+              type="button"
+              aria-pressed={timelineScale === option.value}
+              onClick={() => void selectTimelineScale(option.value)}
+            >
+              {option.label}
+            </button>
+          ))}
+        </div>
       </div>
       <RevoGrid
         ref={gridRef}
