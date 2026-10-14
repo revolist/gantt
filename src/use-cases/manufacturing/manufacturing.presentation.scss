@@ -210,7 +210,7 @@
     bottom: 5px;
     left: 91px;
     gap: 7px;
-    color: #5e7b87;
+    color: #9bb5bf;
     font-family: var(--ig-mono);
     font-size: 8px;
     letter-spacing: 0.055em;
@@ -329,7 +329,7 @@
   }
 
   .industry-gantt-grid,
-  revo-grid {
+  revo-grid.industry-gantt-grid[theme] {
     --revo-grid-primary: #16839d;
     --revo-grid-primary-transparent: rgba(22, 131, 157, 0.12);
     --revo-grid-background: #fff;
@@ -440,7 +440,7 @@
     }
 
     .industry-gantt-header::after {
-      content: 'CELL NETWORK / LIVE';
+      content: none;
     }
   }
 

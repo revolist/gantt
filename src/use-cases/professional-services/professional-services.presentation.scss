@@ -72,7 +72,7 @@
     font-size: 10px;
     letter-spacing: .015em;
   }
-  .industry-gantt-toggle[aria-pressed='true'] { border-color: #287f7b; background: #287f7b; box-shadow: 0 5px 14px rgba(30, 112, 108, .18); }
+  .industry-gantt-toggle[aria-pressed='true'] { border-color: #287f7b; color: #fff; background: #287f7b; box-shadow: 0 5px 14px rgba(30, 112, 108, .18); }
 
   .industry-gantt-grid {
     width: calc(100% - 20px);
@@ -221,6 +221,13 @@
   background: #18211f;
 
   .industry-gantt-header { background: linear-gradient(118deg, #202b28, #1a2523); }
+  .industry-gantt-product { color: #d3bea0; }
+  .industry-gantt-subtitle, .industry-gantt-sync { color: #bdc8c2; }
+  .industry-gantt-metric__value { color: #a6e5d8; }
+  .industry-gantt-metric__label { color: #bdc8c2; }
+  .industry-gantt-toolbar__label, .industry-gantt-toolbar__legend { color: #bdc8c2; }
+  .industry-gantt-toggle { border-color: #50655d; color: #e3eeea; background: #293b34; }
+  .industry-gantt-toggle[aria-pressed='true'] { color: #fff; background: #21665f; }
   .industry-gantt-metric, .industry-gantt-toolbar, .industry-gantt-grid { background: #202a28; }
   .industry-gantt-grid {
     border-color: #38413f;
@@ -238,6 +245,7 @@
     --gantt-text-muted: #9aa6a2;
     --gantt-non-working-bg: rgba(255, 255, 255, .035);
   }
+  .industry-gantt-grid revogr-header .rgHeaderCell { color: #c7d0cd; }
   .industry-gantt-grid revogr-header .header-rgRow,
   .industry-gantt-grid .gantt-header-cell--top { border-color: #3a4542; background: #252f2d; }
   .industry-gantt-grid .gantt-header-cell--leaf { color: #aab4b1; background: #202a28; }

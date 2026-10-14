@@ -505,12 +505,38 @@
   .industry-gantt-metric:first-child { background: linear-gradient(140deg, #352945, #2b2532); }
   .industry-gantt-metric__value { color: #e6dce9; }
   .industry-gantt-metric__label { color: #aaa3af; }
+  .industry-gantt-metric:first-child .industry-gantt-metric__value,
+  .industry-gantt-metric--warning .industry-gantt-metric__value { color: #c8acff; }
+  .industry-gantt-metric--danger .industry-gantt-metric__value { color: #ff9fce; }
   .industry-gantt-toolbar { border-bottom-color: #3b3641; background: #211e24; }
   .industry-gantt-toolbar__label { color: #ddd5e2; }
   .industry-gantt-toolbar__legend { color: #e1a7b5; }
   .industry-gantt-toggle { border-color: #48404f; color: #d1c9d6; background: #29242d; }
   .industry-gantt-grid,
-  revo-grid { border-color: #3e3944; background: #201d23; }
+  revo-grid {
+    border-color: #3e3944;
+    background: #201d23;
+    --revo-grid-background: #201d23;
+    --revo-grid-text: #e6dce9;
+    --revo-grid-header-bg: #29242d;
+    --revo-grid-header-color: #e6dce9;
+    --revo-grid-border: #48404f;
+    --revo-grid-cell-border: #3e3944;
+    --revo-grid-cell-vertical-border: #3e3944;
+    --revo-grid-row-hover: #302936;
+    --gantt-header-bg: #29242d;
+    --gantt-header-band-bg: #29242d;
+    --gantt-header-tick-bg: #201d23;
+    --gantt-text-strong: #e6dce9;
+    --gantt-text-muted: #bcb3c4;
+    --gantt-border-color-soft: #3e3944;
+    --gantt-border-color-strong: #48404f;
+  }
+  .gantt-header-flag-cap__label { color: #fff; }
+  .internal-owner { color: #e6dce9; }
+  .internal-readiness__label { color: #bcb3c4; }
+  .internal-readiness--blocked .internal-readiness__label { color: #ff9fce; }
+  .internal-readiness--done .internal-readiness__label { color: #c8acff; }
 }
 
 @media (max-width: 900px) {

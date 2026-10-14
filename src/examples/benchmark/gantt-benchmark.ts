@@ -124,7 +124,9 @@ function createBenchmarkController(
   grid.plugins = [GanttPlugin];
   grid.columns = [createDefaultTaskTableColumn('name')];
   stage.replaceChildren(grid);
+  const shell = stage.closest<HTMLElement>('.gantt-benchmark');
   const disconnectTheme = observeCurrentTheme((isDark) => {
+    if (shell) shell.dataset.theme = isDark ? 'dark' : 'light';
     grid.theme = isDark ? 'darkCompact' : 'compact';
   });
 

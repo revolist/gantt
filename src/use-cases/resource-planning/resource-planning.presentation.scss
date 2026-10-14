@@ -480,12 +480,15 @@
   .industry-gantt-mark { border-color: #344d3c; border-top-color: #72a483; border-right-color: #547d62; color: #cfe2d2; background: #202c23; }
   .industry-gantt-mark::after { border-color: #202c23; }
   .industry-gantt-title { color: #edf3ed; }
+  .industry-gantt-product { color: #b4cfbd; }
   .industry-gantt-subtitle, .industry-gantt-sync { color: #9aaa9d; }
   .industry-gantt-metrics { border-color: #415244; background: rgba(30, 42, 33, .86); }
   .industry-gantt-metrics::before { color: #a7b5aa; background: #1c281f; }
   .industry-gantt-metric { border-left-color: #405044; }
   .industry-gantt-metric__label { color: #9ba99e; }
   .industry-gantt-metric__value { color: #c9ded0; }
+  .industry-gantt-metric--warning .industry-gantt-metric__value { color: #e8c28f; }
+  .industry-gantt-metric--positive .industry-gantt-metric__value { color: #9ed8b2; }
   .industry-gantt-toolbar { border-bottom-color: #3b4b3f; background: #1b261e; }
   .industry-gantt-toolbar__label { color: #c3d3c7; }
   .industry-gantt-toolbar__legend { color: #c0a87e; }

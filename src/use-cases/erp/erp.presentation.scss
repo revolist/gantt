@@ -309,3 +309,19 @@
     grid-template-columns: 1fr;
   }
 }
+
+.industry-gantt-shell--erp.industry-gantt-shell--dark {
+  .industry-gantt-grid {
+    --revo-grid-text: #e1e8ef;
+    --revo-grid-background: #141b23;
+    --revo-grid-header-bg: #1c2732;
+    --revo-grid-header-color: #e1e8ef;
+    --revo-grid-border: #3d4a58;
+    --revo-grid-cell-border: #33404d;
+    --revo-grid-cell-vertical-border: #33404d;
+    --revo-grid-row-hover: #22303e;
+    --revo-grid-row-headers-bg: #1c2732;
+    --revo-grid-row-headers-color: #b8c7d6;
+  }
+  .erp-work-order { color: #b8cfe2; }
+}
