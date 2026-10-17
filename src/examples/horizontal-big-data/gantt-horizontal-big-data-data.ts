@@ -1,9 +1,8 @@
+import type { CalendarEntity, ISODateString } from '@revolist/dates';
 import type {
-  CalendarEntity,
   DependencyEntity,
   GanttPluginConfig,
   GanttTaskSourceRow,
-  ISODateString,
 } from '@revolist/gantt';
 
 export const GANTT_HORIZONTAL_BIG_DATA_TASK_COUNT = 100;
