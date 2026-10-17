@@ -1,5 +1,6 @@
-import type { CalendarEntity, ISODateString } from '@revolist/revogrid-pro';
 import type {
+  CalendarEntity,
+  ISODateString,
   DependencyEntity,
   GanttPluginConfig,
   GanttTaskSourceRow,
