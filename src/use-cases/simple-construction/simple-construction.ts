@@ -1,3 +1,5 @@
+import { controlAttributes, createControl } from '@revolist/ui';
+import '@revolist/ui/styles.css';
 import { currentTheme } from '../../theme';
 import { defineCustomElements } from '@revolist/revogrid/loader';
 import { createConstructionRows, rootName } from './shared/data';
@@ -11,10 +13,10 @@ import './simple-construction.scss';
 defineCustomElements();
 
 function button(label: string, onClick: () => void, kind = 'tab') {
-  const element = document.createElement('button');
+  const element = createControl(document, 'button', { type: 'button' });
   element.type = 'button';
   element.textContent = label;
-  element.className = `construction-fabrication__button construction-fabrication__button--${kind}`;
+  element.className = controlAttributes('button', { class: `construction-fabrication__button construction-fabrication__button--${kind}` }).class;
   element.addEventListener('click', onClick);
   return element;
 }
@@ -42,8 +44,8 @@ export function load(parentSelector: string): (() => void) | undefined {
   filterTags.setAttribute('aria-label', 'Active filters');
   const dates = document.createElement('div');
   dates.className = 'construction-fabrication__command-actions';
-  const start = document.createElement('input');
-  const finish = document.createElement('input');
+  const start = createControl(document, 'input');
+  const finish = createControl(document, 'input');
   for (const input of [start, finish]) {
     input.type = 'date';
     input.className = 'construction-fabrication__select';
@@ -102,16 +104,16 @@ export function load(parentSelector: string): (() => void) | undefined {
     filterTags.replaceChildren();
     filterTags.hidden = !state.rootId;
     if (state.rootId) {
-      const projectTag = document.createElement('button');
-      projectTag.className = 'construction-simple__filter-tag';
+      const projectTag = createControl(document, 'button', { type: 'button' });
+      projectTag.className = controlAttributes('button', { class: 'construction-simple__filter-tag' }).class;
       projectTag.type = 'button';
       projectTag.title = 'Clear project filter';
       projectTag.textContent = `Project: ${rootName(rows, state.rootId)} ×`;
       projectTag.addEventListener('click', clearProjectFilter);
       filterTags.append(projectTag);
       if (state.view === 'lookahead') {
-        const periodTag = document.createElement('button');
-        periodTag.className = 'construction-simple__filter-tag';
+        const periodTag = createControl(document, 'button', { type: 'button' });
+        periodTag.className = controlAttributes('button', { class: 'construction-simple__filter-tag' }).class;
         periodTag.type = 'button';
         periodTag.title = 'Clear date range filter';
         periodTag.textContent = `Date range: ${state.startDate} – ${state.endDate} ×`;
@@ -121,7 +123,7 @@ export function load(parentSelector: string): (() => void) | undefined {
     }
     dates.hidden = state.view !== 'lookahead';
     tabs.hidden = !state.rootId;
-    lookAhead.setAttribute('aria-pressed', String(state.view === 'lookahead'));
+    lookAhead.classList.add('rv-choice-chip'); lookAhead.setAttribute('aria-pressed', String(state.view === 'lookahead'));
   }
 
   grid.addEventListener('tree-state-changed', (event: Event) => {

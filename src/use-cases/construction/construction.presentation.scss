@@ -231,27 +231,8 @@
 }
 
 .industry-gantt-shell--construction .industry-gantt-toggle {
-  min-height: 29px;
-  padding: 4px 12px;
-  border: 1px solid #d9d0c0;
-  border-radius: 1px;
-  color: #fffaf0;
-  background: #343b40;
-  box-shadow: none;
-  font-size: 10px;
   letter-spacing: 0.025em;
   text-transform: uppercase;
-}
-
-.industry-gantt-shell--construction .industry-gantt-toggle[aria-pressed='true'] {
-  border-color: #f26722;
-  color: #1f2529;
-  background: #f26722;
-  box-shadow: inset 0 -3px 0 rgb(31 37 41 / 22%);
-}
-
-.industry-gantt-shell--construction .industry-gantt-toggle:focus-visible {
-  outline-color: #fffaf0;
 }
 
 .industry-gantt-shell--construction .industry-gantt-grid,

@@ -1,3 +1,5 @@
+import { controlAttributes, createControl } from '@revolist/ui';
+import '@revolist/ui/styles.css';
 // src/examples/showcase/gantt.ts
 import './gantt.scss';
 import { defineCustomElements } from '@revolist/revogrid/loader';
@@ -88,9 +90,9 @@ export function load(parentSelector: string): (() => void) | undefined {
   function createToggle(label: string, checked: () => boolean, onChange: (value: boolean) => void) {
     const control = document.createElement('label');
     control.className = 'gantt-showcase-control';
-    const input = document.createElement('input');
+    const input = createControl(document, 'input', { type: 'checkbox' });
     input.type = 'checkbox';
-    input.className = 'gantt-showcase-control__input';
+    input.className = controlAttributes('input', { type: input.type, class: 'gantt-showcase-control__input' }).class;
     const text = document.createElement('span');
     text.className = 'gantt-showcase-control__label';
     text.textContent = label;
@@ -116,14 +118,14 @@ export function load(parentSelector: string): (() => void) | undefined {
   );
 
   const zoomButtons = SHOWCASE_TIMELINE_SCALE_OPTIONS.map((option) => {
-    const button = document.createElement('button');
+    const button = createControl(document, 'button', { type: 'button' });
     button.type = 'button';
-    button.className = 'rv-segmented-switch-item';
+    button.className = controlAttributes('button', { class: 'rv-segmented-switch-item' }).class;
     button.textContent = option.label;
     const sync = () => {
       const active = timelineScale === option.value;
       button.classList.toggle('on', active);
-      button.setAttribute('aria-pressed', String(active));
+      button.classList.add('rv-choice-chip'); button.setAttribute('aria-pressed', String(active));
     };
     button.addEventListener('click', async () => {
       if (await applyShowcaseTimelineScale(grid, option.value)) {

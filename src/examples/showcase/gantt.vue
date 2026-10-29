@@ -3,19 +3,19 @@
     <div class="gantt-showcase-toolbar">
       <div class="gantt-showcase-controls gantt-showcase-visual-controls">
         <label class="gantt-showcase-control">
-          <input v-model="showCriticalPath" class="gantt-showcase-control__input" type="checkbox" />
+          <input v-rv-control v-model="showCriticalPath" class="gantt-showcase-control__input" type="checkbox" />
           <span class="gantt-showcase-control__label">Critical path</span>
         </label>
         <label class="gantt-showcase-control">
-          <input v-model="showBaseline" class="gantt-showcase-control__input" type="checkbox" />
+          <input v-rv-control v-model="showBaseline" class="gantt-showcase-control__input" type="checkbox" />
           <span class="gantt-showcase-control__label">Baselines</span>
         </label>
       </div>
       <div class="gantt-showcase-zoom rv-segmented-switch" role="group" aria-label="Timeline scale">
-        <button
+        <button v-rv-control
           v-for="option in SHOWCASE_TIMELINE_SCALE_OPTIONS"
           :key="option.value"
-          class="rv-segmented-switch-item"
+          class="rv-choice-chip rv-segmented-switch-item"
           :class="{ on: timelineScale === option.value }"
           type="button"
           :aria-pressed="timelineScale === option.value"
@@ -51,6 +51,8 @@
 </template>
 
 <script setup lang="ts">
+import { vRvControl } from '@revolist/ui/vue-control';
+import '@revolist/ui/styles.css';
 import { computed, nextTick, onBeforeUnmount, onMounted, ref } from 'vue';
 import RevoGrid from '@revolist/vue3-datagrid';
 import { ExportExcelPlugin, RowStatusPlugin } from '@revolist/revogrid-pro';

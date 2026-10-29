@@ -1,3 +1,5 @@
+import '@revolist/ui/styles.css';
+import { ButtonControl as UiButton } from '@revolist/ui/react-control';
 import '../shared/industry-use-case.scss';
 import './internal-tools.presentation.scss';
 import React, { useEffect, useMemo, useState } from 'react';
@@ -57,8 +59,8 @@ export default function InternalToolsGanttDemo() {
       <div className="industry-gantt-toolbar">
         <span className="industry-gantt-toolbar__label">{definition.scheduleLabel}</span>
         <span className="industry-gantt-toolbar__legend">{definition.riskLegendLabel}</span>
-        <button type="button" className="industry-gantt-toggle" aria-pressed={showBaseline} onClick={() => setShowBaseline((value) => !value)}>Baseline</button>
-        <button type="button" className="industry-gantt-toggle" aria-pressed={showCriticalPath} onClick={() => setShowCriticalPath((value) => !value)}>Critical path</button>
+        <UiButton type="button" className={"rv-choice-chip " + ("industry-gantt-toggle")} aria-pressed={showBaseline} onClick={() => setShowBaseline((value) => !value)}>Baseline</UiButton>
+        <UiButton type="button" className={"rv-choice-chip " + ("industry-gantt-toggle")} aria-pressed={showCriticalPath} onClick={() => setShowCriticalPath((value) => !value)}>Critical path</UiButton>
       </div>
       <EnterpriseRevoGrid
         className={industryGridClass(definition)}

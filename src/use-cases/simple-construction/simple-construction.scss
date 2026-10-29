@@ -53,24 +53,7 @@
 
 .construction-fabrication__control-group { font-size: 11px; }
 
-.construction-fabrication__select,
-.construction-fabrication__button {
-  height: 26px;
-  padding: 0 8px;
-  border: 1px solid #bfdbfe;
-  border-radius: 5px;
-  color: var(--cf-ink);
-  background: var(--cf-surface-raised);
-  font: inherit;
-  font-size: 12px;
-}
-
 .construction-fabrication__select { width: 120px; }
-
-.construction-fabrication__button {
-  cursor: pointer;
-  font-weight: 400;
-}
 
 .construction-fabrication__button--lookahead[aria-pressed='true'] {
   border-color: var(--cf-accent);
@@ -96,11 +79,6 @@
     min-width: 88px;
   }
 
-  &__lookahead-button:disabled {
-    cursor: not-allowed;
-    opacity: .48;
-  }
-
   &__filter-tags {
     align-items: center;
     display: flex;
@@ -109,29 +87,13 @@
   }
 
   &__filter-tag {
-    background: #eff6ff;
-    border: 1px solid #bfdbfe;
-    border-radius: 999px;
-    color: #1e40af;
-    cursor: pointer;
-    font-family: inherit;
-    font-size: 11px;
-    font-weight: 400;
-    line-height: 1;
-    padding: 4px 8px;
     white-space: nowrap;
   }
 
   &__project-link {
     align-items: center;
-    background: transparent;
-    border: 0;
-    color: var(--cf-accent);
-    cursor: pointer;
     display: inline-flex;
-    font: inherit;
     gap: 8px;
-    padding: 0;
   }
 
   &__project-link:hover { text-decoration: underline; }

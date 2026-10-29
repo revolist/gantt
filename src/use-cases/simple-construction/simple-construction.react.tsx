@@ -1,3 +1,5 @@
+import '@revolist/ui/styles.css';
+import { ButtonControl as UiButton, Input as UiInput } from '@revolist/ui/react-control';
 import React, { useMemo, useRef, useState } from 'react';
 import { RevoGrid } from '@revolist/react-datagrid';
 import { createConstructionRows, rootName } from './shared/data';
@@ -58,19 +60,19 @@ export default function SimpleConstructionGantt() {
     <main className="construction-fabrication__main">
       <div className="construction-fabrication__command-deck">
         {rootId && <div className="construction-simple__filter-tags" aria-label="Active filters">
-          <button className="construction-simple__filter-tag" type="button" title="Clear project filter" onClick={clearProjectFilter}>
+          <UiButton className="construction-simple__filter-tag" type="button" title="Clear project filter" onClick={clearProjectFilter}>
             Project: {rootName(rows, rootId)} ×
-          </button>
-          {view === 'lookahead' && <button className="construction-simple__filter-tag" type="button" title="Clear date range filter" onClick={clearDateRangeFilter}>
+          </UiButton>
+          {view === 'lookahead' && <UiButton className="construction-simple__filter-tag" type="button" title="Clear date range filter" onClick={clearDateRangeFilter}>
             Date range: {startDate} – {endDate} ×
-          </button>}
+          </UiButton>}
         </div>}
         {rootId && <div className="construction-simple__lookahead-action">
-          <button className="construction-fabrication__button construction-simple__lookahead-button" type="button" aria-pressed={view === 'lookahead'} onClick={showLookAhead}>Look-Ahead</button>
+          <UiButton className={"rv-choice-chip " + ("construction-fabrication__button construction-simple__lookahead-button")} type="button" aria-pressed={view === 'lookahead'} onClick={showLookAhead}>Look-Ahead</UiButton>
         </div>}
         {view === 'lookahead' && <div className="construction-fabrication__command-actions">
-          <label className="construction-fabrication__control-group">Start <input className="construction-fabrication__select" type="date" value={startDate} onChange={(event) => setStartDate(event.target.value)} /></label>
-          <label className="construction-fabrication__control-group">Finish <input className="construction-fabrication__select" type="date" value={endDate} onChange={(event) => setEndDate(event.target.value)} /></label>
+          <label className="construction-fabrication__control-group">Start <UiInput className="construction-fabrication__select" type="date" value={startDate} onChange={(event) => setStartDate(event.target.value)} /></label>
+          <label className="construction-fabrication__control-group">Finish <UiInput className="construction-fabrication__select" type="date" value={endDate} onChange={(event) => setEndDate(event.target.value)} /></label>
         </div>}
       </div>
       <RevoGrid

@@ -177,23 +177,8 @@
 }
 
 .industry-gantt-shell--erp .industry-gantt-toggle {
-  min-height: 27px;
-  padding: 4px 10px;
-  border-color: #aab5c0;
-  border-radius: 2px;
-  color: #2a394a;
-  background: #f8fafb;
-  box-shadow: inset 0 1px #fff;
-  font-size: 9px;
   letter-spacing: .03em;
   text-transform: uppercase;
-}
-
-.industry-gantt-shell--erp .industry-gantt-toggle[aria-pressed='true'] {
-  border-color: #1d6f8b;
-  color: #fff;
-  background: #1f7896;
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .12);
 }
 
 .industry-gantt-shell--erp .industry-gantt-grid revogr-data .rgCell.erp-grid-cell {
@@ -295,13 +280,6 @@
   border-color: #744b48;
   color: #f2b0aa;
   background: #392725;
-}
-
-.industry-gantt-shell--erp.industry-gantt-shell--dark .industry-gantt-toggle {
-  border-color: #526170;
-  color: #d9e0e7;
-  background: #1b2631;
-  box-shadow: none;
 }
 
 @media (max-width: 900px) {

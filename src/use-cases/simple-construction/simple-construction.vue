@@ -3,15 +3,15 @@
     <main class="construction-fabrication__main">
       <div class="construction-fabrication__command-deck">
         <div v-if="rootId" class="construction-simple__filter-tags" aria-label="Active filters">
-          <button class="construction-simple__filter-tag" type="button" title="Clear project filter" @click="clearProjectFilter">Project: {{ selectedName }} ×</button>
-          <button v-if="view === 'lookahead'" class="construction-simple__filter-tag" type="button" title="Clear date range filter" @click="clearDateRangeFilter">Date range: {{ startDate }} – {{ endDate }} ×</button>
+          <button v-rv-control class="construction-simple__filter-tag" type="button" title="Clear project filter" @click="clearProjectFilter">Project: {{ selectedName }} ×</button>
+          <button v-rv-control v-if="view === 'lookahead'" class="construction-simple__filter-tag" type="button" title="Clear date range filter" @click="clearDateRangeFilter">Date range: {{ startDate }} – {{ endDate }} ×</button>
         </div>
         <div v-if="rootId" class="construction-simple__lookahead-action">
-          <button class="construction-fabrication__button construction-simple__lookahead-button" type="button" :aria-pressed="view === 'lookahead'" @click="showLookAhead">Look-Ahead</button>
+          <button v-rv-control class="rv-choice-chip construction-fabrication__button construction-simple__lookahead-button" type="button" :aria-pressed="view === 'lookahead'" @click="showLookAhead">Look-Ahead</button>
         </div>
         <div v-if="view === 'lookahead'" class="construction-fabrication__command-actions">
-          <label class="construction-fabrication__control-group">Start <input v-model="startDate" class="construction-fabrication__select" type="date"></label>
-          <label class="construction-fabrication__control-group">Finish <input v-model="endDate" class="construction-fabrication__select" type="date"></label>
+          <label class="construction-fabrication__control-group">Start <input v-rv-control v-model="startDate" class="construction-fabrication__select" type="date"></label>
+          <label class="construction-fabrication__control-group">Finish <input v-rv-control v-model="endDate" class="construction-fabrication__select" type="date"></label>
         </div>
       </div>
 
@@ -46,6 +46,8 @@
 </template>
 
 <script setup lang="ts">
+import { vRvControl } from '@revolist/ui/vue-control';
+import '@revolist/ui/styles.css';
 import { computed, ref } from 'vue';
 import RevoGrid from '@revolist/vue3-datagrid';
 import { createConstructionRows, rootName } from './shared/data';

@@ -1,3 +1,5 @@
+import '@revolist/ui/styles.css';
+import { UiControlDirective } from '@revolist/ui/angular-control';
 import { Component, NO_ERRORS_SCHEMA, ViewEncapsulation } from '@angular/core';
 import type { OnDestroy } from '@angular/core';
 import { RevoGrid } from '@revolist/angular-datagrid';
@@ -15,7 +17,7 @@ import {
 @Component({
   selector: 'erp-gantt-grid',
   standalone: true,
-  imports: [RevoGrid],
+  imports: [UiControlDirective, RevoGrid],
   schemas: [NO_ERRORS_SCHEMA],
   encapsulation: ViewEncapsulation.None,
   styleUrls: ['../shared/industry-use-case.scss', './erp.presentation.scss'],
@@ -44,8 +46,8 @@ import {
       <div class="industry-gantt-toolbar">
         <span class="industry-gantt-toolbar__label">{{ definition.scheduleLabel }}</span>
         <span class="industry-gantt-toolbar__legend">{{ definition.riskLegendLabel }}</span>
-        <button type="button" class="industry-gantt-toggle" [attr.aria-pressed]="showBaseline" (click)="toggleBaseline()">Baseline</button>
-        <button type="button" class="industry-gantt-toggle" [attr.aria-pressed]="showCriticalPath" (click)="toggleCriticalPath()">Critical path</button>
+        <button rvControl type="button" class="rv-choice-chip industry-gantt-toggle" [attr.aria-pressed]="showBaseline" (click)="toggleBaseline()">Baseline</button>
+        <button rvControl type="button" class="rv-choice-chip industry-gantt-toggle" [attr.aria-pressed]="showCriticalPath" (click)="toggleCriticalPath()">Critical path</button>
       </div>
       <revo-grid
         [class]="gridClass"

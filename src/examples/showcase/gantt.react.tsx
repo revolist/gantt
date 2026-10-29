@@ -1,3 +1,5 @@
+import '@revolist/ui/styles.css';
+import { ButtonControl as UiButton, Input as UiInput } from '@revolist/ui/react-control';
 // src/examples/showcase/gantt.react.tsx
 import './gantt.scss';
 import React, { useEffect, useMemo, useRef, useState } from 'react';
@@ -62,7 +64,7 @@ function GanttShowcase() {
       <div className="gantt-showcase-toolbar">
         <div className="gantt-showcase-controls gantt-showcase-visual-controls">
           <label className="gantt-showcase-control">
-            <input
+            <UiInput
               className="gantt-showcase-control__input"
               type="checkbox"
               checked={showCriticalPath}
@@ -71,7 +73,7 @@ function GanttShowcase() {
             <span className="gantt-showcase-control__label">Critical path</span>
           </label>
           <label className="gantt-showcase-control">
-            <input
+            <UiInput
               className="gantt-showcase-control__input"
               type="checkbox"
               checked={showBaseline}
@@ -82,15 +84,15 @@ function GanttShowcase() {
         </div>
         <div className="gantt-showcase-zoom rv-segmented-switch" role="group" aria-label="Timeline scale">
           {SHOWCASE_TIMELINE_SCALE_OPTIONS.map((option) => (
-            <button
+            <UiButton
               key={option.value}
-              className={`rv-segmented-switch-item ${timelineScale === option.value ? 'on' : ''}`}
+              className={"rv-choice-chip " + (`rv-segmented-switch-item ${timelineScale === option.value ? 'on' : ''}`)}
               type="button"
               aria-pressed={timelineScale === option.value}
               onClick={() => void selectTimelineScale(option.value)}
             >
               {option.label}
-            </button>
+            </UiButton>
           ))}
         </div>
       </div>
