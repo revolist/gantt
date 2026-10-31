@@ -1,12 +1,12 @@
 import type { PluginProviders } from '@revolist/revogrid';
-import { GanttPanelResizePlugin, GanttPlugin } from '@revolist/gantt';
-import { ExportExcelPlugin, RowStatusPlugin } from '@revolist/revogrid-pro';
+import { GanttPlugin } from '@revolist/gantt';
+import { ExportExcelPlugin, PanelResizePlugin, RowStatusPlugin } from '@revolist/revogrid-pro';
 import type { IndustryGanttDefinition, IndustryGridTheme } from './industry-use-case.types';
 
 export function industryPlugins(definition: IndustryGanttDefinition) {
   const initialWidth = definition.grid?.timelinePanelWidth;
   if (initialWidth === undefined) return [GanttPlugin, ExportExcelPlugin, RowStatusPlugin];
-  class IndustryPanelResizePlugin extends GanttPanelResizePlugin {
+  class IndustryPanelResizePlugin extends PanelResizePlugin {
     constructor(revogrid: HTMLRevoGridElement, providers: PluginProviders) {
       super(revogrid, providers, { initialWidth });
     }
