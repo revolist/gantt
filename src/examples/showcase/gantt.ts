@@ -43,7 +43,10 @@ export function load(parentSelector: string): (() => void) | undefined {
   zoomControls.className = 'gantt-showcase-zoom rv-segmented-switch';
   zoomControls.setAttribute('role', 'group');
   zoomControls.setAttribute('aria-label', 'Timeline scale');
-  toolbar.append(controls, zoomControls);
+  const reviewNote = document.createElement('p');
+  reviewNote.className = 'gantt-showcase-review-note';
+  reviewNote.textContent = 'Reviewed is a separate checklist flag; workflow and % complete are edited in the task editor.';
+  toolbar.append(reviewNote, controls, zoomControls);
   container.appendChild(toolbar);
 
   grid.theme          = darkTheme ? 'darkCompact' : 'compact';
