@@ -68,7 +68,7 @@ export const SHOWCASE_GANTT_CONFIG = {
     levels: SHOWCASE_TIMELINE_ZOOM_LEVELS,
     defaultLevelId: SHOWCASE_TIMELINE_LEVELS.week,
     minLevelId: SHOWCASE_TIMELINE_LEVELS.week,
-    maxLevelId: SHOWCASE_TIMELINE_LEVELS.month,
+    maxLevelId: SHOWCASE_TIMELINE_LEVELS.overview,
   },
   allowTaskCreate: true,
   taskCreateRow: true,
