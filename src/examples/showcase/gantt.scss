@@ -87,12 +87,15 @@ revo-grid.gantt-showcase-grid {
 }
 
 .gantt-showcase-grid {
-  .rgRow[row-status] .gantt-showcase-task-name {
-    color: var(--revo-row-status-color, color-mix(in srgb, currentColor 62%, transparent));
-    opacity: var(--revo-row-status-opacity, 0.78);
-    text-decoration: var(--revo-row-status-text-decoration, line-through);
-  }
+  // Review flags are separate from task completion.
+  --revo-row-status-text-decoration: none;
+  --revo-row-status-opacity: 1;
+  --revo-row-status-color: inherit;
+}
 
+.gantt-showcase-review-note {
+  margin: 0;
+  font-size: 12px;
 }
 
 .gantt-showcase-status-icon {

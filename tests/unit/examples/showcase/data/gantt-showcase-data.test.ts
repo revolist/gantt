@@ -7,6 +7,7 @@ vi.mock('@revolist/gantt', () => ({
   TIMELINE_ZOOM_PRESET_LEVELS: [
     { id: 'day-week', label: 'Day / Week', tickUnit: 'day', tickWidth: 30, headerRows: [] },
     { id: 'week-month', label: 'Week / Month', tickUnit: 'week', tickWidth: 84, headerRows: [] },
+    ...['month-quarter', 'quarter-year', 'multi-year-quarter'].map(id => ({ id, tickUnit: 'year', tickWidth: 120, headerRows: [] })),
   ],
 }));
 
@@ -41,7 +42,7 @@ describe('Gantt showcase data', () => {
     expect(SHOWCASE_TASKS.every((task) => task.done === (task.workflowStatus === 'done'))).toBe(true);
   });
 
-  it('places the single completion checkbox directly after WBS', async () => {
+  it('places the independent review checkbox directly after WBS', async () => {
     const { SHOWCASE_COLUMNS_WITH_COMPLETION, SHOWCASE_DEFAULT_HIDDEN } = await loadShowcaseData();
 
     expect(SHOWCASE_COLUMNS_WITH_COMPLETION.slice(0, 3).map((column) => column.prop)).toEqual([
@@ -50,7 +51,7 @@ describe('Gantt showcase data', () => {
       'name',
     ]);
     expect(SHOWCASE_COLUMNS_WITH_COMPLETION[0]).toMatchObject({ filter: false });
-    expect(SHOWCASE_COLUMNS_WITH_COMPLETION[1]).toMatchObject({ name: '', size: 58 });
+    expect(SHOWCASE_COLUMNS_WITH_COMPLETION[1]).toMatchObject({ name: 'Reviewed', size: 100 });
     expect(SHOWCASE_DEFAULT_HIDDEN).toContain('wbs');
   });
 
@@ -58,7 +59,8 @@ describe('Gantt showcase data', () => {
     const { renderShowcaseTaskBarColor } = await loadShowcaseData();
 
     expect(renderShowcaseTaskBarColor({ row: { done: false } })).toBeUndefined();
-    expect(renderShowcaseTaskBarColor({ row: { done: true } })).toEqual({
+    expect(renderShowcaseTaskBarColor({ row: { done: true } })).toBeUndefined();
+    expect(renderShowcaseTaskBarColor({ row: { done: false, workflowStatusKey: 'done' } })).toEqual({
       className: 'gantt-showcase-bar--finished',
     });
   });
@@ -197,11 +199,11 @@ describe('Gantt showcase data', () => {
     });
     vi.mocked(gantt.fitGanttToProject).mockResolvedValue(true);
 
-    expect(SHOWCASE_TIMELINE_LEVELS).toEqual({ week: 'day-week', month: 'week-month' });
+    expect(SHOWCASE_TIMELINE_LEVELS).toEqual({ week: 'day-week', month: 'week-month', overview: 'project-overview' });
     expect(SHOWCASE_GANTT_CONFIG.zoom).toMatchObject({
       defaultLevelId: 'day-week',
       minLevelId: 'day-week',
-      maxLevelId: 'week-month',
+      maxLevelId: 'project-overview',
     });
     expect(SHOWCASE_GANTT_CONFIG.zoom.levels).toEqual(expect.arrayContaining([
       expect.objectContaining({ id: 'day-week', tickWidth: 44 }),

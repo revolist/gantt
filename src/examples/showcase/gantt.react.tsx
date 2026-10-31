@@ -60,6 +60,7 @@ function GanttShowcase() {
   return (
     <div className={`gantt-showcase-shell grow h-full ${darkTheme ? 'gantt-showcase-shell--dark' : 'gantt-showcase-shell--light'}`}>
       <div className="gantt-showcase-toolbar">
+        <p className="gantt-showcase-review-note">Reviewed is a separate checklist flag; workflow and % complete are edited in the task editor.</p>
         <div className="gantt-showcase-controls gantt-showcase-visual-controls">
           <label className="gantt-showcase-control">
             <input

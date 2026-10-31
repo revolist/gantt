@@ -19,6 +19,7 @@ export const SHOWCASE_TIMELINE_SCALE_OPTIONS: readonly {
 export const SHOWCASE_TIMELINE_LEVELS = {
   week: 'day-week',
   month: 'week-month',
+  overview: 'project-overview',
 } as const;
 
 function getPresetLevel(id: string): TimelineZoomLevel {
@@ -37,6 +38,17 @@ export const SHOWCASE_TIMELINE_ZOOM_LEVELS: readonly TimelineZoomLevel[] = [
     tickWidth: 44,
   },
   getPresetLevel(SHOWCASE_TIMELINE_LEVELS.month),
+  getPresetLevel('month-quarter'),
+  getPresetLevel('quarter-year'),
+  getPresetLevel('multi-year-quarter'),
+  {
+    ...getPresetLevel('multi-year-quarter'),
+    id: SHOWCASE_TIMELINE_LEVELS.overview,
+    label: 'Project overview',
+    tickCount: 10,
+    tickWidth: 48,
+    headerRows: [{ id: 'decade', unit: 'year', count: 10 }],
+  },
 ];
 
 export async function applyShowcaseTimelineScale(
