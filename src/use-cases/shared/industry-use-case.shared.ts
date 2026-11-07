@@ -1,3 +1,5 @@
+import { controlAttributes, createControl } from '@revolist/ui';
+import '@revolist/ui/styles.css';
 import type { PluginProviders } from '@revolist/revogrid';
 import { GanttPlugin } from '@revolist/gantt';
 import { ExportExcelPlugin, PanelResizePlugin, RowStatusPlugin } from '@revolist/revogrid-pro';
@@ -36,5 +38,5 @@ export function createIndustryHeader(definition: IndustryGanttDefinition): HTMLE
 }
 
 export function createIndustryToggle(label: string, pressed: boolean, action: (button: HTMLButtonElement) => void): HTMLButtonElement {
-  const button = document.createElement('button'); button.type = 'button'; button.className = 'industry-gantt-toggle'; button.textContent = label; button.setAttribute('aria-pressed', String(pressed)); button.addEventListener('click', () => action(button)); return button;
+  const button = createControl(document, 'button', { type: 'button' }); button.type = 'button'; button.className = controlAttributes('button', { class: 'industry-gantt-toggle' }).class; button.textContent = label; button.classList.add('rv-choice-chip'); button.setAttribute('aria-pressed', String(pressed)); button.addEventListener('click', () => action(button)); return button;
 }

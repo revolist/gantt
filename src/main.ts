@@ -37,7 +37,8 @@ async function bootstrap() {
     }
     case 'angular': {
       await import('zone.js');
-      await import('@angular/compiler');
+      const { publishFacade } = await import('@angular/compiler');
+      publishFacade(globalThis);
       document.querySelector('#app')!.innerHTML = `<${entry.angularSelector}></${entry.angularSelector}>`;
       const [{ bootstrapApplication }, Demo] = await Promise.all([
         import('@angular/platform-browser'),

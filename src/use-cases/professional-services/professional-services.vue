@@ -20,8 +20,8 @@
     <div class="industry-gantt-toolbar">
       <span class="industry-gantt-toolbar__label">{{ definition.scheduleLabel }}</span>
       <span class="industry-gantt-toolbar__legend">{{ definition.riskLegendLabel }}</span>
-      <button type="button" class="industry-gantt-toggle" :aria-pressed="showBaseline" @click="showBaseline = !showBaseline">Baseline</button>
-      <button type="button" class="industry-gantt-toggle" :aria-pressed="showCriticalPath" @click="showCriticalPath = !showCriticalPath">Critical path</button>
+      <button v-rv-control type="button" class="rv-choice-chip industry-gantt-toggle" :aria-pressed="showBaseline" @click="showBaseline = !showBaseline">Baseline</button>
+      <button v-rv-control type="button" class="rv-choice-chip industry-gantt-toggle" :aria-pressed="showCriticalPath" @click="showCriticalPath = !showCriticalPath">Critical path</button>
     </div>
     <RevoGrid
       :class="gridClass"
@@ -47,6 +47,8 @@
 </template>
 
 <script setup lang="ts">
+import { vRvControl } from '@revolist/ui/vue-control';
+import '@revolist/ui/styles.css';
 import '../shared/industry-use-case.scss';
 import './professional-services.presentation.scss';
 import { computed, onBeforeUnmount, ref } from 'vue';

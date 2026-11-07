@@ -277,16 +277,6 @@
   }
 
   .industry-gantt-toggle {
-    min-height: 27px;
-    padding: 3px 10px;
-    border-color: #35505b;
-    border-radius: 1px;
-    color: #92acb6;
-    background: #0b151a;
-    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.018);
-    font-family: var(--ig-mono);
-    font-size: 8px;
-    font-weight: 700;
     letter-spacing: 0.08em;
     text-transform: uppercase;
   }
@@ -294,38 +284,8 @@
   .industry-gantt-toggle::before {
     display: inline-block;
     width: 7px;
-    height: 7px;
     margin-right: 6px;
-    border: 1px solid #51717d;
-    background: transparent;
-    box-shadow: inset 0 0 0 1px #0b151a;
     content: '';
-  }
-
-  .industry-gantt-toggle[aria-pressed='true'] {
-    border-color: #38e8ff;
-    color: #d9fbff;
-    background: #12313c;
-    box-shadow:
-      inset 2px 0 #38e8ff,
-      0 0 10px rgba(56, 232, 255, 0.12);
-  }
-
-  .industry-gantt-toggle[aria-pressed='true']::before {
-    border-color: #7ff4ff;
-    background: #38e8ff;
-    box-shadow:
-      inset 0 0 0 1px #12313c,
-      0 0 5px rgba(56, 232, 255, 0.48);
-  }
-
-  .industry-gantt-toggle:hover {
-    border-color: #5f7d87;
-    color: #d0f3f8;
-  }
-
-  .industry-gantt-toggle:focus-visible {
-    outline-color: #38e8ff;
   }
 
   .industry-gantt-grid,

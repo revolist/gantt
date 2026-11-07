@@ -1,3 +1,5 @@
+import '@revolist/ui/styles.css';
+import { UiControlDirective } from '@revolist/ui/angular-control';
 // src/examples/showcase/gantt.angular.ts
 import {
   Component,
@@ -50,7 +52,7 @@ function createGanttConfig(showCriticalPath: boolean, showBaseline: boolean): Ga
   },
   // Allows Angular demos to bind RevoGrid plugin props that are not wrapper inputs.
   schemas: [NO_ERRORS_SCHEMA],
-  imports: [RevoGrid],
+  imports: [UiControlDirective, RevoGrid],
   encapsulation: ViewEncapsulation.None,
   styleUrls: ['./gantt.scss'],
   template: `
@@ -59,7 +61,7 @@ function createGanttConfig(showCriticalPath: boolean, showBaseline: boolean): Ga
         <p class="gantt-showcase-review-note">Reviewed is a separate checklist flag; workflow and % complete are edited in the task editor.</p>
         <div class="gantt-showcase-controls gantt-showcase-visual-controls">
           <label class="gantt-showcase-control">
-            <input
+            <input rvControl
               class="gantt-showcase-control__input"
               type="checkbox"
               [checked]="showCriticalPath"
@@ -68,7 +70,7 @@ function createGanttConfig(showCriticalPath: boolean, showBaseline: boolean): Ga
             <span class="gantt-showcase-control__label">Critical path</span>
           </label>
           <label class="gantt-showcase-control">
-            <input
+            <input rvControl
               class="gantt-showcase-control__input"
               type="checkbox"
               [checked]="showBaseline"
@@ -79,8 +81,8 @@ function createGanttConfig(showCriticalPath: boolean, showBaseline: boolean): Ga
         </div>
         <div class="gantt-showcase-zoom rv-segmented-switch" role="group" aria-label="Timeline scale">
           @for (option of timelineScaleOptions; track option.value) {
-            <button
-              class="rv-segmented-switch-item"
+            <button rvControl
+              class="rv-choice-chip rv-segmented-switch-item"
               [class.on]="timelineScale === option.value"
               type="button"
               [attr.aria-pressed]="timelineScale === option.value"

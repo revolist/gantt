@@ -63,16 +63,8 @@
   .industry-gantt-toolbar__legend { color: #8a7069; }
   .industry-gantt-toolbar__legend::before { width: 6px; height: 6px; border-radius: 50%; background: #d7766a; }
   .industry-gantt-toggle {
-    min-height: 30px;
-    padding-inline: 13px;
-    border-color: #dfd5c6;
-    border-radius: 999px;
-    color: #365b58;
-    background: #fff;
-    font-size: 10px;
     letter-spacing: .015em;
   }
-  .industry-gantt-toggle[aria-pressed='true'] { border-color: #287f7b; color: #fff; background: #287f7b; box-shadow: 0 5px 14px rgba(30, 112, 108, .18); }
 
   .industry-gantt-grid {
     width: calc(100% - 20px);
@@ -226,8 +218,6 @@
   .industry-gantt-metric__value { color: #a6e5d8; }
   .industry-gantt-metric__label { color: #bdc8c2; }
   .industry-gantt-toolbar__label, .industry-gantt-toolbar__legend { color: #bdc8c2; }
-  .industry-gantt-toggle { border-color: #50655d; color: #e3eeea; background: #293b34; }
-  .industry-gantt-toggle[aria-pressed='true'] { color: #fff; background: #21665f; }
   .industry-gantt-metric, .industry-gantt-toolbar, .industry-gantt-grid { background: #202a28; }
   .industry-gantt-grid {
     border-color: #38413f;

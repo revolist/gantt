@@ -1,3 +1,5 @@
+import { renderControl } from '@revolist/ui';
+import '@revolist/ui/styles.css';
 import folderIcon from '@fortawesome/fontawesome-free/svgs/solid/folder.svg?raw';
 import folderOpenIcon from '@fortawesome/fontawesome-free/svgs/solid/folder-open.svg?raw';
 import { createDefaultTaskTableColumn, GanttPlugin, normalizePinnedTaskColumns } from '@revolist/gantt';
@@ -32,7 +34,7 @@ function createSimpleColumns(
     cellTemplate: (h: any, { model }: { model: ConstructionTask }) => {
       if (model.parentId != null) return h('span', {}, model.name);
       const open = expandedRowIds.has(model.id);
-      return h('button', {
+      return renderControl(h, 'button', {
         class: 'construction-simple__project-link',
         title: `Show only ${model.name}`,
         onClick: (event: Event) => { event.stopPropagation(); selectRoot(model.id); },

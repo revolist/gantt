@@ -1,3 +1,5 @@
+import { applyControlPresentation } from '@revolist/ui';
+import '@revolist/ui/styles.css';
 import './gantt-benchmark.scss';
 import { defineCustomElements } from '@revolist/revogrid/loader';
 import { GanttPlugin, createDefaultTaskTableColumn } from '@revolist/gantt';
@@ -34,6 +36,7 @@ export function load(parentSelector: string): (() => void) | undefined {
   const root = document.createElement('section');
   root.className = 'gantt-benchmark';
   root.innerHTML = benchmarkMarkup(initialOptions);
+  applyControlPresentation(root);
   parent.appendChild(root);
 
   const stage = root.querySelector<HTMLElement>('[data-benchmark-stage]')!;
@@ -57,6 +60,7 @@ export function load(parentSelector: string): (() => void) | undefined {
         <div><span>Dataset generation</span><strong>${readiness.datasetGenerationMs.toFixed(1)} ms</strong></div>
         <div><span>Mounted DOM</span><strong>${readiness.dom.totalNodes.toLocaleString('en-US')} nodes</strong></div>
       `;
+      applyControlPresentation(results);
       status.textContent = `${readiness.taskCount.toLocaleString('en-US')} tasks · ${readiness.dependencyCount.toLocaleString('en-US')} dependencies · interactive`;
     }).catch((error) => {
       status.textContent = error instanceof Error ? error.message : String(error);

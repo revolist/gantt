@@ -1,3 +1,5 @@
+import '@revolist/ui/styles.css';
+import { UiControlDirective } from '@revolist/ui/angular-control';
 import { Component, ElementRef, ViewChild, ViewEncapsulation } from '@angular/core';
 import { RevoGrid } from '@revolist/angular-datagrid';
 import { createConstructionRows, rootName } from './shared/data';
@@ -10,7 +12,7 @@ import { DEFAULT_PERIOD, type SimpleConstructionState, type SimpleConstructionVi
 @Component({
   selector: 'simple-construction-gantt',
   standalone: true,
-  imports: [RevoGrid],
+  imports: [UiControlDirective, RevoGrid],
   encapsulation: ViewEncapsulation.None,
   styleUrls: ['./simple-construction.scss'],
   template: `
@@ -19,19 +21,19 @@ import { DEFAULT_PERIOD, type SimpleConstructionState, type SimpleConstructionVi
         <div class="construction-fabrication__command-deck">
           @if (rootId) {
             <div class="construction-simple__filter-tags" aria-label="Active filters">
-              <button class="construction-simple__filter-tag" type="button" title="Clear project filter" (click)="clearProjectFilter()">Project: {{ selectedName }} ×</button>
-              @if (view === 'lookahead') { <button class="construction-simple__filter-tag" type="button" title="Clear date range filter" (click)="clearDateRangeFilter()">Date range: {{ startDate }} – {{ endDate }} ×</button> }
+              <button rvControl class="construction-simple__filter-tag" type="button" title="Clear project filter" (click)="clearProjectFilter()">Project: {{ selectedName }} ×</button>
+              @if (view === 'lookahead') { <button rvControl class="construction-simple__filter-tag" type="button" title="Clear date range filter" (click)="clearDateRangeFilter()">Date range: {{ startDate }} – {{ endDate }} ×</button> }
             </div>
           }
           @if (rootId) {
             <div class="construction-simple__lookahead-action">
-              <button class="construction-fabrication__button construction-simple__lookahead-button" type="button" [attr.aria-pressed]="view === 'lookahead'" (click)="showLookAhead()">Look-Ahead</button>
+              <button rvControl class="rv-choice-chip construction-fabrication__button construction-simple__lookahead-button" type="button" [attr.aria-pressed]="view === 'lookahead'" (click)="showLookAhead()">Look-Ahead</button>
             </div>
           }
           @if (view === 'lookahead') {
             <div class="construction-fabrication__command-actions">
-              <label class="construction-fabrication__control-group">Start <input class="construction-fabrication__select" type="date" [value]="startDate" (change)="setStartDate($event)"></label>
-              <label class="construction-fabrication__control-group">Finish <input class="construction-fabrication__select" type="date" [value]="endDate" (change)="setEndDate($event)"></label>
+              <label class="construction-fabrication__control-group">Start <input rvControl class="construction-fabrication__select" type="date" [value]="startDate" (change)="setStartDate($event)"></label>
+              <label class="construction-fabrication__control-group">Finish <input rvControl class="construction-fabrication__select" type="date" [value]="endDate" (change)="setEndDate($event)"></label>
             </div>
           }
         </div>
