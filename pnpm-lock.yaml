@@ -33,8 +33,8 @@ importers:
         specifier: 4.31.3
         version: 4.31.3
       '@revolist/gantt':
-        specifier: npm:@revolist/gantt-trial@4.0.1
-        version: '@revolist/gantt-trial@4.0.1'
+        specifier: npm:@revolist/gantt-trial@4.0.9
+        version: '@revolist/gantt-trial@4.0.9'
       '@revolist/react-datagrid':
         specifier: 4.31.3
         version: 4.31.3
@@ -45,11 +45,11 @@ importers:
         specifier: ^2.0.27
         version: 2.0.27
       '@revolist/revogrid-pro':
-        specifier: npm:@revolist/rv-pro-trial@4.0.6
-        version: '@revolist/rv-pro-trial@4.0.6'
+        specifier: npm:@revolist/rv-pro-trial@4.0.9
+        version: '@revolist/rv-pro-trial@4.0.9'
       '@revolist/ui':
-        specifier: 4.0.1
-        version: 4.0.1(@angular/core@20.3.26(@angular/compiler@20.3.26)(rxjs@7.8.2)(zone.js@0.15.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(vue@3.5.40(typescript@5.9.3))
+        specifier: 4.0.9
+        version: 4.0.9(@angular/core@20.3.26(@angular/compiler@20.3.26)(rxjs@7.8.2)(zone.js@0.15.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(vue@3.5.40(typescript@5.9.3))
       '@revolist/vue3-datagrid':
         specifier: 4.31.3
         version: 4.31.3
@@ -1285,8 +1285,8 @@ packages:
   '@revolist/angular-datagrid@4.31.3':
     resolution: {integrity: sha512-hBCA6SSVB3LBv11YCbGwi8iQFlFss45QV+Ggdli5oKJ2n2UZSPdq8A1OxmfujR599ROyBJGD1VrzOqY1s15YQQ==}
 
-  '@revolist/gantt-trial@4.0.1':
-    resolution: {integrity: sha512-3FyS6hQQt8UlH2XP76YHy0CPaAy4TZmbFJ5esCBlM255j87JqKBnmgfysJeSP39fRYz7/kcVTagM/Qf+6yyY+A==, tarball: https://trial.rv-grid.com/@revolist/gantt-trial/-/9a7ac90e1a9a1c0d6e259998e82c49de9db73afa}
+  '@revolist/gantt-trial@4.0.9':
+    resolution: {integrity: sha512-Iy4fpfhWLYxn5CMz6J1z57wddTU96E+KfT/ZIo1bW4VDGr2Z8XAsFje0Ed2EmIEjIOFR5FrSR0jRr68bMapSFg==, tarball: https://trial.rv-grid.com/@revolist/gantt-trial/-/a9f21d3094a6d290e4922c51ff7b6ee96ded628f}
 
   '@revolist/react-datagrid@4.31.3':
     resolution: {integrity: sha512-YktZubY5kh1k4DizvXgdPYQ4SgJNbZO4JaU1f38d3i8lEx20ti5/RZUU5kqApzj5ACg6sXKRckIMYtyCjpT2iw==}
@@ -1303,14 +1303,11 @@ packages:
   '@revolist/revogrid@4.31.3':
     resolution: {integrity: sha512-QDMBGY+aO1lj/RKXlLqk7fTzzlRXuPIUW+YTzpWB4rmLVoHMbrJloxc1An+BcGNfV7tgy2B74iihKb8GWktPfA==}
 
-  '@revolist/rv-pro-trial@4.0.1':
-    resolution: {integrity: sha512-WFk8OMiXQZDuHgm0EHX4LlWjr7FjkBSrU2VW3YNe7Z1UpGP7KYLdWTt960A0Oruf/LV83BJ9xyt3p+NLZj+3Hg==, tarball: https://trial.rv-grid.com/@revolist/rv-pro-trial/-/16d6de3f7a47a343ab49e6b5d25b05ccc795f769}
+  '@revolist/rv-pro-trial@4.0.9':
+    resolution: {integrity: sha512-NC16Jm8LslC0rzXW0t3SFfO5m0aNhCB3rmNz7fAbFE3F3vCYfGNIVhfm2mg3DNOvnzmZqH+U8R+smgqp9XsytA==, tarball: https://trial.rv-grid.com/@revolist/rv-pro-trial/-/c2588c8b9c7200d00012e580ebdf1da8ca7a5abb}
 
-  '@revolist/rv-pro-trial@4.0.6':
-    resolution: {integrity: sha512-0B5u8HERIgb7XU1KuEjV7Au0+4Bd3qKU2asjXC7Sc8IucpOJD1fvyVZSTq3ABO7W5rJ/ipBXX23rrIAm+71dOA==, tarball: https://trial.rv-grid.com/@revolist/rv-pro-trial/-/60f2c5658938d9921ef5b369a73c27b808947880}
-
-  '@revolist/ui@4.0.1':
-    resolution: {integrity: sha512-dRgg28nL8+rQ52Ry909JqvHCGbARCQwxGwKkssOP53hUnr4IGY6giWq7Uai4woWzQOuDgDisunZzywnTNcyZuA==}
+  '@revolist/ui@4.0.9':
+    resolution: {integrity: sha512-zGI4NX4Vmj1LdXqlyPNfEvZlEuqxbfhI6lu8ShpgAl4yKZ1OgCXn8sG/iUO6256Wx+krfHPpU7Q9EeeKEj6yRA==}
     peerDependencies:
       '@angular/core': '>=20'
       pdfjs-dist: ^6.4.299
@@ -4563,13 +4560,13 @@ snapshots:
       '@stencil/core': 4.43.5
       tslib: 2.8.1
 
-  '@revolist/gantt-trial@4.0.1':
+  '@revolist/gantt-trial@4.0.9':
     dependencies:
       '@fortawesome/fontawesome-free': 7.3.1
       '@revolist/revogrid': 4.31.3
       '@revolist/revogrid-column-date': 2.0.27
       '@revolist/revogrid-column-select': 3.2.4
-      '@revolist/rv-pro-trial': 4.0.1
+      '@revolist/rv-pro-trial': 4.0.9
       '@tanstack/query-core': 5.104.5
 
   '@revolist/react-datagrid@4.31.3':
@@ -4587,7 +4584,7 @@ snapshots:
 
   '@revolist/revogrid@4.31.3': {}
 
-  '@revolist/rv-pro-trial@4.0.1':
+  '@revolist/rv-pro-trial@4.0.9':
     dependencies:
       '@formulajs/formulajs': 4.6.1
       '@revolist/revogrid': 4.31.3
@@ -4595,15 +4592,7 @@ snapshots:
       preact: 10.29.1
       write-excel-file: 4.1.1
 
-  '@revolist/rv-pro-trial@4.0.6':
-    dependencies:
-      '@formulajs/formulajs': 4.6.1
-      '@revolist/revogrid': 4.31.3
-      '@tanstack/query-core': 5.104.5
-      preact: 10.29.1
-      write-excel-file: 4.1.1
-
-  '@revolist/ui@4.0.1(@angular/core@20.3.26(@angular/compiler@20.3.26)(rxjs@7.8.2)(zone.js@0.15.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(vue@3.5.40(typescript@5.9.3))':
+  '@revolist/ui@4.0.9(@angular/core@20.3.26(@angular/compiler@20.3.26)(rxjs@7.8.2)(zone.js@0.15.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(vue@3.5.40(typescript@5.9.3))':
     optionalDependencies:
       '@angular/core': 20.3.26(@angular/compiler@20.3.26)(rxjs@7.8.2)(zone.js@0.15.1)
       react: 18.3.1
