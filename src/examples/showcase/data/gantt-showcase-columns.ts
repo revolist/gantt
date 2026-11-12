@@ -102,9 +102,9 @@ export const SHOWCASE_COLUMNS_WITH_ROW_SELECT: ColumnRegular[] = [
 
 const showcaseDoneColumn: ColumnRegular = {
   prop: 'done',
-  name: 'Reviewed',
+  name: '',
   rowStatus: { attribute: 'data-done' },
-  size: 100,
+  size: 58,
   readonly: ({ model }: any) => isGanttAddTaskRow(model),
   filter: false,
 };
@@ -155,7 +155,7 @@ export function renderShowcaseTaskBarContent({ h, row, defaultContent }: any) {
 }
 
 export function renderShowcaseTaskBarColor({ row }: any) {
-  if (row.workflowStatusKey !== 'done' && (row.percentDone ?? 0) < 100) {
+  if (row.done !== true) {
     return undefined;
   }
 

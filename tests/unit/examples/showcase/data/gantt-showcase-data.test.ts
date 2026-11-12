@@ -42,7 +42,7 @@ describe('Gantt showcase data', () => {
     expect(SHOWCASE_TASKS.every((task) => task.done === (task.workflowStatus === 'done'))).toBe(true);
   });
 
-  it('places the independent review checkbox directly after WBS', async () => {
+  it('places the completion checkbox directly after WBS', async () => {
     const { SHOWCASE_COLUMNS_WITH_COMPLETION, SHOWCASE_DEFAULT_HIDDEN } = await loadShowcaseData();
 
     expect(SHOWCASE_COLUMNS_WITH_COMPLETION.slice(0, 3).map((column) => column.prop)).toEqual([
@@ -51,7 +51,7 @@ describe('Gantt showcase data', () => {
       'name',
     ]);
     expect(SHOWCASE_COLUMNS_WITH_COMPLETION[0]).toMatchObject({ filter: false });
-    expect(SHOWCASE_COLUMNS_WITH_COMPLETION[1]).toMatchObject({ name: 'Reviewed', size: 100 });
+    expect(SHOWCASE_COLUMNS_WITH_COMPLETION[1]).toMatchObject({ name: '', size: 58 });
     expect(SHOWCASE_DEFAULT_HIDDEN).toContain('wbs');
   });
 
@@ -59,8 +59,8 @@ describe('Gantt showcase data', () => {
     const { renderShowcaseTaskBarColor } = await loadShowcaseData();
 
     expect(renderShowcaseTaskBarColor({ row: { done: false } })).toBeUndefined();
-    expect(renderShowcaseTaskBarColor({ row: { done: true } })).toBeUndefined();
-    expect(renderShowcaseTaskBarColor({ row: { done: false, workflowStatusKey: 'done' } })).toEqual({
+    expect(renderShowcaseTaskBarColor({ row: { done: false, workflowStatusKey: 'done' } })).toBeUndefined();
+    expect(renderShowcaseTaskBarColor({ row: { done: true } })).toEqual({
       className: 'gantt-showcase-bar--finished',
     });
   });

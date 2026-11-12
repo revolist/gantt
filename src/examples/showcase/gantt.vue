@@ -1,7 +1,6 @@
 <template>
   <div :class="shellClass">
     <div class="gantt-showcase-toolbar">
-      <p class="gantt-showcase-review-note">Reviewed is a separate checklist flag; workflow and % complete are edited in the task editor.</p>
         <div class="gantt-showcase-controls gantt-showcase-visual-controls">
         <label class="gantt-showcase-control">
           <input v-rv-control v-model="showCriticalPath" class="gantt-showcase-control__input" type="checkbox" />
