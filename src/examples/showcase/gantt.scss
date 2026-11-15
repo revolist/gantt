@@ -28,54 +28,9 @@ $icon-size: 16px;
 }
 
 .gantt-showcase-toolbar {
-  display: flex;
   flex: 0 0 auto;
-  justify-content: space-between;
-  gap: 8px;
-  align-items: center;
-  padding: 0 0 8px;
-}
-
-.gantt-showcase-controls {
-  display: flex;
-  gap: 8px;
-  align-items: center;
-}
-
-.gantt-showcase-zoom {
-  flex: 0 0 auto;
-}
-
-.gantt-showcase-zoom .rv-segmented-switch-item {
-  min-width: 54px;
-}
-
-.gantt-showcase-control {
-  display: inline-flex;
-  gap: 6px;
-  align-items: center;
-  border: 1px solid var(--revo-grid-border-color, #d8dee4);
-  border-radius: 6px;
-  padding: 4px 10px;
-  background: var(--revo-grid-background, #fff);
-  color: currentColor;
-  font: inherit;
-  line-height: 1.4;
-  font-size: 13px;
-  cursor: pointer;
-
-  &:hover {
-    border-color: var(--revo-grid-focused-border, #8c9bab);
-  }
-}
-
-.gantt-showcase-control__input {
-  width: 13px;
-    margin: 0;
-  }
-
-.gantt-showcase-control__label {
-  white-space: nowrap;
+  min-width: 0;
+  padding-bottom: 8px;
 }
 
 revo-grid.gantt-showcase-grid {

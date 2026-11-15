@@ -1,4 +1,3 @@
-import { controlAttributes, createControl } from '@revolist/ui';
 import '@revolist/ui/styles.css';
 // src/examples/showcase/gantt.ts
 import './gantt.scss';
@@ -6,6 +5,7 @@ import { defineCustomElements } from '@revolist/revogrid/loader';
 defineCustomElements();
 
 import { GanttPlugin } from '@revolist/gantt';
+import { mountShowcaseToolbar } from './showcase-toolbar';
 import { ExportExcelPlugin, RowStatusPlugin } from '@revolist/revogrid-pro';
 import {
   STANDARD_CALENDAR,
@@ -17,11 +17,8 @@ import {
   SHOWCASE_GANTT_CONFIG,
   SHOWCASE_RESOURCES,
   SHOWCASE_TASKS,
-  SHOWCASE_TIMELINE_SCALE_OPTIONS,
-  applyShowcaseTimelineScale,
   renderShowcaseTaskBarColor,
   renderShowcaseTaskBarContent,
-  type ShowcaseTimelineScale,
 } from './data/gantt-project-data';
 import { currentTheme, observeCurrentTheme } from '../../theme';
 
@@ -39,13 +36,6 @@ export function load(parentSelector: string): (() => void) | undefined {
   const grid = document.createElement('revo-grid') as HTMLRevoGridElement;
   const toolbar = document.createElement('div');
   toolbar.className = 'gantt-showcase-toolbar';
-  const controls = document.createElement('div');
-  controls.className = 'gantt-showcase-controls gantt-showcase-visual-controls';
-  const zoomControls = document.createElement('div');
-  zoomControls.className = 'gantt-showcase-zoom rv-segmented-switch';
-  zoomControls.setAttribute('role', 'group');
-  zoomControls.setAttribute('aria-label', 'Timeline scale');
-  toolbar.append(controls, zoomControls);
   container.appendChild(toolbar);
 
   grid.theme          = darkTheme ? 'darkCompact' : 'compact';
@@ -70,79 +60,21 @@ export function load(parentSelector: string): (() => void) | undefined {
     container.classList.toggle('gantt-showcase-shell--dark', isDark);
     container.classList.toggle('gantt-showcase-shell--light', !isDark);
   });
-  let showCriticalPath = Boolean(SHOWCASE_GANTT_CONFIG.visuals.showCriticalPath);
-  let showBaseline = false;
-  let timelineScale: ShowcaseTimelineScale = 'week';
-
-  function applyGanttConfig() {
-    grid.gantt = {
-      ...SHOWCASE_GANTT_CONFIG,
-      visuals: {
-        ...SHOWCASE_GANTT_CONFIG.visuals,
-        showCriticalPath,
-        showBaseline,
-        taskBarColorHook: renderShowcaseTaskBarColor,
-        taskBarContentHook: renderShowcaseTaskBarContent,
-      },
-    } as typeof grid.gantt;
-  }
-
-  function createToggle(label: string, checked: () => boolean, onChange: (value: boolean) => void) {
-    const control = document.createElement('label');
-    control.className = 'gantt-showcase-control';
-    const input = createControl(document, 'input', { type: 'checkbox' });
-    input.type = 'checkbox';
-    input.className = controlAttributes('input', { type: input.type, class: 'gantt-showcase-control__input' }).class;
-    const text = document.createElement('span');
-    text.className = 'gantt-showcase-control__label';
-    text.textContent = label;
-    const sync = () => {
-      input.checked = checked();
-    };
-    input.addEventListener('change', () => {
-      onChange(input.checked);
-      applyGanttConfig();
-    });
-    control.append(input, text);
-    sync();
-    return control;
-  }
-
-  controls.append(
-    createToggle('Critical path', () => showCriticalPath, (value) => {
-      showCriticalPath = value;
-    }),
-    createToggle('Baselines', () => showBaseline, (value) => {
-      showBaseline = value;
-    }),
-  );
-
-  const zoomButtons = SHOWCASE_TIMELINE_SCALE_OPTIONS.map((option) => {
-    const button = createControl(document, 'button', { type: 'button' });
-    button.type = 'button';
-    button.className = controlAttributes('button', { class: 'rv-segmented-switch-item' }).class;
-    button.textContent = option.label;
-    const sync = () => {
-      const active = timelineScale === option.value;
-      button.classList.toggle('on', active);
-      button.classList.add('rv-choice-chip'); button.setAttribute('aria-pressed', String(active));
-    };
-    button.addEventListener('click', async () => {
-      if (await applyShowcaseTimelineScale(grid, option.value)) {
-        timelineScale = option.value;
-        zoomButtons.forEach((item) => item.sync());
-      }
-    });
-    sync();
-    return { button, sync };
-  });
-  zoomControls.append(...zoomButtons.map(({ button }) => button));
-
-  applyGanttConfig();
+  grid.gantt = {
+    ...SHOWCASE_GANTT_CONFIG,
+    visuals: {
+      ...SHOWCASE_GANTT_CONFIG.visuals,
+      showBaseline: false,
+      taskBarColorHook: renderShowcaseTaskBarColor,
+      taskBarContentHook: renderShowcaseTaskBarContent,
+    },
+  } as typeof grid.gantt;
   container.appendChild(grid);
   grid.source = [...SHOWCASE_TASKS];
+  const disposeToolbar = mountShowcaseToolbar(toolbar, grid);
 
   return () => {
+    disposeToolbar();
     disconnectTheme();
     container.remove();
   };

@@ -1,5 +1,4 @@
 import '@revolist/ui/styles.css';
-import { ButtonControl as UiButton, Input as UiInput } from '@revolist/ui/react-control';
 // src/examples/showcase/gantt.react.tsx
 import './gantt.scss';
 import React, { useEffect, useMemo, useRef, useState } from 'react';
@@ -16,14 +15,12 @@ import {
   SHOWCASE_GANTT_CONFIG,
   SHOWCASE_RESOURCES,
   SHOWCASE_TASKS,
-  SHOWCASE_TIMELINE_SCALE_OPTIONS,
-  applyShowcaseTimelineScale,
   renderShowcaseTaskBarColor,
   renderShowcaseTaskBarContent,
-  type ShowcaseTimelineScale,
 } from './data/gantt-project-data';
 import type { GanttPluginConfig } from '@revolist/gantt';
 import { currentTheme, observeCurrentTheme } from '../../theme';
+import { mountShowcaseToolbar } from './showcase-toolbar';
 
 const plugins = [GanttPlugin, ExportExcelPlugin, RowStatusPlugin];
 const source      = [...SHOWCASE_TASKS];
@@ -38,64 +35,27 @@ const hiddenColumns = [...SHOWCASE_DEFAULT_HIDDEN];
 function GanttShowcase() {
   const [darkTheme, setDarkTheme] = useState(() => currentTheme().isDark());
   const gridRef = useRef<HTMLRevoGridElement>(null);
-  const [showCriticalPath, setShowCriticalPath] = useState(Boolean(SHOWCASE_GANTT_CONFIG.visuals.showCriticalPath));
-  const [showBaseline, setShowBaseline] = useState(false);
-  const [timelineScale, setTimelineScale] = useState<ShowcaseTimelineScale>('week');
+  const toolbarRef = useRef<HTMLDivElement>(null);
   const ganttConfig: GanttPluginConfig = useMemo(() => ({
     ...SHOWCASE_GANTT_CONFIG,
     visuals: {
       ...SHOWCASE_GANTT_CONFIG.visuals,
-      showCriticalPath,
-      showBaseline,
+      showBaseline: false,
       taskBarColorHook: renderShowcaseTaskBarColor,
       taskBarContentHook: renderShowcaseTaskBarContent,
     },
-  } as GanttPluginConfig), [showCriticalPath, showBaseline]);
+  } as GanttPluginConfig), []);
 
   useEffect(() => observeCurrentTheme(setDarkTheme), []);
-  const selectTimelineScale = async (scale: ShowcaseTimelineScale) => {
-    if (gridRef.current && await applyShowcaseTimelineScale(gridRef.current, scale)) {
-      setTimelineScale(scale);
+  useEffect(() => {
+    if (toolbarRef.current && gridRef.current) {
+      return mountShowcaseToolbar(toolbarRef.current, gridRef.current);
     }
-  };
+  }, []);
 
   return (
     <div className={`gantt-showcase-shell grow h-full ${darkTheme ? 'gantt-showcase-shell--dark' : 'gantt-showcase-shell--light'}`}>
-      <div className="gantt-showcase-toolbar">
-        <div className="gantt-showcase-controls gantt-showcase-visual-controls">
-          <label className="gantt-showcase-control">
-            <UiInput
-              className="gantt-showcase-control__input"
-              type="checkbox"
-              checked={showCriticalPath}
-              onChange={(event) => setShowCriticalPath(event.currentTarget.checked)}
-            />
-            <span className="gantt-showcase-control__label">Critical path</span>
-          </label>
-          <label className="gantt-showcase-control">
-            <UiInput
-              className="gantt-showcase-control__input"
-              type="checkbox"
-              checked={showBaseline}
-              onChange={(event) => setShowBaseline(event.currentTarget.checked)}
-            />
-            <span className="gantt-showcase-control__label">Baselines</span>
-          </label>
-        </div>
-        <div className="gantt-showcase-zoom rv-segmented-switch" role="group" aria-label="Timeline scale">
-          {SHOWCASE_TIMELINE_SCALE_OPTIONS.map((option) => (
-            <UiButton
-              key={option.value}
-              className={"rv-choice-chip " + (`rv-segmented-switch-item ${timelineScale === option.value ? 'on' : ''}`)}
-              type="button"
-              aria-pressed={timelineScale === option.value}
-              onClick={() => void selectTimelineScale(option.value)}
-            >
-              {option.label}
-            </UiButton>
-          ))}
-        </div>
-      </div>
+      <div ref={toolbarRef} className="gantt-showcase-toolbar" />
       <RevoGrid
         ref={gridRef}
         className="gantt-showcase-grid"
