@@ -1,7 +1,11 @@
-/** Project column presets owned by the showcase example. */
+/** Shared project column presets used by multiple Gantt examples. */
 import type { ColumnRegular } from '@revolist/revogrid';
-import { createDefaultTaskTableColumn, isGanttAddTaskRow } from '@revolist/gantt';
+import {
+  createDefaultTaskTableColumn,
+  isGanttAddTaskRow,
+} from '@revolist/gantt';
 import { getShowcaseTaskIcon } from './gantt-showcase-icons';
+import './gantt-showcase-columns.css';
 
 const SHOWCASE_TAG_TONES: Record<string, string> = {
   Backend: 'red',
@@ -12,9 +16,12 @@ const SHOWCASE_TAG_TONES: Record<string, string> = {
   Security: 'red',
 };
 
-function renderShowcaseNameCell(h: Parameters<Required<ColumnRegular>['cellTemplate']>[0], model: any) {
+function renderShowcaseNameCell(
+  h: Parameters<Required<ColumnRegular>['cellTemplate']>[0],
+  model: any,
+) {
   const tag = model.tags?.[0];
-  const tagTone = tag ? SHOWCASE_TAG_TONES[tag] ?? 'neutral' : '';
+  const tagTone = tag ? (SHOWCASE_TAG_TONES[tag] ?? 'neutral') : '';
   const statusKey = model.statusKey ?? 'not-started';
 
   return h('div', { class: { 'gantt-showcase-task-cell': true } }, [
@@ -24,21 +31,36 @@ function renderShowcaseNameCell(h: Parameters<Required<ColumnRegular>['cellTempl
       'aria-label': String(model.name ?? tag ?? statusKey),
       innerHTML: getShowcaseTaskIcon(model.id, tag),
     }),
-    h('span', { class: { 'gantt-showcase-task-name': true }, title: model.name }, model.name),
+    h(
+      'span',
+      { class: { 'gantt-showcase-task-name': true }, title: model.name },
+      model.name,
+    ),
     tag
-      ? h('span', {
-          class: `gantt-status-badge gantt-status-badge--${tagTone}`,
-          title: tag,
-        }, [
-          h('span', { class: 'gantt-status-badge__dot', 'aria-hidden': 'true' }),
-          h('span', { class: 'gantt-status-badge__label' }, tag),
-        ])
+      ? h(
+          'span',
+          {
+            class: `gantt-status-badge gantt-status-badge--${tagTone}`,
+            title: tag,
+          },
+          [
+            h('span', {
+              class: 'gantt-status-badge__dot',
+              'aria-hidden': 'true',
+            }),
+            h('span', { class: 'gantt-status-badge__label' }, tag),
+          ],
+        )
       : null,
   ]);
 }
 
 function isShowcaseRootTask(model: any) {
-  return model.parentId === null || model.parentId === undefined || model.parentId === '';
+  return (
+    model.parentId === null ||
+    model.parentId === undefined ||
+    model.parentId === ''
+  );
 }
 
 function showcaseCellProperties({ model }: any) {
@@ -121,36 +143,61 @@ export const SHOWCASE_COLUMNS_WITH_COMPLETION: ColumnRegular[] = [
   ...showcaseTaskColumns,
 ];
 
+function hasClass(node: any, className: string) {
+  const nodeClass = node?.props?.class;
+
+  if (typeof nodeClass === 'string') {
+    return nodeClass.split(/\s+/).includes(className);
+  }
+
+  return Boolean(nodeClass?.[className]);
+}
+
 export function renderShowcaseTaskBarContent({ h, row, defaultContent }: any) {
-  const content = defaultContent;
+  if (row.taskKind === 'summary' || row.type === 'summary') {
+    return defaultContent.filter(
+      (node: any) => !hasClass(node, 'gantt-bar__label'),
+    );
+  }
 
   if (!row.assigneeDetails?.length) {
-    return content;
+    return defaultContent;
   }
 
   const primaryAssignee = row.assigneeDetails[0];
   const secondaryAssignee = row.assigneeDetails[1];
-  const badge = (assignee: any, kind: 'primary' | 'secondary') => h('span', {
-    class: {
-      'gantt-bar__assignee-badge': true,
-      [`gantt-bar__assignee-badge--${kind}`]: true,
-    },
-    style: { background: assignee.color },
-  }, assignee.initials);
+  const badge = (assignee: any, kind: 'primary' | 'secondary') =>
+    h(
+      'span',
+      {
+        class: {
+          'gantt-bar__assignee-badge': true,
+          [`gantt-bar__assignee-badge--${kind}`]: true,
+        },
+        style: { background: assignee.color },
+      },
+      assignee.initials,
+    );
 
   return [
-    ...content,
-    h('span', {
-      class: {
-        'gantt-bar__assignee-stack': true,
-        'gantt-bar__assignee-stack--multiple': Boolean(secondaryAssignee),
+    ...defaultContent,
+    h(
+      'span',
+      {
+        class: {
+          'gantt-bar__assignee-stack': true,
+          'gantt-bar__assignee-stack--multiple': Boolean(secondaryAssignee),
+        },
+        title: row.assigneeDetails
+          .map((assignee: any) => assignee.name)
+          .join(', '),
+        'aria-hidden': 'true',
       },
-      title: row.assigneeDetails.map((assignee: any) => assignee.name).join(', '),
-      'aria-hidden': 'true',
-    }, [
-      secondaryAssignee ? badge(secondaryAssignee, 'secondary') : null,
-      badge(primaryAssignee, 'primary'),
-    ].filter(Boolean)),
+      [
+        secondaryAssignee ? badge(secondaryAssignee, 'secondary') : null,
+        badge(primaryAssignee, 'primary'),
+      ].filter(Boolean),
+    ),
   ];
 }
 

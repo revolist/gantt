@@ -4,22 +4,8 @@ import './gantt.scss';
 import { defineCustomElements } from '@revolist/revogrid/loader';
 defineCustomElements();
 
-import { GanttPlugin } from '@revolist/gantt';
-import { mountShowcaseToolbar } from './showcase-toolbar';
-import { ExportExcelPlugin, RowStatusPlugin } from '@revolist/revogrid-pro';
-import {
-  STANDARD_CALENDAR,
-  SHOWCASE_ASSIGNMENTS,
-  SHOWCASE_BASELINES,
-  SHOWCASE_COLUMNS_WITH_COMPLETION,
-  SHOWCASE_DEFAULT_HIDDEN,
-  SHOWCASE_DEPENDENCIES,
-  SHOWCASE_GANTT_CONFIG,
-  SHOWCASE_RESOURCES,
-  SHOWCASE_TASKS,
-  renderShowcaseTaskBarColor,
-  renderShowcaseTaskBarContent,
-} from './data/gantt-project-data';
+import { createGanttShowcaseState } from './gantt-showcase-state';
+import { mountShowcaseToolbar } from './gantt-showcase-toolbar';
 import { currentTheme, observeCurrentTheme } from '../../theme';
 
 // ─── Entry point ──────────────────────────────────────────────────────────────
@@ -27,6 +13,11 @@ import { currentTheme, observeCurrentTheme } from '../../theme';
 export function load(parentSelector: string): (() => void) | undefined {
   const parent = document.querySelector(parentSelector);
   if (!parent) return;
+  return mountShowcase(parent);
+}
+
+export function mountShowcase(parent: HTMLElement): () => void {
+  const state = createGanttShowcaseState();
   const darkTheme = currentTheme().isDark();
 
   const container = document.createElement('div');
@@ -35,7 +26,7 @@ export function load(parentSelector: string): (() => void) | undefined {
 
   const grid = document.createElement('revo-grid') as HTMLRevoGridElement;
   const toolbar = document.createElement('div');
-  toolbar.className = 'gantt-showcase-toolbar';
+  toolbar.className = 'gantt-showcase-controls';
   container.appendChild(toolbar);
 
   grid.theme          = darkTheme ? 'darkCompact' : 'compact';
@@ -47,30 +38,22 @@ export function load(parentSelector: string): (() => void) | undefined {
   grid.hideAttribution = true;
   grid.autoSizeColumn = false;
   grid.classList.add('gantt-showcase-grid');
-  grid.plugins        = [GanttPlugin, ExportExcelPlugin, RowStatusPlugin];
-  grid.hideColumns    = [...SHOWCASE_DEFAULT_HIDDEN];
-  grid.columns        = [...SHOWCASE_COLUMNS_WITH_COMPLETION];
-  grid.ganttDependencies = [...SHOWCASE_DEPENDENCIES];
-  grid.ganttCalendars = [{ ...STANDARD_CALENDAR }];
-  grid.ganttResources = [...SHOWCASE_RESOURCES];
-  grid.ganttAssignments = [...SHOWCASE_ASSIGNMENTS];
-  grid.ganttBaselines = [...SHOWCASE_BASELINES];
+  grid.plugins        = state.plugins;
+  grid.hideColumns    = state.hiddenColumns;
+  grid.columns        = state.columns;
+  grid.ganttDependencies = state.dependencies;
+  grid.ganttCalendars = state.calendars;
+  grid.ganttResources = state.resources;
+  grid.ganttAssignments = state.assignments;
+  grid.ganttBaselines = state.baselines;
   const disconnectTheme = observeCurrentTheme((isDark) => {
     grid.theme = isDark ? 'darkCompact' : 'compact';
     container.classList.toggle('gantt-showcase-shell--dark', isDark);
     container.classList.toggle('gantt-showcase-shell--light', !isDark);
   });
-  grid.gantt = {
-    ...SHOWCASE_GANTT_CONFIG,
-    visuals: {
-      ...SHOWCASE_GANTT_CONFIG.visuals,
-      showBaseline: false,
-      taskBarColorHook: renderShowcaseTaskBarColor,
-      taskBarContentHook: renderShowcaseTaskBarContent,
-    },
-  } as typeof grid.gantt;
+  grid.gantt = state.gantt;
   container.appendChild(grid);
-  grid.source = [...SHOWCASE_TASKS];
+  grid.source = state.source;
   const disposeToolbar = mountShowcaseToolbar(toolbar, grid);
 
   return () => {

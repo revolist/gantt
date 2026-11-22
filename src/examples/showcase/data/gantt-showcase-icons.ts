@@ -1,4 +1,4 @@
-/** Task icons owned by the showcase column presets. */
+/** Shared task icons used by the reusable showcase column presets. */
 import bugIcon from '@fortawesome/fontawesome-free/svgs/solid/bug.svg?raw';
 import chartLineIcon from '@fortawesome/fontawesome-free/svgs/solid/chart-line.svg?raw';
 import clipboardListIcon from '@fortawesome/fontawesome-free/svgs/solid/clipboard-list.svg?raw';
@@ -45,5 +45,9 @@ function svgWithCurrentColor(svg: string) {
 export function getShowcaseTaskIcon(taskId: unknown, tag: unknown): string {
   const taskKey = typeof taskId === 'string' ? taskId : '';
   const tagKey = typeof tag === 'string' ? tag.toLowerCase() : '';
-  return svgWithCurrentColor(SHOWCASE_TASK_ICONS[taskKey] ?? SHOWCASE_TASK_ICONS[tagKey] ?? roadCircleCheckIcon);
+  return svgWithCurrentColor(
+    SHOWCASE_TASK_ICONS[taskKey] ??
+      SHOWCASE_TASK_ICONS[tagKey] ??
+      roadCircleCheckIcon,
+  );
 }
