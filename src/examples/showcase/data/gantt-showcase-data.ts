@@ -13,7 +13,7 @@ import { CALENDAR_ID, GANTT_BASE_CONFIG } from './gantt-project-base-data';
 export const SHOWCASE_COLUMN_OPTIONS = [
   { prop: 'wbs', label: 'WBS', defaultVisible: false },
   { prop: 'name', label: 'Name', defaultVisible: true },
-  { prop: 'assignees', label: 'Assignees', defaultVisible: true },
+  { prop: 'assignees', label: 'Assignees', defaultVisible: false },
   { prop: 'cost', label: 'Cost', defaultVisible: false },
   { prop: 'startDate', label: 'Start Date', defaultVisible: false },
   { prop: 'endDate', label: 'End Date', defaultVisible: false },
@@ -27,7 +27,7 @@ export const SHOWCASE_COLUMN_OPTIONS = [
 export const SHOWCASE_TOOLBAR_COLUMNS = [
   { prop: 'wbs', label: 'WBS', visible: true },
   { prop: 'name', label: 'Task', visible: true },
-  { prop: 'assignees', label: 'Assignees', visible: true },
+  { prop: 'assignees', label: 'Assignees', visible: false },
   { prop: 'cost', label: 'Cost', visible: true },
   { prop: 'startDate', label: 'Start', visible: true },
   { prop: 'duration', label: 'Dur', visible: true },
