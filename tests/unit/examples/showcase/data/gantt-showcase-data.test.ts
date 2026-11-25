@@ -2,8 +2,9 @@ import { describe, expect, it, vi } from 'vitest';
 
 vi.mock('@revolist/gantt', () => ({
   createDefaultTaskTableColumn: (prop: string) => ({ prop }),
-  fitGanttToProject: vi.fn(),
-  getGanttTimelineNavigationRuntime: vi.fn(),
+  defineGanttToolbar: vi.fn(),
+  destroyGanttToolbar: vi.fn(),
+  DEFAULT_TIMELINE_ZOOM_LEVELS: ['day-week', 'week-month', 'month-quarter', 'quarter-year'].map(id => ({ id, tickWidth: 84 })),
   TIMELINE_ZOOM_PRESET_LEVELS: [
     { id: 'day-week', label: 'Day / Week', tickUnit: 'day', tickWidth: 30, headerRows: [] },
     { id: 'week-month', label: 'Week / Month', tickUnit: 'week', tickWidth: 84, headerRows: [] },
@@ -65,13 +66,13 @@ describe('Gantt showcase data', () => {
     });
   });
 
-  it('disables built-in labels for all showcase task bars', async () => {
+  it('shows built-in labels for task bars only', async () => {
     const { SHOWCASE_GANTT_CONFIG } = await loadShowcaseData();
 
-    expect(SHOWCASE_GANTT_CONFIG.visuals.showTaskLabels).toBe(false);
+    expect(SHOWCASE_GANTT_CONFIG.visuals.showTaskLabels).toBe('tasks');
   });
 
-  it('keeps the default task-bar content when adding no assignee badges', async () => {
+  it('removes the label from summary bars while keeping their shape', async () => {
     const { renderShowcaseTaskBarContent } = await loadShowcaseData();
     const defaultContent = [
       { props: { class: { 'gantt-bar__line': true } } },
@@ -84,7 +85,7 @@ describe('Gantt showcase data', () => {
       h: () => null,
       row: { taskKind: 'summary' },
       defaultContent,
-    })).toEqual(defaultContent);
+    })).toEqual(defaultContent.slice(0, 3));
   });
 
   it('shows a secondary assignee edge behind the primary task-bar badge', async () => {
@@ -183,38 +184,19 @@ describe('Gantt showcase data', () => {
     });
   });
 
-  it('maps Week and Month to their Gantt runtime levels and delegates Fit', async () => {
+  it('configures the shared toolbar with the showcase zoom levels', async () => {
     const gantt = await import('@revolist/gantt');
-    const {
-      applyShowcaseTimelineScale,
-      SHOWCASE_GANTT_CONFIG,
-      SHOWCASE_TIMELINE_LEVELS,
-    } = await loadShowcaseData();
-    const setZoomLevel = vi.fn(() => true);
-    const grid = {} as HTMLRevoGridElement;
-
-    vi.mocked(gantt.getGanttTimelineNavigationRuntime).mockResolvedValue({
-      getZoomLevel: () => ({ id: 'day-week' }),
-      setZoomLevel,
-    });
-    vi.mocked(gantt.fitGanttToProject).mockResolvedValue(true);
-
-    expect(SHOWCASE_TIMELINE_LEVELS).toEqual({ week: 'day-week', month: 'week-month', overview: 'project-overview' });
-    expect(SHOWCASE_GANTT_CONFIG.zoom).toMatchObject({
-      defaultLevelId: 'day-week',
-      minLevelId: 'day-week',
-      maxLevelId: 'project-overview',
-    });
-    expect(SHOWCASE_GANTT_CONFIG.zoom.levels).toEqual(expect.arrayContaining([
-      expect.objectContaining({ id: 'day-week', tickWidth: 44 }),
+    const { createShowcaseConfig, mountShowcaseToolbar } = await import('../../../../../src/examples/showcase/gantt-showcase-toolbar');
+    const config = createShowcaseConfig();
+    expect(config.zoom?.levels).toEqual(expect.arrayContaining([
+      expect.objectContaining({ id: 'day-week' }),
+      expect.objectContaining({ id: 'week-month', tickWidth: 62 }),
     ]));
-    await expect(applyShowcaseTimelineScale(grid, 'week')).resolves.toBe(true);
-    expect(setZoomLevel).not.toHaveBeenCalled();
-    await expect(applyShowcaseTimelineScale(grid, 'month')).resolves.toBe(true);
-    expect(setZoomLevel).toHaveBeenCalledWith('week-month');
-    await expect(applyShowcaseTimelineScale(grid, 'fit')).resolves.toBe(true);
-    expect(gantt.fitGanttToProject).toHaveBeenCalledWith(grid);
-    vi.mocked(gantt.fitGanttToProject).mockResolvedValueOnce(false);
-    await expect(applyShowcaseTimelineScale(grid, 'fit')).resolves.toBe(false);
+    const host = document.createElement('div');
+    const grid = {} as HTMLRevoGridElement;
+    const cleanup = mountShowcaseToolbar(host, grid);
+    expect(gantt.defineGanttToolbar).toHaveBeenCalledWith(host, expect.objectContaining({ grid }));
+    cleanup();
+    expect(gantt.destroyGanttToolbar).toHaveBeenCalledWith(host);
   });
 });

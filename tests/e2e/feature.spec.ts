@@ -38,7 +38,7 @@ test(`${feature.title} mounts without browser errors`, async ({ page }) => {
   const baseline = page.getByRole('checkbox', { name: 'Toggle baseline', exact: true });
   await baseline.check();
   await expect(baseline).toBeChecked();
-  await expect(grid.locator('.gantt-bar__label')).toHaveCount(0);
+  await expect(grid.locator('.gantt-bar__label').first()).toBeVisible();
   const screenshot = await page.locator('body').screenshot({ animations: 'disabled' });
   expect(screenshot.byteLength).toBeGreaterThan(10_000);
   expect(errors).toEqual([]);
