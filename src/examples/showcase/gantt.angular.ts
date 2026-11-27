@@ -8,7 +8,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import type { AfterViewInit, OnDestroy } from '@angular/core';
-import { mountShowcase } from './gantt';
+import { mountShowcase } from './gantt-showcase-mount';
 
 @Component({
   selector: 'gantt-showcase-grid',
